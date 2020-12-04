@@ -1,4 +1,3 @@
-  
 'use strict';
 
 const fs = require('fs');
@@ -9,7 +8,6 @@ const sequelize = require('../config/dbConfig');
 const basename = path.basename(__filename);
 const db = {};
 
-
 fs
   .readdirSync(__dirname)
   .filter(file => {
@@ -17,8 +15,8 @@ fs
   })
   .forEach(file => {
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+    console.log('TUKA SUUUUUM',model);
     db[model.name] = model;
-    
   });
 
 
