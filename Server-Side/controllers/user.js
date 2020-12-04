@@ -23,4 +23,21 @@ module.exports = {
       .then((user) => res.status(201).send(user))
       .catch((error) => res.status(400).send(error));
   },
+  login(req, res) {
+    const {firstName, password} = req.body;
+    return User
+      .findOne({
+        where: {
+          firstName: firstName,
+        }
+      }).then(async function (user) {
+        if (!user) {
+          res.redirect('No user');
+        } else if (!await user.validPassword(password)) {
+          res.send('Incorrect password');
+        } else {
+          res.send(user);
+        }
+    }).catch((error) => { res.status(400).send(error); });
+  }
 };

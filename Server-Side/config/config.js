@@ -23,7 +23,7 @@ const creds = {
       host: DB_HOSTNAME,
       dialect: 'postgresql'
     }
-  };
+};
 
 module.exports = creds;
   
