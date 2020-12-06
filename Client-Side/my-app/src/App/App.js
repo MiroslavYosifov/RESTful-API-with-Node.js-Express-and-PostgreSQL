@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
 
 import Home from '../components/Home/Home';
+import About from '../components/About/About';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,10 +12,26 @@ class App extends React.Component {
   
   render () {
     return(
-    <div>
-      <h1>APP COMPONENT</h1>
-      <Home/>
-    </div>
+      <BrowserRouter>
+        <div>
+        <ul>
+          <li>
+            <Link to="/home">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+
+        <hr />
+        <Switch>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route path="/about" render={(props) => (<About />)}/>
+        </Switch>
+      </div>
+      </BrowserRouter>
     )
   }
 }
