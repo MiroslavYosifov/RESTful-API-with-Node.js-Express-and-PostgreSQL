@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './WorkoutBuilder.css';
-import Auxiliary from '../../hoc/Auxiliary';
-import './WorkoutBuilder.css'
+import './WorkoutBuilder.module.css';
+
+import Workout from '../../components/Workout/Workout';
 
 
 class WorkoutBuilder extends Component {
@@ -9,9 +9,35 @@ class WorkoutBuilder extends Component {
         super(props)
     }
 
+    state = {
+        exercises: [],
+        workout: ['pyrva', 'vtora']
+    }
+
+    componentDidMount () {
+        fetch('http://localhost:3333/api/workout')
+            .then(response => response.json())
+            .then(data => {
+                this.setState( {
+                    exercises: data
+                });
+            });
+    }
+
+    
     render() {
+
         return (
-            <div className="Test">Workout</div>
+            <div>
+                <h1>THESE ARE THE EXERCISES</h1>
+                <div>
+                    {this.state.exercises.map((ex, index) => {
+                        return <Workout key={index} exercise={ex.name}/>
+                    })}
+                </div>
+                
+            </div>
+            
         );
     }
 }
