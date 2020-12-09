@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './WorkoutBuilder.module.css';
+import  classes from './WorkoutBuilder.module.css';
+import workoutServices from '../../services/workout-service';
 
 import Workout from '../../components/Workout/Workout';
 
@@ -15,20 +16,18 @@ class WorkoutBuilder extends Component {
     }
 
     componentDidMount () {
-        fetch('http://localhost:3333/api/workout')
-            .then(response => response.json())
-            .then(data => {
-                this.setState( {
-                    exercises: data
-                });
+        workoutServices.getWorkouts().then(data => {
+            this.setState({
+                exercises: data
             });
+        });
     }
 
     
     render() {
 
         return (
-            <div>
+            <div className={classes.WorkoutBuilder}>
                 <h1>THESE ARE THE EXERCISES</h1>
                 <div>
                     {this.state.exercises.map((ex, index) => {

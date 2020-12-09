@@ -2,18 +2,27 @@ import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 import Layout from './components/Layout/Layout';
-import RecipeBuilder from './containers/RecipeBuilder/RecipeBuilder';
 import WorkoutBuilder from './containers/WorkoutBuilder/WorkoutBuilder';
+import RecipeBuilder from './containers/RecipeBuilder/RecipeBuilder';
+import FoodBuilder from './containers/FoodBuilder/FoodBuilder';
 
 
 function App() {
   return (
     <div className="App">
-      <WorkoutBuilder></WorkoutBuilder>
+      {/* <WorkoutBuilder></WorkoutBuilder>
       <Layout>
         <RecipeBuilder></RecipeBuilder>
+      </Layout> */}
+      <Layout>
+        <Switch>
+          <Route path="/workout" component={WorkoutBuilder}></Route>
+          <Route path="/recipe" component={RecipeBuilder}></Route>
+          <Route path="/food" component={FoodBuilder}></Route>
+        </Switch>
       </Layout>
     </div>
   );
