@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       // Storing passwords in plaintext in the database is terrible.
       // Hashing the value with an appropriate cryptographic hash function is better.
     },
+    passwordd: DataTypes.STRING,
     comments: DataTypes.STRING
   },{
     sequelize,

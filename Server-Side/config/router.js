@@ -1,7 +1,8 @@
 const routes = require('../routes/index');
 
 module.exports = (app) => {
-    app.use('/api/user', routes.user);
-    app.use('/api/course', routes.course);
-    app.use('/api/workout', routes.workoutExersice);
+    app.use('/api/user', routes.userController);
+    app.use('/api/workout', routes.workoutController);
+    app.use('/api/food', routes.foodController);
+    app.use('/api/food', routes.recipeController);
 }

@@ -1,9 +1,11 @@
 const user = require('./user');
-const course = require('./course');
-const workoutExersice = require('./workoutExersice')
+const workout = require('./workout');
+const food = require('./food');
+const recipe = require('./recipe');
 
 module.exports = {
     user,
-    course,
-    workoutExersice
+    workout,
+    food,
+    recipe
 };

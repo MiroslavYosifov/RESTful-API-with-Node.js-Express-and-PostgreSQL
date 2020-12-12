@@ -1,8 +1,8 @@
-const WorkoutExersice = require('../models').WorkoutExersice;
+const Workout = require('../models').Workout;
 
 module.exports = {
   list(req, res) {
-    return WorkoutExersice
+    return Workout
       .findAll({
         order: [
           ['createdAt', 'DESC'],
@@ -13,7 +13,7 @@ module.exports = {
   },
   add(req, res) {
     console.log('TUKAAAAAAAAAA SYM', req.body.name)
-    return WorkoutExersice
+    return Workout
       .create({
         name: req.body.name,
       })

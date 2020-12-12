@@ -1,9 +1,11 @@
-const user = require('./user');
-const course = require('./course');
-const workoutExersice = require('./workoutExersice');
+const userController = require('./user');
+const workoutController = require('./workout');
+const foodController = require('./food');
+const recipeController = require('./recipe');
 
 module.exports = {
-    user,
-    course,
-    workoutExersice
+    userController,
+    workoutController,
+    foodController,
+    recipeController
 }
