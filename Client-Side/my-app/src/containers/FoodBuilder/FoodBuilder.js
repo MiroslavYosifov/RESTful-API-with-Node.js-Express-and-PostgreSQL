@@ -14,8 +14,8 @@ class FoodBuilder extends Component {
 
         return (
             <div className={classes.FoodBuilder}>
-                <p>FOOOOOOOOOOOD</p>
-                <Food></Food>
+                <h1>I AM FOODBUILDER COMPONENT</h1>
+                <Food/>
             </div>
         );
     }

@@ -5,4 +5,5 @@ module.exports = (app) => {
     app.use('/api/workout', routes.workoutController);
     app.use('/api/food', routes.foodController);
     app.use('/api/food', routes.recipeController);
+    app.use('/api/test', routes.testController);
 }

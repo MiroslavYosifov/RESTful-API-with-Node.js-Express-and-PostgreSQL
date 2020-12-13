@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Food.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    kind: DataTypes.STRING,
+    macros: DataTypes.JSON,
   }, {
     sequelize,
     modelName: 'Food',

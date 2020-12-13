@@ -1,22 +1,23 @@
-const Food = require('../models').Food;
+const Tests = require('../models').Tests;
 
 module.exports = {
   list(req, res) {
-    return Food
+    return Tests
       .findAll({
         order: [
           ['createdAt', 'DESC'],
         ],
       })
-      .then((food) => res.status(200).send(food))
+      .then((test) => res.status(200).send(test))
       .catch((error) => { res.status(400).send(error); });
   },
   add(req, res) {
-    return Food
+    return Tests
       .create({
         name: req.body.name,
         kind: req.body.kind,
         macros: req.body.macros,
+        addObj: req.body.addObj,
       })
       .then((test) => res.status(201).send(test))
       .catch((error) => res.status(400).send(error));
