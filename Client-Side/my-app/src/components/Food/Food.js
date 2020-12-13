@@ -1,4 +1,5 @@
     import React, { Component } from 'react';
+    import { withRouter } from 'react-router-dom';
     import classes from './Food.module.css';
 
     import foodService from '../../services/food-service';
@@ -13,7 +14,13 @@
                         type: 'text',
                         placeholder: 'Food name'
                     },
-                    value: ''
+                    value: '',
+                    validation: {
+                        required: true,
+                        minLength: 6
+                    },
+                    valid: false,
+                    touched: false
                 },
                 kind: {
                     elementType: 'select',
@@ -28,7 +35,10 @@
                             { value: 'eggs', displayValue: 'Eggs' }
                         ]
                     },
-                    value: ''
+                    validation: {},
+                    valid: true,
+                    value: 'vegetables',
+                    touched: false
                 },
                 protein: {
                     elementType: 'input',
@@ -36,7 +46,13 @@
                         type: 'text',
                         placeholder: 'Protein quantity'
                     },
-                    value: ''
+                    value: '',
+                    validation: {
+                        required: true,
+                        minLength: 6
+                    },
+                    valid: false,
+                    touched: false
                 },
                 carbohydrate: {
                     elementType: 'input',
@@ -44,7 +60,13 @@
                         type: 'text',
                         placeholder: 'Carbohydrate quantity'
                     },
-                    value: ''
+                    value: '',
+                    validation: {
+                        required: true,
+                        minLength: 6
+                    },
+                    valid: false,
+                    touched: false
                 },
                 fat: {
                     elementType: 'input',
@@ -52,10 +74,35 @@
                         type: 'text',
                         placeholder: 'Fat quantity'
                     },
-                    value: ''
+                    value: '',
+                    validation: {
+                        required: true,
+                        minLength: 6
+                    },
+                    valid: false,
+                    touched: false
                 },
             },
+            formIsValid: false,
             loading: false
+        }
+
+        checkValidity(value, rules) {
+            let isValid = false;
+
+            if(!rules) {
+                return true;
+            }
+
+            if(rules.required) {
+                isValid = value.trim() !== '';
+            }
+
+            if(rules.minLength) {
+                isValid = value.length >= rules.minLength;
+            }
+
+            return isValid;
         }
 
         inputChnagedHandler = (event, inputIndentifier) => {
@@ -68,9 +115,18 @@
             };
 
             updatedFormElement.value = event.target.value;
+
+            updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+            updatedFormElement.touched = true;
+
             updatedOrderForm[inputIndentifier] = updatedFormElement;
 
-            this.setState({ orderForm: updatedOrderForm });
+            let formsIsValid = true;
+            for (let inputIndentifier in updatedOrderForm) {
+                formsIsValid = updatedOrderForm[inputIndentifier].valid && formsIsValid;
+            }
+
+            this.setState({ orderForm: updatedOrderForm, formsIsValid: formsIsValid });
 
         }
 
@@ -106,8 +162,6 @@
                 })
             }
 
-            console.log(formElementsArray);
-
             return (
                 <div className={classes.Food}>
                     <h2>I AM FOOD COMPONENT</h2>
@@ -118,13 +172,16 @@
                                 elementType={formElement.config.elementType} 
                                 elementConfig={formElement.config.elementConfig} 
                                 value={formElement.config.value}
+                                invalid={!formElement.config.valid}
+                                shouldValidate={formElement.config.validation}
+                                touched={formElement.config.touched}
                                 changed={(event) => this.inputChnagedHandler(event, formElement.id)}/>
                         ))}
-                        <button>Success</button>
+                        <button disabled={!this.state.formIsValid}>Success</button>
                     </form>
                 </div>
             );
         }
     }
     
-    export default Food;
+    export default withRouter(Food);

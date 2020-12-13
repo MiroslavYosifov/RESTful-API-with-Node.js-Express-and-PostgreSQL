@@ -10,3 +10,16 @@
     display: block;
     margin-bottom: 8px;
 }
+
+.inputElement {
+    border-radius: 3px;
+    border: none;
+    background: lightgrey;
+    padding: 1em;
+    width: 20%;
+}
+
+.Invalid {
+    border: 1px solid red;
+    background: rgb(255, 178, 169);
+}
