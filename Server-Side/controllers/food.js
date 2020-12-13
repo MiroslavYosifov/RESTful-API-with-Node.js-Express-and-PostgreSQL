@@ -12,11 +12,14 @@ module.exports = {
       .catch((error) => { res.status(400).send(error); });
   },
   add(req, res) {
+
     return Food
       .create({
-        name: req.body.name,
-        kind: req.body.kind,
-        macros: req.body.macros,
+        name: req.body.orderData.name,
+        kind: req.body.orderData.kind,
+        protein: Number(req.body.orderData.protein),
+        fat: Number(req.body.orderData.fat),
+        carbohydrate: Number(req.body.orderData.carbohydrate),
       })
       .then((test) => res.status(201).send(test))
       .catch((error) => res.status(400).send(error));
