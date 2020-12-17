@@ -29,6 +29,7 @@ class WorkoutBuilder extends Component {
         return (
             <div className={classes.WorkoutBuilder}>
                 <h1>THESE ARE THE EXERCISES</h1>
+                <Workout/>
                 <div>
                     {this.state.exercises.map((ex, index) => {
                         return <Workout key={index} exercise={ex.name}/>
