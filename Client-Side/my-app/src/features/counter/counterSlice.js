@@ -1,3 +1,4 @@
+// DONT USE THIS FILE
 import { createSlice } from '@reduxjs/toolkit';
 
 export const counterSlice = createSlice({

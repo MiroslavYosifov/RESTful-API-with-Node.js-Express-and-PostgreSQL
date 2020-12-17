@@ -83,7 +83,6 @@
                     touched: false
                 },
             },
-            formIsValid: false,
             loading: false
         }
 
@@ -121,12 +120,8 @@
 
             updatedOrderForm[inputIndentifier] = updatedFormElement;
 
-            let formsIsValid = true;
-            for (let inputIndentifier in updatedOrderForm) {
-                formsIsValid = updatedOrderForm[inputIndentifier].valid && formsIsValid;
-            }
 
-            this.setState({ orderForm: updatedOrderForm, formsIsValid: formsIsValid });
+            this.setState({ orderForm: updatedOrderForm });
 
         }
 
@@ -177,7 +172,7 @@
                                 touched={formElement.config.touched}
                                 changed={(event) => this.inputChnagedHandler(event, formElement.id)}/>
                         ))}
-                        <button disabled={!this.state.formIsValid}>Success</button>
+                        <button>Success</button>
                     </form>
                 </div>
             );
