@@ -21,7 +21,7 @@ class Recipe extends Component {
                 <CounterControl label="Add" clicked={this.props.onAddCounter} />
                 <CounterControl label="Substract" clicked={this.props.onSubstractCounter} />
                 <hr></hr>
-                <button onClick={this.props.onStoreResult}>Store Result</button>
+                <button onClick={() => this.props.onStoreResult(this.props.ctr)}>Store Result</button>
                 <ul>
                     {this.props.storedResults.map((storedResult, index) => (
                         <li key={storedResult.id} onClick={() => this.props.onDeleteResult(storedResult.id)}>Results{index}: {storedResult.value} </li>))}
@@ -33,8 +33,8 @@ class Recipe extends Component {
 
 const mapStateToProps = state => {
     return {
-        ctr: state.counter,
-        storedResults: state.results
+        ctr: state.ctr.counter,
+        storedResults: state.res.results
     };
 };
 
@@ -44,7 +44,7 @@ const mapDispatchToProps = dispatch => {
         onDecrementCounter: () => dispatch({ type: actionTypes.DECREMENT}),
         onAddCounter: () => dispatch({ type: actionTypes.ADD, val: 10 }),
         onSubstractCounter: () => dispatch({ type: actionTypes.SUBSTRACT, val: 5 }),
-        onStoreResult: () => dispatch({ type: actionTypes.STORE_RESULT }),
+        onStoreResult: (result) => dispatch({ type: actionTypes.STORE_RESULT, result: result }),
         onDeleteResult: (id) => dispatch({ type: actionTypes.DELETE_RESULT, resultElId: id }),
     };
 };
