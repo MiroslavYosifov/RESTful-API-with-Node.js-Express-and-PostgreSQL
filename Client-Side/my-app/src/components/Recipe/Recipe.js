@@ -6,7 +6,8 @@ import classes from './Recipe.module.css';
 import CounterControl from './CounterControl/CounterControl';
 import CounterOutput from './CounterOutput/CounterOutput';
 
-import * as actionTypes from '../../store/actions';
+import { increment, decrement, add, substract, storeResult, deleteResult } from '../../store/actions/actions';
+import * as actionTypes from '../../store/actions/actions';
   
 class Recipe extends Component {
 
@@ -40,12 +41,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIncrementCounter: () => dispatch({ type: actionTypes.INCREMENT}),
-        onDecrementCounter: () => dispatch({ type: actionTypes.DECREMENT}),
-        onAddCounter: () => dispatch({ type: actionTypes.ADD, val: 10 }),
-        onSubstractCounter: () => dispatch({ type: actionTypes.SUBSTRACT, val: 5 }),
-        onStoreResult: (result) => dispatch({ type: actionTypes.STORE_RESULT, result: result }),
-        onDeleteResult: (id) => dispatch({ type: actionTypes.DELETE_RESULT, resultElId: id }),
+        onIncrementCounter: () => dispatch(increment()),
+        onDecrementCounter: () => dispatch(decrement()),
+        onAddCounter: () => dispatch(add()),
+        // onSubstractCounter: () => dispatch({ type: actionTypes.SUBSTRACT, val: 5 }),
+        onSubstractCounter: () => dispatch(substract()),
+        // onStoreResult: (result) => dispatch({ type: actionTypes.STORE_RESULT, result: result }),
+        onStoreResult: (result) => dispatch(storeResult(result)),
+        onDeleteResult: (id) => dispatch(deleteResult(id)),
     };
 };
 
