@@ -6,8 +6,8 @@ import classes from './Recipe.module.css';
 import CounterControl from './CounterControl/CounterControl';
 import CounterOutput from './CounterOutput/CounterOutput';
 
-import { increment, decrement, add, substract, storeResult, deleteResult } from '../../store/actions/actions';
-import * as actionTypes from '../../store/actions/actions';
+import { increment, decrement, add, substract, storeResult, deleteResult } from '../../store/actions/index';
+// import * as actionTypes from '../../store/actions/actions';
   
 class Recipe extends Component {
 
@@ -51,6 +51,5 @@ const mapDispatchToProps = dispatch => {
         onDeleteResult: (id) => dispatch(deleteResult(id)),
     };
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recipe);

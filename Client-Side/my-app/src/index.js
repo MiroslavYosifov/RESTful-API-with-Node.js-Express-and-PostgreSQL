@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 
 //import reducer from './store/reducer';
 import counterReducer from './store/reducers/counter';
@@ -32,7 +33,7 @@ const logger = store => {
   }
 };
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)) );
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, thunk)) );
 
 ReactDOM.render(
   <React.StrictMode>
