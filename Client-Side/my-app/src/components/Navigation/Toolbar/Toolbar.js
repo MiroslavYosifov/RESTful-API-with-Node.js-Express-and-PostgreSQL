@@ -11,7 +11,8 @@ const toolbar = (props) => (
             <ul>
                 <li><Link to="/workout">Workout</Link></li>
                 <li><Link to="/recipe">Recipe</Link></li>
-                <li><Link to="/food">Food</Link></li>     
+                <li><Link to="/food">Food</Link></li>
+                <li><Link to="/auth">Sign in</Link></li>     
             </ul>
         </nav>
     </header>

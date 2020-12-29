@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
       // Storing passwords in plaintext in the database is terrible.
       // Hashing the value with an appropriate cryptographic hash function is better.
     },
-    passwordd: DataTypes.STRING,
     comments: DataTypes.STRING
   },{
     sequelize,
@@ -42,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.prototype.validPassword = async function(password) {
+    //console.log('Is it working', bcrypt.compare(password, this.password));
     return await bcrypt.compare(password, this.password);
   }
 

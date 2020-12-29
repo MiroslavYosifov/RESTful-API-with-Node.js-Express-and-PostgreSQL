@@ -1,3 +1,6 @@
+
+const jwt = require('../utils/jwt');
+const config = require('../config/config');
 const User = require('../models').User;
 
 module.exports = {
@@ -24,20 +27,25 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
   login(req, res) {
-    const {firstName, password} = req.body;
+    const { firstName, password } = req.body;
     return User
       .findOne({
         where: {
           firstName: firstName,
         }
-      }).then(async function (user) {
-        if (!user) {
-          res.redirect('No user');
-        } else if (!await user.validPassword(password)) {
-          res.send('Incorrect password');
-        } else {
-          res.send(user);
-        }
-    }).catch((error) => { res.status(400).send(error); });
+      }).then((user) => {
+        user.validPassword(password).then((isValid) => {
+          if(!isValid) {
+            console.log('Inavlid username or password');
+            res.status(401).send('Invalid username or password');
+            return;
+          }
+
+          const token = jwt.createToken({ id: user._id });
+          res.cookie(config.development.authCookieName, token).send(user);
+        })
+       
+      }
+    ).catch((error) => { res.status(400).send(error); });
   }
 };
