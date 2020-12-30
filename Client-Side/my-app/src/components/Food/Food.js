@@ -104,7 +104,7 @@
             return isValid;
         }
 
-        inputChnagedHandler = (event, inputIndentifier) => {
+        inputChangedHandler = (event, inputIndentifier) => {
             const updatedOrderForm = {
                 ...this.state.orderForm
             };
@@ -170,7 +170,7 @@
                                 invalid={!formElement.config.valid}
                                 shouldValidate={formElement.config.validation}
                                 touched={formElement.config.touched}
-                                changed={(event) => this.inputChnagedHandler(event, formElement.id)}/>
+                                changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
                         ))}
                         <button>Success</button>
                     </form>

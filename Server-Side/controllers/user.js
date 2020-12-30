@@ -2,6 +2,7 @@
 const jwt = require('../utils/jwt');
 const config = require('../config/config');
 const User = require('../models').User;
+const TokenBlackList = require('../models').TokenBlackList;
 
 module.exports = {
   list(req, res) {
@@ -27,7 +28,10 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
   login(req, res) {
-    const { firstName, password } = req.body;
+
+    console.log(req.body);
+    const { firstName, password } = req.body.orderData;
+  
     return User
       .findOne({
         where: {
@@ -47,5 +51,13 @@ module.exports = {
        
       }
     ).catch((error) => { res.status(400).send(error); });
+  },
+  logout(req, res) {
+    const token = req.cookies[config.development.authCookieName];
+    TokenBlackList
+      .create({ token: token })
+      .then(() => {
+        res.clearCookie(config.development.authCookieName).send('Logout successfully!');
+      }).catch((error) => { res.status(400).send(error); });
   }
 };
