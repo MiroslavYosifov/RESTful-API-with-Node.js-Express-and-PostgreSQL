@@ -1,46 +1,108 @@
 import React, { Component } from 'react';
 import  classes from './Auth.module.css';
-import { useFormik } from 'formik';
+import { useFormik, withFormik, Form, Field } from 'formik';
+import * as yup from 'yup';
 
 import userService from '../../services/user-service';
 
 
+class Auth extends Component {
 
-const Auth = () => {
-    const formik = useFormik({
-        initialValues: {
-          firstName: '',
-          password: '',
-        },
-        onSubmit: values => {
-          alert(JSON.stringify(values, null, 2));
-        },
-    });
-
+  render() {
+    const { values, errors, touched, isSubmitting } = this.props;
     return (
-        <form className={classes.Auth} onSubmit={formik.handleSubmit}>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            id="firstName"
-            name="firstName"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.firstName}
-          />
-          <input
-            id="password"
-            name="password"
-            type="password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-          />
-          <button type="submit">Submit</button>
-        </form>
-      );
+      <Form className={classes.Auth}>
+        <div>
+          { touched.email && errors.email && <p>{errors.email}</p>}
+          <Field type="email" name="email" placeholder="Email"/>
+        </div>
+       <div>
+          { touched.email && errors.password && <p>{errors.password}</p>}
+          <Field type="password" name="password" placeholder="Password"/>
+       </div>
+       <div>
+          <label>
+            <Field type="checkbox" name="newsletter" checked={values.newsletter}/>
+            Join to us.
+          </label>
+       </div>
+       <div>
+          <Field component="select" name="plan">
+            <option value="free">Free</option>
+            <option value="premium">Premium</option>
+          </Field>
+       </div>
+        <button disabled={isSubmitting}>Submit</button>
+      </Form>
+    )
+  }
 }
+ 
+const FormikAuth = withFormik({
+  mapPropsToValues({ email, password, newsletter, plan }) {
+    return {
+      email: email || '',
+      password: password || '',
+      newsletter: newsletter || true,
+      plan: plan || 'premium'
+    }
+  },
+  validationSchema: yup.object().shape({
+    email: yup.string().email().required(),
+    password: yup.string().min(6, 'must be 6 symbols').required()
+  }),
+  handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
+    setTimeout(() => {
+      if(values.email === "andrews@test.com") {
+        setErrors({ email: 'That email is already taken'})
+      } else {
+        resetForm()
+      }
+        setSubmitting(false)
+    }, 2000)
+  }
+})(Auth)
 
-export default Auth;
+export default FormikAuth;
 
+// 1. FIRST WAY
+
+// const Auth = () => {
+//     const formik = useFormik({
+//         initialValues: {
+//           firstName: '',
+//           password: '',
+//         },
+//         onSubmit: values => {
+//           alert(JSON.stringify(values, null, 2));
+//         },
+//     });
+
+//     return (
+//         <form className={classes.Auth} onSubmit={formik.handleSubmit}>
+//           <label htmlFor="firstName">First Name</label>
+//           <input
+//             id="firstName"
+//             name="firstName"
+//             type="text"
+//             onChange={formik.handleChange}
+//             value={formik.values.firstName}
+//           />
+//           <input
+//             id="password"
+//             name="password"
+//             type="password"
+//             onChange={formik.handleChange}
+//             value={formik.values.password}
+//           />
+//           <button type="submit">Submit</button>
+//         </form>
+//       );
+// }
+
+// export default Auth;
+
+// 2. SECOND WAY
 
 // class Auth extends Component {
 //     state = {

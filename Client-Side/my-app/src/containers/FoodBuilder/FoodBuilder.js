@@ -11,7 +11,6 @@ class FoodBuilder extends Component {
 
 
     render() {
-
         return (
             <div className={classes.FoodBuilder}>
                 <h1>I AM FOODBUILDER COMPONENT</h1>
