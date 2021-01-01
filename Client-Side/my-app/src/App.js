@@ -7,7 +7,7 @@ import Layout from './components/Layout/Layout';
 import WorkoutBuilder from './containers/WorkoutBuilder/WorkoutBuilder';
 import RecipeBuilder from './containers/RecipeBuilder/RecipeBuilder';
 import FoodBuilder from './containers/FoodBuilder/FoodBuilder';
-import Auth from './containers/Auth/Auth';
+import AuthBuilder from './containers/AuthBuilder/AuthBuilder';
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
           <Route path="/workout" component={WorkoutBuilder}></Route>
           <Route path="/recipe" component={RecipeBuilder}></Route>
           <Route path="/food" component={FoodBuilder}></Route>
-          <Route path="/auth" component={Auth}></Route>
+          <Route path="/auth" component={AuthBuilder}></Route>
         </Switch>
       </Layout>
     </div>

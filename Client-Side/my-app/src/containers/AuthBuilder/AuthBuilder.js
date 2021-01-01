@@ -1,69 +1,21 @@
 import React, { Component } from 'react';
-import  classes from './Auth.module.css';
-import { useFormik, withFormik, Form, Field } from 'formik';
-import * as yup from 'yup';
+import  classes from './AuthBuilder.module.css';
 
-import userService from '../../services/user-service';
+import Auth from '../../components/Auth/Auth';
 
-
-class Auth extends Component {
+class AuthBuilder extends Component {
 
   render() {
-    const { values, errors, touched, isSubmitting } = this.props;
     return (
-      <Form className={classes.Auth}>
-        <div>
-          { touched.email && errors.email && <p>{errors.email}</p>}
-          <Field type="email" name="email" placeholder="Email"/>
-        </div>
-       <div>
-          { touched.email && errors.password && <p>{errors.password}</p>}
-          <Field type="password" name="password" placeholder="Password"/>
-       </div>
-       <div>
-          <label>
-            <Field type="checkbox" name="newsletter" checked={values.newsletter}/>
-            Join to us.
-          </label>
-       </div>
-       <div>
-          <Field component="select" name="plan">
-            <option value="free">Free</option>
-            <option value="premium">Premium</option>
-          </Field>
-       </div>
-        <button disabled={isSubmitting}>Submit</button>
-      </Form>
+      <div className={classes.Auth}>
+        <h1>AuthBuilder Component</h1>
+        <Auth/>
+      </div>
     )
   }
 }
- 
-const FormikAuth = withFormik({
-  mapPropsToValues({ email, password, newsletter, plan }) {
-    return {
-      email: email || '',
-      password: password || '',
-      newsletter: newsletter || true,
-      plan: plan || 'premium'
-    }
-  },
-  validationSchema: yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().min(6, 'must be 6 symbols').required()
-  }),
-  handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-    setTimeout(() => {
-      if(values.email === "andrews@test.com") {
-        setErrors({ email: 'That email is already taken'})
-      } else {
-        resetForm()
-      }
-        setSubmitting(false)
-    }, 2000)
-  }
-})(Auth)
 
-export default FormikAuth;
+export default AuthBuilder;
 
 // 1. FIRST WAY
 

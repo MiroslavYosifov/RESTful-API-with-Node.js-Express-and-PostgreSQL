@@ -30,7 +30,7 @@ module.exports = {
   login(req, res) {
 
     console.log(req.body);
-    const { firstName, password } = req.body.orderData;
+    const { firstName, password } = req.body;
   
     return User
       .findOne({
@@ -57,7 +57,7 @@ module.exports = {
     TokenBlackList
       .create({ token: token })
       .then(() => {
-        res.clearCookie(config.development.authCookieName).send('Logout successfully!');
+        res.clearCookie(config.development.authCookieName).send({ success: 'Logout successfully!'});
       }).catch((error) => { res.status(400).send(error); });
   }
 };
