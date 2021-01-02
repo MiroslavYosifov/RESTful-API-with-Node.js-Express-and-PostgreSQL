@@ -15,20 +15,14 @@ module.exports = {
       .then((users) => res.status(200).send(users))
       .catch((error) => { res.status(400).send(error); });
   },
-  add(req, res) {
+  registration(req, res) {
+    const { username, firstName, lastName, email, password } = req.body;
     return User
-      .create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-        comments: req.body.comments
-      })
+      .create({ username, firstName, lastName, email, password})
       .then((user) => res.status(201).send(user))
       .catch((error) => res.status(400).send(error));
   },
   login(req, res) {
-
     console.log(req.body);
     const { firstName, password } = req.body;
   

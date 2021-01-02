@@ -8,7 +8,7 @@ import userService from '../../../../services/user-service';
 
 
 const AuthLogoutForm = () => (
-    <Form>
+    <Form className={classes.AuthLogoutForm}>
       <button>Logout</button>
     </Form>
 );

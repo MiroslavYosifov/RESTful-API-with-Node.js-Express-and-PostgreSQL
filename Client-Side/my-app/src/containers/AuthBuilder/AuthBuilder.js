@@ -4,11 +4,18 @@ import  classes from './AuthBuilder.module.css';
 import Auth from '../../components/Auth/Auth';
 
 class AuthBuilder extends Component {
+  state = {
+    userInfo: {}
+  }
+
+  
 
   render() {
     return (
-      <div className={classes.Auth}>
-        <h1>AuthBuilder Component</h1>
+      <div className={classes.AuthBuilder}>
+        <div>
+          <h1>AuthBuilder Component</h1>
+        </div>
         <Auth/>
       </div>
     )

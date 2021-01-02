@@ -8,7 +8,7 @@ import userService from '../../../../services/user-service';
 
 
 const AuthLoginForm = ({ values, errors, touched, isSubmitting }) => (
-  <Form>
+  <Form className={classes.AuthLoginForm}>
       <div>
          { touched.firstName && errors.firstName && <p>{errors.firstName}</p>}
          <Field type="text" name="firstName" placeholder="First Name"/>
@@ -53,9 +53,6 @@ const FormikAuthLoginForm = withFormik({
       console.log(res);
     });
   },
-  sendLogout() {
-    console.log('test');
-  }
 })(AuthLoginForm);
 
 export default FormikAuthLoginForm;
