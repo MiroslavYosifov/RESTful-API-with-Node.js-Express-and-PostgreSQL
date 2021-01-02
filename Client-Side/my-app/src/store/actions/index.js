@@ -8,3 +8,6 @@ export {
     storeResult,
     deleteResult
 } from './result';
+export {
+    auth
+} from './auth'

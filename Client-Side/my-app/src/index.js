@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 //import reducer from './store/reducer';
 import counterReducer from './store/reducers/counter';
 import resultReducer from './store/reducers/result';
+import authReducer from './store/reducers/auth';
 
 import { BrowserRouter } from 'react-router-dom';
 
@@ -17,7 +18,8 @@ import * as serviceWorker from './serviceWorker';
 
 const rootReducer = combineReducers({
   ctr: counterReducer,
-  res: resultReducer
+  res: resultReducer,
+  auth: authReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
