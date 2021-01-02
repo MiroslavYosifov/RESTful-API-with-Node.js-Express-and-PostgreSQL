@@ -56,7 +56,7 @@ const FormikAuthRegistrationForm = withFormik({
         lastName: yup.string().min(1, 'must be 1 symbols').required(),
         email: yup.string().email().required(),
         password: yup.string().min(1, 'must be 1 symbols').required(),
-        comfirmPassword: yup.string().min(1, 'must be 1 symbols').required()
+        comfirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').min(1, 'must be 1 symbols').required()
     }),
     handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
         userService.registration(values).then(res => {
