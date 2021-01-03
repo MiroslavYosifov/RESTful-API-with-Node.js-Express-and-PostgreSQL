@@ -9,5 +9,7 @@ export {
     deleteResult
 } from './result';
 export {
-    auth
+    authLogin,
+    authLogoutChecking,
+    authCheckState
 } from './auth'

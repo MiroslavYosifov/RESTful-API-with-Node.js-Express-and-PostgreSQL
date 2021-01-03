@@ -33,7 +33,7 @@ const AuthRegistrationForm = ({ values, errors, touched, isSubmitting }) => (
            { touched.comfirmPassword && errors.comfirmPassword && <p>{errors.comfirmPassword}</p>}
            <Field type="password" name="comfirmPassword" placeholder="Comfirm Password"/>
         </div>
-      <button>Submit</button>
+      <button>Sign up</button>
     </Form>
 );
 
@@ -51,7 +51,7 @@ const FormikAuthRegistrationForm = withFormik({
         }
     },
     validationSchema: yup.object().shape({
-        username: yup.string().min(1, 'must be 1 symbols').required(),
+        username: yup.string().min(3, 'must be 3 symbols').required(),
         firstName: yup.string().min(1, 'must be 1 symbols').required(),
         lastName: yup.string().min(1, 'must be 1 symbols').required(),
         email: yup.string().email().required(),

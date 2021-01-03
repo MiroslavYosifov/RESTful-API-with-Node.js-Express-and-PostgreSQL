@@ -4,6 +4,10 @@ import  classes from './AuthLoginForm.module.css';
 import * as yup from 'yup';
 import { useFormik, withFormik, Form, Field } from 'formik';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { authLogoutChecking } from '../../../../store/actions/index';
+
 import userService from '../../../../services/user-service';
 
 
@@ -14,11 +18,18 @@ const AuthLogoutForm = () => (
 );
 
 const FormikAuthLogoutForm = withFormik({
-  handleSubmit() {
-    userService.logout().then(res => {
-      console.log(res);
-    });
+  handleSubmit(values, { props, setSubmitting }) {
+    const { onLogout } = props;
+    onLogout().then(() => setSubmitting(false))
   }
 })(AuthLogoutForm);
 
-export default FormikAuthLogoutForm;
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(
+      {
+        onLogout: () => dispatch(authLogoutChecking()),
+      }
+    )
+  };
+
+export default connect(null, mapDispatchToProps)(FormikAuthLogoutForm);

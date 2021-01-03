@@ -1,5 +1,14 @@
 .AuthLogoutForm {
-    border: 1px solid black;
-    padding: 0.4em;
-    margin: 2em 0;
+   
+}
+
+.AuthLogoutForm button {
+    border: none;
+    color: lightgray;
+    background: none;
+}
+
+.AuthLogoutForm button:hover {
+    cursor: pointer;
+    color: white;
 }

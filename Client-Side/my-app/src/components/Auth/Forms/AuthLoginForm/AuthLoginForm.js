@@ -6,7 +6,7 @@ import { useFormik, withFormik, Form, Field } from 'formik';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { auth } from '../../../../store/actions/index';
+import { authLogin } from '../../../../store/actions/index';
 
 const AuthLoginForm = (props) => {
   const { values, errors, touched, isSubmitting } = props;
@@ -27,7 +27,8 @@ const AuthLoginForm = (props) => {
            Join to us.
          </label>
       </div> */}
-      <button disabled={isSubmitting}>Submit</button>
+      {/* <button disabled={isSubmitting}>Sign upa</button> */}
+      <button disabled={isSubmitting}>Sign in</button>
     </Form>
   )
 };
@@ -62,7 +63,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      onAuth: (firstName, password) => dispatch(auth(firstName, password)),
+      onAuth: (firstName, password) => dispatch(authLogin(firstName, password)),
     }
   )
 };
