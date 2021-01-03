@@ -5,6 +5,7 @@ import classes from './Food.module.css';
 import foodService from '../../services/food-service';
 
 import FoodForm from './FoodForm/FoodForm';
+import FoodCard from './FoodCard/FoodCard';
 
 class Food extends Component {
 
@@ -12,6 +13,9 @@ class Food extends Component {
         return (
             <div className={classes.Food}>
                 <FoodForm/>
+                <div>
+                    <FoodCard/>
+                </div>
             </div>
         );
     }

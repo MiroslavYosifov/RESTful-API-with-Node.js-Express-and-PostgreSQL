@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     protein: DataTypes.INTEGER,
     fat: DataTypes.INTEGER,
     carbohydrate: DataTypes.INTEGER,
-    macros: DataTypes.JSON,
+    calories: DataTypes.INTEGER,
+    //macros: DataTypes.JSON,
   }, {
     sequelize,
     modelName: 'Food',
