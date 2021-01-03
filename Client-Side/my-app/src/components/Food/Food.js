@@ -21,7 +21,7 @@ class Food extends Component {
         
         return (
             <div className={classes.Food}>
-                <FoodAddForm/>
+                <FoodAddForm {...this.props}/>
                 <div className={classes.FoodContainer}>
                     {foodData ? foodData.map(food =>  (
                         <FoodCard key={food.id} {...food}/>

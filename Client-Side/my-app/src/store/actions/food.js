@@ -21,13 +21,13 @@ export const authFail = (error) => {
     }
 }
 
-
-export const addFood = (foodData) => {
+export const addFood = (foodData, props) => {
     return dispatch => {
         dispatch(authStart())
         foodService.addFood(foodData)
             .then(res => {
-                console.log(res);
+                props.history.replace(`/reload`);
+                props.history.replace('/food');
             }).catch(err => {
                 dispatch(authFail(err))
             })

@@ -67,14 +67,15 @@ const FormikFoodAddForm = withFormik({
   handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
     const { onAddFood } = props;
     const foodData = { ...values }
-    onAddFood(foodData).then(() => setSubmitting(false));
+    onAddFood(foodData, props).then(() => setSubmitting(false));
   },
 })(FoodAddForm);
+
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      onAddFood: (foodData) => dispatch(addFood(foodData)),
+      onAddFood: (foodData, props) => dispatch(addFood(foodData, props)),
     }
   )
 };
