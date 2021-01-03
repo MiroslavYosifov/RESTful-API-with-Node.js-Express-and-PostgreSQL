@@ -12,4 +12,8 @@ export {
     authLogin,
     authLogoutChecking,
     authCheckState
-} from './auth'
+} from './auth';
+export {
+    addFood,
+    getFoods
+} from './food';

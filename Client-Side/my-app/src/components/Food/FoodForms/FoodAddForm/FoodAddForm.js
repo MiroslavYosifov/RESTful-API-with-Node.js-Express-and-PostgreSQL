@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import  classes from './FoodForm.module.css';
+import  classes from './FoodAddForm.module.css';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addFood } from '../../../../store/actions/index';
 
 import * as yup from 'yup';
 import { useFormik, withFormik, Form, Field } from 'formik';
 
-const FoodForm = ({ values, errors, touched, isSubmitting }) => (
-  <Form className={classes.AuthLoginForm}>
+const FoodAddForm  = ({ values, errors, touched, isSubmitting }) => (
+  <Form className={classes.FoodAddForm}>
       <div>
          { touched.name && errors.name && <p>{errors.name}</p>}
          <Field type="text" name="name" placeholder="Food Name"/>
@@ -32,21 +36,24 @@ const FoodForm = ({ values, errors, touched, isSubmitting }) => (
       <div>
          { touched.carbohydrate && errors.carbohydrate && <p>{errors.carbohydrate}</p>}
          <Field type="text" name="carbohydrate" placeholder="Carbohydrate"/>
-      </div>        
+      </div>
+      <div>
+         { touched.imgUrl && errors.imgUrl && <p>{errors.imgUrl}</p>}
+         <Field type="text" name="imgUrl" placeholder="Image URL"/>
+      </div>          
       <button>Submit</button>
     </Form>
 );
 
-
-
-const FormikFoodForm = withFormik({
-  mapPropsToValues({ name, kind, protein, fat, carbohydrate }) {
+const FormikFoodAddForm = withFormik({
+  mapPropsToValues({ name, kind, protein, fat, carbohydrate, imgUrl }) {
     return {
         name: name || '',
         kind: kind || 'vegetables',
         protein: protein || '',
         fat: fat || '',
         carbohydrate: carbohydrate || '',
+        imgUrl: imgUrl || '',
     }
   },
   validationSchema: yup.object().shape({
@@ -55,10 +62,21 @@ const FormikFoodForm = withFormik({
     protein: yup.number().min(1, 'must be 1 symbols').required(),
     fat: yup.number().min(1, 'must be 1 symbols').required(),
     carbohydrate: yup.number().min(1, 'must be 1 symbols').required(),
+    imgUrl: yup.string().min(1, 'must be 1 symbols').required(),
   }),
-  handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-    
+  handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
+    const { onAddFood } = props;
+    const foodData = { ...values }
+    onAddFood(foodData).then(() => setSubmitting(false));
   },
-})(FoodForm);
+})(FoodAddForm);
 
-export default FormikFoodForm;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      onAddFood: (foodData) => dispatch(addFood(foodData)),
+    }
+  )
+};
+
+export default connect(null, mapDispatchToProps)(FormikFoodAddForm);

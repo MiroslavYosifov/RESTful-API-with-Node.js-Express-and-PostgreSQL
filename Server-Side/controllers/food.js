@@ -13,13 +13,18 @@ module.exports = {
   },
   add(req, res) {
 
+    const { name, kind, protein, fat, carbohydrate, imgUrl} = req.body;
+    const calories = (Number(protein) * 4) + (Number(carbohydrate) * 4) + (Number(fat) * 4);
+
     return Food
       .create({
-        name: req.body.orderData.name,
-        kind: req.body.orderData.kind,
-        protein: Number(req.body.orderData.protein),
-        fat: Number(req.body.orderData.fat),
-        carbohydrate: Number(req.body.orderData.carbohydrate),
+        name: name,
+        kind: kind,
+        protein: Number(protein),
+        fat: Number(fat),
+        carbohydrate: Number(carbohydrate),
+        imgUrl: imgUrl,
+        calories: calories
       })
       .then((test) => res.status(201).send(test))
       .catch((error) => res.status(400).send(error));

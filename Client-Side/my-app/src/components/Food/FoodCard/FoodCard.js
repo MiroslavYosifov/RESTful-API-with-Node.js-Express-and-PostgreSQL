@@ -14,22 +14,24 @@ class FoodCard extends Component {
 
     render() {
         const { isHidden } = this.state;
+        const { calories, carbohydrate, fat, protein, imgUrl, name, kind } = this.props;
 
         return (
             <div className={classes.FoodCard}>
                 <div className={classes.FoodCardMediaContainer}>
-                    <img src="https://www.learn-bulgarian.net/wp-content/uploads/2013/05/7-banana-bulgarian-vocabulary-banan.jpg"/>
+                    <img src={imgUrl}/>
                     {isHidden ? <div className={classes.FoodCardContentContainer}>
-                        <p>Calories: 250</p>
-                        <p>Protein: 23</p>
-                        <p>Fat: 14 </p>
-                        <p>Carbohydrate: 34</p>
+                        <p>Kind: {kind}</p>
+                        <p>Calories: {calories}</p>
+                        <p>Protein: {protein}</p>
+                        <p>Fat: {fat}</p>
+                        <p>Carbohydrate: {carbohydrate}</p>
                     </div> : ''}
                 </div>
                 <div className={classes.FoodCardHeaderContainer}>
                     <header>
-                        <h3>Banana</h3>
-                        <p onClick={this.changeIsHidden}>Show Content</p>   
+                        <h3>{name}</h3>
+                        <p onClick={this.changeIsHidden}>{!isHidden ? 'Show content' : 'Hide content'}</p>   
                     </header>
                 </div>
             </div>

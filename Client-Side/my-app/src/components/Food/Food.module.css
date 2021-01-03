@@ -2,3 +2,8 @@
     border: 3px solid gray;
     padding: 1em;
 }
+
+.FoodContainer {
+    display: flex;
+    flex-wrap: wrap;
+}

@@ -1,63 +1,73 @@
-.FoodCard {
-    margin: 1em;
-    border: 1px solid black;
-    width: 15%;
-}
+    .FoodCard {
+        margin: 1em;
+        border: 2px solid white;
+        border-radius: 0.6em;
+        width: 15%;
+        box-shadow: 0 0 0.6em 0.1em rgba(0, 0, 0, 0.6);
+    }
 
-.FoodCardMediaContainer {
-    position: relative;
-    width: 100%;
-    border: 1px solid red;
-    overflow: hidden;
-}
+    .FoodCardMediaContainer {
+        position: relative;
+        width: 100%;
+        /* border: 1px solid red; */
+        border-radius: 0.6em;
+        overflow: hidden;
+    }
 
-.FoodCardMediaContainer:before {
-    display: block;
-    content: '';
-    padding: 50%;
-}
+    .FoodCardMediaContainer:before {
+        display: block;
+        content: '';
+        padding: 50%;
+    }
 
-.FoodCardMediaContainer img {
-    position: absolute;
-    height: 100%;
-    width: auto;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-}
+    .FoodCardMediaContainer img {
+        position: absolute;
+        height: 100%;
+        width: auto;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
-.FoodCardContentContainer {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    height: 100%;
-    width: 100%;
-    padding: 2em;
-    text-align: center;
-}
+    .FoodCardContentContainer {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.8);
+        height: 100%;
+        width: 100%;
+        padding: 4em 3em;
+        text-align: left;
+    }
 
-.FoodCardHeaderContainer {
-    width: 100%;
-    padding: 1em;
-}
+    .FoodCardContentContainer p {
+        font-size: 1.3em;
+    }
 
-.FoodCardHeaderContainer header {
-    display: flex;
-    width: 100%;
-}
+    .FoodCardHeaderContainer {
+        width: 100%;
+        padding: 1em;
+        background: white
+    }
 
-.FoodCardHeaderContainer header h3 {
-    text-align: center;
-}
+    .FoodCardHeaderContainer header {
+        display: flex;
+        width: 100%;
+    }
 
-.FoodCardHeaderContainer header p {
-    background: gray;
-    color: white;
-    padding: 0.2em;
-    margin-left: auto;
-}
+    .FoodCardHeaderContainer header h3 {
+        text-align: center;
+    }
 
-.FoodCardHeaderContainer header p:hover {
-    cursor: pointer;
-    
-}
+    .FoodCardHeaderContainer header p {
+        background: rgb(173, 173, 173);
+        border-radius: 0.2em;
+        color: white;
+        padding: 0.2em 0.4em;
+        margin-left: auto;
+        font-size: 0.9em;
+    }
+
+    .FoodCardHeaderContainer header p:hover {
+        cursor: pointer;
+        
+    }
