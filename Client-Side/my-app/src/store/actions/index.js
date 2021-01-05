@@ -15,5 +15,6 @@ export {
 } from './auth';
 export {
     addFood,
+    editFoods,
     getFoods
 } from './food';

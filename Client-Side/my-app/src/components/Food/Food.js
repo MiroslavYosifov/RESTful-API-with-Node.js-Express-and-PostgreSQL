@@ -8,7 +8,10 @@ import foodService from '../../services/food-service';
 import { getFoods } from '../../store/actions/index';
 
 import FoodAddForm from './FoodForms/FoodAddForm/FoodAddForm';
+import FoodEditForm from './FoodForms/FoodEditForm/FoodEditForm';
+
 import FoodCard from './FoodCard/FoodCard';
+import Spinner from '../UI/Spinner/Spinner';
 
 class Food extends Component {
 
@@ -24,9 +27,8 @@ class Food extends Component {
                 <FoodAddForm {...this.props}/>
                 <div className={classes.FoodContainer}>
                     {foodData ? foodData.map(food =>  (
-                        <FoodCard key={food.id} {...food}/>
+                        <FoodCard key={food.id} food={food} history={this.props.history}/>
                     )) : ''}
-                    
                 </div>
             </div>
         );

@@ -1,20 +1,20 @@
 import * as actionTypes from './actionsTypes';
 import foodService from '../../services/food-service';
 
-export const authStart = () => {
+export const foodStart = () => {
     return {
         type: actionTypes.FOOD_START
     }
 }
 
-export const authSuccess = (foodData) => {
+export const foodSuccess = (foodData) => {
     return {
         type: actionTypes.FOOD_SUCCESS,
         foodData: foodData
     }
 }
 
-export const authFail = (error) => {
+export const foodFail = (error) => {
     return {
         type: actionTypes.FOOD_FAIL,
         error: error
@@ -23,25 +23,38 @@ export const authFail = (error) => {
 
 export const addFood = (foodData, props) => {
     return dispatch => {
-        dispatch(authStart())
+        dispatch(foodStart())
         foodService.addFood(foodData)
             .then(res => {
                 props.history.replace(`/reload`);
                 props.history.replace('/food');
             }).catch(err => {
-                dispatch(authFail(err))
+                dispatch(foodFail(err))
             })
     }
 };
 
+export const editFoods = (foodData, props) => {
+    console.log(foodData, props);
+    // return dispatch => {
+    //     dispatch(foodStart())
+    //     foodService.getFoods()
+    //         .then(res => {
+    //             dispatch(foodSuccess(res))
+    //         }).catch(err => {
+    //             dispatch(foodFail(err))
+    //         })
+    // }
+};
+
 export const getFoods = () => {
     return dispatch => {
-        dispatch(authStart())
+        dispatch(foodStart())
         foodService.getFoods()
             .then(res => {
-                dispatch(authSuccess(res))
+                dispatch(foodSuccess(res))
             }).catch(err => {
-                dispatch(authFail(err))
+                dispatch(foodFail(err))
             })
     }
 };

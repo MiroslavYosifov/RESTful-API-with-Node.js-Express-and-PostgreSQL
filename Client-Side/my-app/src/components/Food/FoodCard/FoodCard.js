@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import classes from './FoodCard.module.css';
 
+import FoodEditForm from '../FoodForms/FoodEditForm/FoodEditForm';
+
 class FoodCard extends Component {
     state = {
-        isHidden: false
+        isHidden: false,
+        isEditFormHidden: false
     }
 
     changeIsHidden = () => {
@@ -12,10 +15,14 @@ class FoodCard extends Component {
         this.setState({ isHidden: changedIsHidden });
     }
 
-    render() {
-        const { isHidden } = this.state;
-        const { calories, carbohydrate, fat, protein, imgUrl, name, kind } = this.props;
+    changeIsEditFormHidden = () => {
+        const changedIsEditFormHidden = !this.state.isEditFormHidden;
+        this.setState({ isEditFormHidden: changedIsEditFormHidden });
+    }
 
+    render() {
+        const { isHidden, isEditFormHidden } = this.state;
+        const { calories, carbohydrate, fat, protein, imgUrl, name, kind } = this.props.food;
         return (
             <div className={classes.FoodCard}>
                 <div className={classes.FoodCardMediaContainer}>
@@ -27,11 +34,13 @@ class FoodCard extends Component {
                         <p>Fat: {fat}</p>
                         <p>Carbohydrate: {carbohydrate}</p>
                     </div> : ''}
+                    {isEditFormHidden ? <FoodEditForm {...this.props}/> : ''}
                 </div>
                 <div className={classes.FoodCardHeaderContainer}>
                     <header>
                         <h3>{name}</h3>
-                        <p onClick={this.changeIsHidden}>{!isHidden ? 'Show content' : 'Hide content'}</p>   
+                        {!isEditFormHidden ? <p onClick={this.changeIsHidden}>{!isHidden ? 'Show content' : 'Hide content'}</p> : ''}
+                        {isHidden ? <p onClick={this.changeIsEditFormHidden}>{!isEditFormHidden ? 'Show Edit' : 'Hide Edit'}</p> : ''}
                     </header>
                 </div>
             </div>

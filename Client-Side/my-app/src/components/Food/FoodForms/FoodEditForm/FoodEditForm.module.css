@@ -1,0 +1,23 @@
+.FoodEditForm {
+    background: gray;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    padding: 6em 0.4em;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.Fields {
+    width: 100%;
+}
+
+.Fields p {
+    width: 100%;
+}
+
+.Fields input {
+    width: 100%;
+}
