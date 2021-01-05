@@ -1,9 +1,9 @@
 
 import * as actionsTypes from '../actions/actionsTypes';
-import { updatedObj } from '../utility';
+import { updatedObj, updatedOneElement } from '../utility';
 
 const initialState = {
-    token: null,
+    foodData: null,
     error: null,
     loading: false,
 }
@@ -31,6 +31,15 @@ const foodFail = (state, action) => {
     });
 }
 
+const foodDataUpdate = (state, action) => {
+    console.log('STATE', state);
+    console.log('action', action.food);
+    return updatedOneElement(state, {
+        foodData: action.food,
+        error: null, 
+        loading: false 
+    })
+}
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -40,6 +49,8 @@ const reducer = (state = initialState, action) => {
             return foodSuccess(state, action);
         case actionsTypes.FOOD_FAIL:
             return foodFail(state, action);
+        case actionsTypes.FOOD_DATA_UPDATE:
+            return foodDataUpdate(state, action);
         default:
             return state;
     }

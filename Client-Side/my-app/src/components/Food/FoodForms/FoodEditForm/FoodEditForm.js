@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { editFoods } from '../../../../store/actions/index';
 
 import * as yup from 'yup';
-import { useFormik, withFormik, Form, Field, Formik } from 'formik';
+import { useFormik, withFormik, Form, Field } from 'formik';
 
 const FoodEditForm  = (props) => {
     //console.log(props);
@@ -16,7 +16,7 @@ const FoodEditForm  = (props) => {
             <Form className={classes.FoodEditForm} >
                 <div className={classes.Fields}>
                    { touched.name && errors.name && <p>{errors.name}</p>}
-                   <Field type="text" name="name" placeholder="Food Name"/>
+                  <Field type="text" name="name" placeholder="Food Name"/>
                  </div>
                  <div className={classes.Fields}>
                   <Field className={classes.Fields} component="select" name="kind">
@@ -45,18 +45,16 @@ const FoodEditForm  = (props) => {
                    { touched.imgUrl && errors.imgUrl && <p>{errors.imgUrl}</p>}
                    <Field type="text" name="imgUrl" placeholder="Image URL"/>
                 </div>          
-                <button type="submit">Submit</button>
+                <button type="Submit" >Submit</button>
             </Form>
     )
 };
 
 const FormikFoodAddForm = withFormik({
-    enableReinitialize: true,
     mapPropsToValues({ name, kind, protein, fat, carbohydrate, imgUrl }) {
-
         return {
             name: name || '',
-            kind: kind || '',
+            kind: kind || 'vegetables',
             protein: protein || '',
             fat: fat || '',
             carbohydrate: carbohydrate || '',
@@ -73,12 +71,15 @@ const FormikFoodAddForm = withFormik({
     }),
     handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
       const { onEditFood } = props;
-      const foodData = { ...values }
-      console.log(props);
+      const foodData = { ...values, id: props.food.id }
       onEditFood(foodData, props).then(() => setSubmitting(false));
     },
 })(FoodEditForm);
 
+const mapStateToProps = (state) => {
+  return {
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
@@ -88,4 +89,4 @@ const mapDispatchToProps = (dispatch) => {
   )
 };
 
-export default connect(null, mapDispatchToProps)(FormikFoodAddForm);
+export default connect(mapStateToProps, mapDispatchToProps)(FormikFoodAddForm);

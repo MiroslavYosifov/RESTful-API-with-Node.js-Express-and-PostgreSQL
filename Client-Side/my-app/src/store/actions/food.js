@@ -14,6 +14,13 @@ export const foodSuccess = (foodData) => {
     }
 }
 
+export const foodDataUpdate = (food) => {
+    return {
+        type: actionTypes.FOOD_DATA_UPDATE,
+        food: food
+    }
+}
+
 export const foodFail = (error) => {
     return {
         type: actionTypes.FOOD_FAIL,
@@ -35,17 +42,29 @@ export const addFood = (foodData, props) => {
 };
 
 export const editFoods = (foodData, props) => {
-    console.log(foodData, props);
-    // return dispatch => {
-    //     dispatch(foodStart())
-    //     foodService.getFoods()
-    //         .then(res => {
-    //             dispatch(foodSuccess(res))
-    //         }).catch(err => {
-    //             dispatch(foodFail(err))
-    //         })
-    // }
+    return dispatch => {
+        foodService.editFoods(foodData)
+            .then(res => {
+                console.log(res);
+                dispatch(foodDataUpdate(res))
+            }).catch(err => {
+                console.log('FOD TUKA ERORRA',err);
+                dispatch(foodFail(err))
+            })
+    }
 };
+
+// export const getFood = (id) => {
+//     return dispatch => {
+//         dispatch(foodStart())
+//         foodService.getFoodd(id)
+//             .then(res => {
+//                 dispatch(foodSuccess(res))
+//             }).catch(err => {
+//                 dispatch(foodFail(err))
+//             })
+//     }
+// };
 
 export const getFoods = () => {
     return dispatch => {
