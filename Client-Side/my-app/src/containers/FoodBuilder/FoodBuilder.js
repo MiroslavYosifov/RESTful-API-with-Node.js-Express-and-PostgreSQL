@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import  classes from './FoodBuilder.module.css';
 
-import Food from '../../components/Food/Food';
+import FoodList from '../../components/Food/FoodList';
 
 
 class FoodBuilder extends Component {
@@ -14,7 +14,7 @@ class FoodBuilder extends Component {
         return (
             <div className={classes.FoodBuilder}>
                 <h1>I AM FOODBUILDER COMPONENT</h1>
-                <Food/>
+                <FoodList/>
             </div>
         );
     }

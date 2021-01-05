@@ -1,5 +1,5 @@
     import React, { Component } from 'react';
-    import classes from './Food.module.css';
+    import classes from './FoodList.module.css';
 
     import { withRouter } from 'react-router-dom';
     import { connect } from 'react-redux';
@@ -14,7 +14,7 @@
     import Spinner from '../UI/Spinner/Spinner';
     import { loadPartialConfig } from '@babel/core';
 
-    class Food extends Component {
+    class FoodList extends Component {
         state = {
             foodData: []
         }
@@ -24,15 +24,12 @@
         }
 
         componentDidUpdate(prevProps, prevState, snapshot) {
-            console.log('COMPONENETDIDUPDATE',prevProps, prevState, snapshot);
-            
-            if (prevProps.food.foodData !== this.props.food.foodData) {
+            if (this.state.foodData !== this.props.food.foodData) {
                 this.setState(() => {
                     return { foodData: this.props.food.foodData };
                 });
                
             }
-         
         }
 
         render() {
@@ -42,7 +39,7 @@
                     <FoodAddForm {...this.props}/>
                     <div className={classes.FoodContainer}>
                         {foodData ? foodData.map(food =>  (
-                            <FoodCard key={food.id} food={food} history={this.props.history}/>
+                            <FoodCard key={food.id} food={food} history={this.props.history} />
                         )) : ''}
                     </div>
                 </div>
@@ -62,4 +59,4 @@
         }
     };
 
-    export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Food));
+    export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FoodList));

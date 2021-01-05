@@ -2,7 +2,7 @@
         margin: 1em;
         border: 2px solid white;
         border-radius: 0.6em;
-        width: 15%;
+        width: 10%;
         box-shadow: 0 0 0.6em 0.1em rgba(0, 0, 0, 0.6);
     }
 
@@ -32,21 +32,23 @@
         position: absolute;
         top: 50%; left: 50%;
         transform: translate(-50%, -50%);
-        background: rgba(187, 187, 187, 0.8);
+        background: rgba(151, 137, 125, 0.9);
         height: 100%;
         width: 100%;
-        padding: 4em 3em;
+        padding: 1em 1em;
         text-align: left;
     }
 
     .FoodCardContentContainer p {
-        font-size: 1.3em;
+        font-size: 1.1em;
+        /* font-weight: bold; */
+        color: white;
     }
 
     .FoodCardHeaderContainer {
         width: 100%;
         padding: 1em;
-        background: white
+        background: white;
     }
 
     .FoodCardHeaderContainer header {
@@ -55,19 +57,28 @@
     }
 
     .FoodCardHeaderContainer header h3 {
+        width: 100%;
         text-align: center;
     }
 
-    .FoodCardHeaderContainer header p {
+   
+    .FoodCardNavigationContainer {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .FoodCardNavigationContainer p {
+        width: 100%;
         background: rgb(173, 173, 173);
+        margin: 0.2em 0;
         border-radius: 0.2em;
         color: white;
         padding: 0.2em 0.4em;
         margin-left: auto;
         font-size: 0.9em;
+        text-align: center;
     }
 
-    .FoodCardHeaderContainer header p:hover {
+    .FoodCardNavigationContainer p:hover {
         cursor: pointer;
-        
     }
