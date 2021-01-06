@@ -39,8 +39,10 @@ class FoodBuilder extends Component {
         console.log(this.state.foodCompareData);
         return (
             <div className={classes.FoodBuilder}>
-                <h1>I AM FOODBUILDER COMPONENT</h1>
-                {/* <FoodAddForm/> */}
+                <header>
+                    <h1>FOODBUILDER COMPONENT</h1>
+                </header>
+                <FoodAddForm/>
                 <FoodCompare key={this.state.isUpdatedCompareCmp} {...this.state}/>
                 <FoodList updateFoodCompareData={this.updateFoodCompareData}/>
             </div>

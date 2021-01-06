@@ -28,12 +28,18 @@ class FoodCompare extends Component {
     render() {
         return (
             <div className={classes.FoodCompare}>
-                {this.state.foodData.map(food => (
-                    <div key={food.id + 'b'} className={classes.FoodCompareCardContent}>
-                        <FoodCardContent  {...food}/>
-                    </div>
-                ))}
+                <header>
+                    <h2>Compare Table</h2>
+                </header>
+                <div className={classes.FoodCompareTable}>
+                    {this.state.foodData.map(food => (
+                        <div key={food.id + 'b'} className={classes.FoodCompareCardContent}>
+                            <FoodCardContent  {...food}/>
+                        </div>
+                    ))}
+                </div>
             </div>
+            
         );
     }
 }

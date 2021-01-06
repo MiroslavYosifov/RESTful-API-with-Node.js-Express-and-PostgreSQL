@@ -24,7 +24,6 @@ class RecipeBuilder extends Component {
 
     }
 
-   
     render() {
         return (
             <Auxiliary>

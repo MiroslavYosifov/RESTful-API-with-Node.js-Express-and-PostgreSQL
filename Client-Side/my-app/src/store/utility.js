@@ -12,8 +12,10 @@ export const updatedOneElement = (oldObj, updatedValues) => {
             foodEl = updatedValues.foodData;
         }
         return foodEl;
-    })
+    });
+
     updatedValues.foodData = updatedFooData;
+    
     return {
         ...oldObj,
         ...updatedValues
@@ -23,6 +25,7 @@ export const updatedOneElement = (oldObj, updatedValues) => {
 export const addOneElement = (oldObj, updatedValues) => {
 
     const updatedState = oldObj;
+    // const updatedState = {...oldObj};
     const isExist = updatedState.foodCompareData.some(food => food.id === updatedValues.foodCompareData.id);
     
     if(!isExist) {

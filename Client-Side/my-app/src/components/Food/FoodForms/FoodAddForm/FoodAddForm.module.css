@@ -1,4 +1,29 @@
 .FoodAddForm {
-    border: 3px solid gray;
+    border-radius: 0.2em;
     padding: 1em;
+    background: rgb(199, 198, 198);
+    width: 18em;
+    /* margin-left: auto; */
+}
+
+.FoodAddForm input {
+    border: none;
+    padding: 0.2em;
+    margin-bottom: 0.3em;
+    border-radius: 0.2em;
+    width: 100%;
+}
+
+.FoodAddForm select {
+    border: none;
+    padding: 0.1em;
+    margin-bottom: 0.3em;
+    border-radius: 0.2em;
+    width: 100%;
+}
+
+.FoodAddForm button {
+    width: 100%;
+    cursor: pointer;
+    padding: 0.2em;
 }

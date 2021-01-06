@@ -1,5 +1,10 @@
 .FoodBuilder {
     margin-top: 5em;
-    border: 5px solid gray;
-    padding: 1em;
+    /* border: 5px solid gray; */
+    padding: 1em 4em;
+    text-align: center;
+}
+
+.FoodBuilder header {
+    margin-bottom: 2em;
 }

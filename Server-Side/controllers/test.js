@@ -2,14 +2,7 @@ const Tests = require('../models').Tests;
 
 module.exports = {
   list(req, res) {
-    return Tests
-      .findAll({
-        order: [
-          ['createdAt', 'DESC'],
-        ],
-      })
-      .then((test) => res.status(200).send(test))
-      .catch((error) => { res.status(400).send(error); });
+    res.status(200).send('IT IS WORKING')
   },
   add(req, res) {
     return Tests
