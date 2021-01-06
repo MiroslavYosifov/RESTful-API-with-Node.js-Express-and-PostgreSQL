@@ -28,20 +28,16 @@
                 this.setState(() => {
                     return { foodData: this.props.food.foodData };
                 });
-               
             }
         }
 
         render() {
             const foodData  = this.state.foodData;
             return (
-                <div className={classes.Food}>
-                    <FoodAddForm {...this.props}/>
-                    <div className={classes.FoodContainer}>
-                        {foodData ? foodData.map(food =>  (
-                            <FoodCard key={food.id} food={food} history={this.props.history} />
-                        )) : ''}
-                    </div>
+                <div className={classes.FoodList}>
+                    {foodData ? foodData.map(resFood =>  (
+                        <FoodCard key={resFood.id} food={resFood} history={this.props.history} updateFoodCompareData={this.props.updateFoodCompareData}/>
+                    )) : ''}
                 </div>
             );
         }

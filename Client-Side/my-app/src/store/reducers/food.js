@@ -1,9 +1,10 @@
 
 import * as actionsTypes from '../actions/actionsTypes';
-import { updatedObj, updatedOneElement } from '../utility';
+import { updatedObj, updatedOneElement, addOneElement } from '../utility';
 
 const initialState = {
     foodData: null,
+    foodCompareData: [],
     error: null,
     loading: false,
 }
@@ -41,6 +42,14 @@ const foodDataUpdate = (state, action) => {
     })
 }
 
+const foodCompareDataUpdate = (state, action) => {
+    return addOneElement(state, {
+        foodCompareData: action.food,
+        error: null, 
+        loading: false 
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionsTypes.FOOD_START:
@@ -51,6 +60,8 @@ const reducer = (state = initialState, action) => {
             return foodFail(state, action);
         case actionsTypes.FOOD_DATA_UPDATE:
             return foodDataUpdate(state, action);
+        case actionsTypes.FOOD_COMPARE_DATA_UPDATE:
+            return foodCompareDataUpdate(state, action);
         default:
             return state;
     }

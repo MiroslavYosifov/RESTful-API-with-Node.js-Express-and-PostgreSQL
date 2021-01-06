@@ -1,3 +1,42 @@
 .FoodCompare {
-    
+    display: flex;
+    flex-wrap: wrap;
+    background: rgb(224, 224, 224);
+    border-radius: 0.6em;
+    margin: 2em 0;
+    overflow: hidden;
+}
+
+.FoodCompareCardContent {
+    border-right: 1px solid black;
+}
+
+.FoodCompareCardContent:last-child {
+    border: none;
+}
+
+.FoodCompareCardContent div p {
+    text-align: center;
+    padding: 0.2em 0.6em;
+}
+
+.FoodCompareCardContent div p:nth-child(even){
+    background: rgb(179, 179, 179);
+}
+
+.FoodCompareCardContent div p:nth-child(odd){
+    background: rgb(224, 224, 224);
+}
+
+.FoodCompareCardContent div p:nth-child(1){
+    background: rgb(92, 92, 92);
+    color: white;
+}
+
+.FoodCompareCardContent:first-child {
+    margin-left: 0;
+}
+
+.FoodCompareCardContent:last-child {
+    margin-right: 0;
 }

@@ -16,5 +16,6 @@ export {
 export {
     addFood,
     editFoods,
-    getFoods
+    getFoods,
+    addFoodToCompareList
 } from './food';

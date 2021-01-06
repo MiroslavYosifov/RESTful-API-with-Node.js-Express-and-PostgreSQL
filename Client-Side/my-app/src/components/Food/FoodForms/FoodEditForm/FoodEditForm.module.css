@@ -1,5 +1,5 @@
 .FoodEditForm {
-    background: gray;
+    background: rgb(219, 219, 219);
     position: absolute;
     width: 100%;
     height: auto;
@@ -16,8 +16,21 @@
 
 .Fields p {
     width: 100%;
+    font-size: 1em;
 }
 
 .Fields input {
     width: 100%;
+    border: none;
+    padding: 0.2em;
+    margin: 0.2em 0;
+}
+
+.FoodEditForm button {
+    width: 100%;
+    cursor: pointer;
+    background: rgb(173, 173, 173);
+    color: white;
+    padding: 0.2em;
+    border: none;
 }

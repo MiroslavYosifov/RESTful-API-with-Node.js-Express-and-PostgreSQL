@@ -28,6 +28,20 @@ export const foodFail = (error) => {
     }
 }
 
+export const foodCompareDataUpdate = (food) => {
+    return {
+        type: actionTypes.FOOD_COMPARE_DATA_UPDATE,
+        food: food
+    }
+}
+
+export const addFoodToCompareList = (food) => {
+    console.log('ACTIONS',food);
+    return dispatch => {
+        dispatch(foodCompareDataUpdate(food))
+    }
+}
+
 export const addFood = (foodData, props) => {
     return dispatch => {
         dispatch(foodStart())
@@ -42,10 +56,11 @@ export const addFood = (foodData, props) => {
 };
 
 export const editFoods = (foodData, props) => {
+    console.log(foodData)
     return dispatch => {
         foodService.editFoods(foodData)
             .then(res => {
-                console.log(res);
+                console.log('TUKA LI SYM',res);
                 dispatch(foodDataUpdate(res))
             }).catch(err => {
                 console.log('FOD TUKA ERORRA',err);

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import classes from './FoodCard.module.css';
+
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import {addFoodToCompareList} from '../../../store/actions/index';
 
 import FoodEditForm from '../FoodForms/FoodEditForm/FoodEditForm';
 import FoodCardContent from './FoodCardContent/FoodCardContent';
@@ -9,7 +13,21 @@ class FoodCard extends Component {
     state = {
         isHidden: false,
         isEditFormHidden: false,
-        food: this.props.food
+        food: {
+            calories: '',
+            carbohydrate: '',
+            fat: '', 
+            protein: '',
+            imgUrl: '', 
+            name: '', 
+            kind: '',
+        }
+    }
+
+    componentDidMount () {
+        this.setState(() => {
+            return { food: this.props.food };
+        })
     }
 
     componentDidUpdate (prevState) {
@@ -30,10 +48,14 @@ class FoodCard extends Component {
         this.setState({ isEditFormHidden: changedIsEditFormHidden });
     }
 
+    showDefaultCard = () => {
+        this.setState({ isEditFormHidden: false, isHidden: false });
+    }
+
     render() {
         const { isHidden, isEditFormHidden } = this.state;
         const { calories, carbohydrate, fat, protein, imgUrl, name, kind } = this.state.food;
-        //console.log(this.props)
+
         return (
             <div className={classes.FoodCard}>
                 <div className={classes.FoodCardMediaContainer}>
@@ -51,6 +73,8 @@ class FoodCard extends Component {
                     <div className={classes.FoodCardNavigationContainer}>
                         {!isEditFormHidden ? <p onClick={this.changeIsHidden}>{!isHidden ? 'Show content' : 'Hide content'}</p> : ''}
                         {isHidden ? <p onClick={this.changeIsEditFormHidden}>{!isEditFormHidden ? 'Show Edit' : 'Hide Edit'}</p> : ''}
+                        {isHidden || isEditFormHidden  ? <p onClick={this.showDefaultCard}>Close</p> : ''}
+                        {<p onClick={() => this.props.updateFoodCompareData(this.state.food)} >Compare</p>}
                     </div>
                 </div>
             </div>
@@ -58,4 +82,16 @@ class FoodCard extends Component {
     }
 }
 
-export default FoodCard;
+const mapStateToProps = state => {
+    return {
+        foodCompareData: state.food.foodCompareData
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCompareList: (food) => dispatch(addFoodToCompareList(food)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FoodCard);

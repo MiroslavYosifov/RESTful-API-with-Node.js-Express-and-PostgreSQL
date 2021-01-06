@@ -45,7 +45,7 @@ const FoodEditForm  = (props) => {
                    { touched.imgUrl && errors.imgUrl && <p>{errors.imgUrl}</p>}
                    <Field type="text" name="imgUrl" placeholder="Image URL"/>
                 </div>          
-                <button type="Submit" >Submit</button>
+                <button type="Submit" >Edit</button>
             </Form>
     )
 };
