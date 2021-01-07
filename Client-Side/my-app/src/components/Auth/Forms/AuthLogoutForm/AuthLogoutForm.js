@@ -8,9 +8,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { authLogoutChecking } from '../../../../store/actions/index';
 
-import userService from '../../../../services/user-service';
-
-
 const AuthLogoutForm = () => (
     <Form className={classes.AuthLogoutForm}>
       <button>Logout</button>

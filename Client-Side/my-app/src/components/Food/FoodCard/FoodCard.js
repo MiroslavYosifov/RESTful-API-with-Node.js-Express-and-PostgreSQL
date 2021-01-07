@@ -4,7 +4,7 @@ import classes from './FoodCard.module.css';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {addFoodToCompareList} from '../../../store/actions/index';
+import { addFoodToCompareList } from '../../../store/actions/index';
 
 import FoodEditForm from '../FoodForms/FoodEditForm/FoodEditForm';
 import FoodCardContent from './FoodCardContent/FoodCardContent';

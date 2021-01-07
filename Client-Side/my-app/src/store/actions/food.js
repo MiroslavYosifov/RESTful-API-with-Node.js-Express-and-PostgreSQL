@@ -1,5 +1,5 @@
 import * as actionTypes from './actionsTypes';
-import foodService from '../../services/food-service';
+import { services } from '../../services/index';
 
 export const foodStart = () => {
     return {
@@ -45,7 +45,7 @@ export const addFoodToCompareList = (food) => {
 export const addFood = (foodData, props) => {
     return dispatch => {
         dispatch(foodStart())
-        foodService.addFood(foodData)
+        services.foodService.addFood(foodData)
             .then(res => {
                 props.history.replace(`/reload`);
                 props.history.replace('/food');
@@ -58,7 +58,7 @@ export const addFood = (foodData, props) => {
 export const editFoods = (foodData, props) => {
     console.log(foodData)
     return dispatch => {
-        foodService.editFoods(foodData)
+        services.foodService.editFoods(foodData)
             .then(res => {
                 console.log('TUKA LI SYM',res);
                 dispatch(foodDataUpdate(res))
@@ -84,7 +84,7 @@ export const editFoods = (foodData, props) => {
 export const getFoods = () => {
     return dispatch => {
         dispatch(foodStart())
-        foodService.getFoods()
+        services.foodService.getFoods()
             .then(res => {
                 dispatch(foodSuccess(res))
             }).catch(err => {

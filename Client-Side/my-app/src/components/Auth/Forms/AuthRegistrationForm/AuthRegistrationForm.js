@@ -4,7 +4,8 @@ import  classes from './AuthRegistrationForm.module.css';
 import * as yup from 'yup';
 import { useFormik, withFormik, Form, Field } from 'formik';
 
-import userService from '../../../../services/user-service';
+// import userService from '../../../../services/user-service';
+import { services } from '../../../../services/index';
 
 
 const AuthRegistrationForm = ({ values, errors, touched, isSubmitting }) => (
@@ -59,7 +60,7 @@ const FormikAuthRegistrationForm = withFormik({
         comfirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').min(1, 'must be 1 symbols').required()
     }),
     handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-        userService.registration(values).then(res => {
+        services.userServices.registration().registration(values).then(res => {
         console.log(res);
     });
   },

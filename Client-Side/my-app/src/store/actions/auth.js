@@ -1,5 +1,5 @@
 import * as actionTypes from './actionsTypes';
-import userService from '../../services/user-service';
+import { services } from '../../services/index';
 
 export const authStart = () => {
     return {
@@ -30,7 +30,7 @@ export const authLogout = () => {
 
 export const authLogoutChecking = () => {
     return dispatch => {
-        userService.logout()
+        services.userServices.logout()
             .then(res => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('userId');
@@ -47,7 +47,7 @@ export const authLogoutChecking = () => {
 export const authLogin = (authData) => {
     return dispatch => {
         dispatch(authStart());
-        userService.login(authData)
+        services.userServices.login(authData)
             .then(res => {
                 localStorage.setItem('token', res.token);
                 localStorage.setItem('userId', res.user.id);
