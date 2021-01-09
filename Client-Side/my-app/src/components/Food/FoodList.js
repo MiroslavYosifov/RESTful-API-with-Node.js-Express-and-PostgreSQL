@@ -19,6 +19,7 @@
         }
 
         componentDidUpdate(prevProps, prevState, snapshot) {
+            console.log('WHYEEEEEEEE', this.props.food);
             if (this.state.foodData !== this.props.food.foodData) {
                 this.setState(() => {
                     return { foodData: this.props.food.foodData };
@@ -28,6 +29,7 @@
 
         render() {
             const foodData  = this.state.foodData;
+            console.log('ZASHTOOOO',foodData);
             return (
                 <div className={classes.FoodList}>
                     {foodData ? foodData.map(resFood =>  (

@@ -68,7 +68,7 @@ export const authCheckState = () => {
         if(!token) {
             dispatch(authLogout());
         } else {
-            dispatch(authSuccess(userId, token))
+            dispatch(authSuccess(userId, token));
         }
     };
 };

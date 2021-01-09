@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import  classes from './WorkoutBuilder.module.css';
-import workoutServices from '../../services/workout-service';
+
+import { services } from '../../services/index';
 
 import Workout from '../../components/Workout/Workout';
 
@@ -18,7 +19,8 @@ class WorkoutBuilder extends Component {
     componentDidMount () {
         
         console.log(localStorage);
-        workoutServices.getWorkouts().then(data => {
+        
+        services.workoutService.getWorkouts().then(data => {
             this.setState({
                 exercises: data
             });

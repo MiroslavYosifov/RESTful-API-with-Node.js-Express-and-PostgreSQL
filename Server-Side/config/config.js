@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { DB_HOSTNAME, DB_USERNAME, DB_PASSWORD } = process.env;
+
 let env = process.env.NODE_ENV || 'production';
 
 const creds = {

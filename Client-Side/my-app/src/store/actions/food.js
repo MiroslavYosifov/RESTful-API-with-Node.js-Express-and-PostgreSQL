@@ -14,6 +14,20 @@ export const foodSuccess = (foodData) => {
     }
 }
 
+export const foodFail = (error) => {
+    return {
+        type: actionTypes.FOOD_FAIL,
+        error: error
+    }
+}
+
+export const foodDataAdd = (food) => {
+    return {
+        type: actionTypes.FOOD_DATA_ADD,
+        food: food
+    }
+}
+
 export const foodDataUpdate = (food) => {
     return {
         type: actionTypes.FOOD_DATA_UPDATE,
@@ -21,10 +35,10 @@ export const foodDataUpdate = (food) => {
     }
 }
 
-export const foodFail = (error) => {
+export const foodDataDeleteElement = (food) => {
     return {
-        type: actionTypes.FOOD_FAIL,
-        error: error
+        type: actionTypes.FOOD_DATA_DELETE_ELEMENT,
+        food: food
     }
 }
 
@@ -42,13 +56,25 @@ export const addFoodToCompareList = (food) => {
     }
 }
 
-export const addFood = (foodData, props) => {
+export const getFoods = () => {
+    return dispatch => {
+        dispatch(foodStart())
+        services.foodService.getFoods()
+            .then(res => {
+                dispatch(foodSuccess(res))
+            }).catch(err => {
+                dispatch(foodFail(err))
+            })
+    }
+};
+
+export const addFood = (foodData) => {
     return dispatch => {
         dispatch(foodStart())
         services.foodService.addFood(foodData)
             .then(res => {
-                props.history.replace(`/reload`);
-                props.history.replace('/food');
+                console.log('TUKA LI SYM',res);
+                dispatch(foodDataAdd(res))
             }).catch(err => {
                 dispatch(foodFail(err))
             })
@@ -69,25 +95,15 @@ export const editFoods = (foodData, props) => {
     }
 };
 
-// export const getFood = (id) => {
-//     return dispatch => {
-//         dispatch(foodStart())
-//         foodService.getFoodd(id)
-//             .then(res => {
-//                 dispatch(foodSuccess(res))
-//             }).catch(err => {
-//                 dispatch(foodFail(err))
-//             })
-//     }
-// };
-
-export const getFoods = () => {
+export const deleteFood = (foodData) => {
+    console.log('DELETVAM LI ',foodData)
     return dispatch => {
-        dispatch(foodStart())
-        services.foodService.getFoods()
+        services.foodService.deleteFood(foodData)
             .then(res => {
-                dispatch(foodSuccess(res))
+                console.log('TUKA LI SYM',res);
+                dispatch(foodDataDeleteElement(res))
             }).catch(err => {
+                console.log('FOD TUKA ERORRA',err);
                 dispatch(foodFail(err))
             })
     }

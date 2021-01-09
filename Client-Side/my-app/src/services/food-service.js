@@ -7,7 +7,6 @@ export default (url) => {
                     'Content-type': 'application/json'
                 },
             });
-            
             return await response.json();
         },
         addFood: async function (data) {
@@ -30,6 +29,16 @@ export default (url) => {
                 body: JSON.stringify(data),
             });
             
+            return await response.json();
+        },
+        deleteFood: async function (data) {
+            const response = await fetch(`${url}/api/food`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            });
             return await response.json();
         },
     }

@@ -1,6 +1,6 @@
 
 import * as actionsTypes from '../actions/actionsTypes';
-import { updatedObj, updatedOneElement, addOneElement } from '../utility';
+import { updatedObj, addOneElement, updatedOneElement, deleteOneElement, addOneElementToCompareState } from '../utility';
 
 const initialState = {
     foodData: null,
@@ -32,9 +32,19 @@ const foodFail = (state, action) => {
     });
 }
 
-const foodDataUpdate = (state, action) => {
+const foodDataAdd = (state, action) => {
     console.log('STATE', state);
     console.log('action', action.food);
+    return addOneElement(state, {
+        foodData: action.food,
+        error: null, 
+        loading: false 
+    })
+}
+
+const foodDataUpdate = (state, action) => {
+    // console.log('STATE', state);
+    // console.log('action', action.food);
     return updatedOneElement(state, {
         foodData: action.food,
         error: null, 
@@ -42,8 +52,18 @@ const foodDataUpdate = (state, action) => {
     })
 }
 
+const foodDataDelete = (state, action) => {
+    // console.log('STATE', state);
+    // console.log('action', action.food);
+    return deleteOneElement(state, {
+        foodData: action.food,
+        error: null, 
+        loading: false 
+    })
+}
+
 const foodCompareDataUpdate = (state, action) => {
-    return addOneElement(state, {
+    return addOneElementToCompareState(state, {
         foodCompareData: action.food,
         error: null, 
         loading: false 
@@ -58,8 +78,12 @@ const reducer = (state = initialState, action) => {
             return foodSuccess(state, action);
         case actionsTypes.FOOD_FAIL:
             return foodFail(state, action);
+        case actionsTypes.FOOD_DATA_ADD:
+            return foodDataAdd(state, action);
         case actionsTypes.FOOD_DATA_UPDATE:
             return foodDataUpdate(state, action);
+        case actionsTypes.FOOD_DATA_DELETE_ELEMENT:
+            return foodDataDelete(state, action);
         case actionsTypes.FOOD_COMPARE_DATA_UPDATE:
             return foodCompareDataUpdate(state, action);
         default:

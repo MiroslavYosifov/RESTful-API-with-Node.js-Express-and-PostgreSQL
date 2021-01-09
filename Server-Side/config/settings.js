@@ -4,7 +4,10 @@ const cors = require('cors');
 const secret = 'secret';
 
 module.exports = (app) => {
-    app.use(cors());
+    app.use(cors({
+        origin: 'http://localhost:3000',
+        credentials: true
+    }));
     app.all('*', function(req, res,next) {
       /**
        * Response settings
@@ -16,7 +19,6 @@ module.exports = (app) => {
           "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
           "AccessControlAllowCredentials": true
       };
-
       /**
        * Headers
        */
@@ -24,15 +26,13 @@ module.exports = (app) => {
       res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
       res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
       res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
-  
+      
       if ('OPTIONS' == req.method) {
           res.send(200);
       }
       else {
           next();
       }
-  
-  
     });
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));

@@ -12,10 +12,8 @@ module.exports = {
       .catch((error) => { res.status(400).send(error); });
   },
   add(req, res) {
-
     const { name, kind, protein, fat, carbohydrate, imgUrl} = req.body;
     const calories = (Number(protein) * 4) + (Number(carbohydrate) * 4) + (Number(fat) * 4);
-
     return Food
       .create({
         name: name,
@@ -55,5 +53,22 @@ module.exports = {
        
       })
       .catch((error) => res.status(400).send(error));;
-  }
+  },
+  deleteOne(req, res) {
+    const { id } = req.body;
+    return Food
+      .findByPk(id)
+      .then(food => {
+        if (!food) {
+          return res.status(400).send({
+            message: 'Food Not Found',
+          });
+        }
+        return food
+          .destroy()
+          .then(() => { 'RABOTI SI', res.status(201).send(req.body)})
+          .catch((error) => res.status(400).send(error));
+      })
+      .catch((error) => res.status(400).send(error));
+  },
 };

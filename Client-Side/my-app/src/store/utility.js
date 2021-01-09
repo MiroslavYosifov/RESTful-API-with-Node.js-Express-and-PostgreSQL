@@ -5,6 +5,20 @@ export const updatedObj = (oldObj, updatedValues) => {
     }
 }
 
+export const addOneElement = (oldObj, updatedValues) => {
+    console.log(updatedValues);
+    const updatedFooData = {...oldObj};
+    console.log('111111',updatedFooData);
+    updatedFooData.foodData.unshift(updatedValues.foodData);
+
+    updatedValues.foodData = updatedFooData.foodData;
+    console.log('2222222',updatedFooData);
+    return {
+        ...oldObj,
+        ...updatedValues
+    };
+}
+
 export const updatedOneElement = (oldObj, updatedValues) => {
     console.log(updatedValues);
     const updatedFooData = oldObj.foodData.map(foodEl => {
@@ -22,7 +36,23 @@ export const updatedOneElement = (oldObj, updatedValues) => {
     };
 }
 
-export const addOneElement = (oldObj, updatedValues) => {
+export const deleteOneElement = (oldObj, updatedValues) => {
+    console.log(updatedValues);
+    const updatedFooData = oldObj.foodData.filter(foodEl => {
+        if(foodEl.id !== updatedValues.foodData.id) {
+            return foodEl;
+        }
+    });
+    console.log('UPDATED FOOD', updatedFooData);
+    updatedValues.foodData = updatedFooData;
+    
+    return {
+        ...oldObj,
+        ...updatedValues
+    };
+}
+
+export const addOneElementToCompareState = (oldObj, updatedValues) => {
 
     const updatedState = oldObj;
     // const updatedState = {...oldObj};
