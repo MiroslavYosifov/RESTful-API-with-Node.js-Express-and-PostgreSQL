@@ -16,10 +16,21 @@ module.exports = {
       .catch((error) => { res.status(400).send(error); });
   },
   registration(req, res) {
+    console.log('TUUUUUUUUUUUUUUUUUUUUKA SYM', req.body);
     const { username, firstName, lastName, email, password } = req.body;
     return User
       .create({ username, firstName, lastName, email, password})
-      .then((user) => res.status(201).send(user))
+      .then((user) => {
+        user.validPassword(password).then((isValid) => {
+          if(!isValid) {
+            console.log('Inavlid username or password');
+            res.status(401).send('Invalid username or password');
+            return;
+          }
+          const token = jwt.createToken({ id: user._id });
+          res.cookie(config.development.authCookieName, token).send( { user: user, token: token});
+        }).catch((error) => res.status(400).send(error));
+      })
       .catch((error) => res.status(400).send(error));
   },
   login(req, res) {
@@ -42,7 +53,6 @@ module.exports = {
           const token = jwt.createToken({ id: user._id });
           res.cookie(config.development.authCookieName, token).send( { user: user, token: token});
         })
-       
       }
     ).catch((error) => { res.status(400).send(error); });
   },

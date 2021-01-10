@@ -10,6 +10,7 @@ export {
 } from './result';
 export {
     authLogin,
+    authRegistration,
     authLogoutChecking,
     authCheckState
 } from './auth';

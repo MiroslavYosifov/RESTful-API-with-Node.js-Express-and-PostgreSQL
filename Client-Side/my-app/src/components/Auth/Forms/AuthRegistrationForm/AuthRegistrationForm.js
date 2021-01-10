@@ -4,8 +4,11 @@ import  classes from './AuthRegistrationForm.module.css';
 import * as yup from 'yup';
 import { useFormik, withFormik, Form, Field } from 'formik';
 
-// import userService from '../../../../services/user-service';
-import { services } from '../../../../services/index';
+// import { services } from '../../../../services/index';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { authRegistration } from '../../../../store/actions/index';
 
 
 const AuthRegistrationForm = ({ values, errors, touched, isSubmitting }) => (
@@ -59,11 +62,26 @@ const FormikAuthRegistrationForm = withFormik({
         password: yup.string().min(1, 'must be 1 symbols').required(),
         comfirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').min(1, 'must be 1 symbols').required()
     }),
-    handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-        services.userServices.registration().registration(values).then(res => {
-        console.log(res);
-    });
-  },
+    handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
+      const { onRegistration } = props;
+      const userData = { ...values };
+      // console.log(userData);
+      onRegistration(userData).then(() => setSubmitting(false));
+    },
 })(AuthRegistrationForm);
 
-export default FormikAuthRegistrationForm;
+const mapStateToProps = state => {
+  return {
+      auth: state.auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      onRegistration: (userData) => dispatch(authRegistration(userData)),
+    }
+  )
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )(FormikAuthRegistrationForm);

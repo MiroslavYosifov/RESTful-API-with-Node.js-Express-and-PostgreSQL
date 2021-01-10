@@ -42,6 +42,7 @@ const authLogout = (state, action) => {
     });
 }
 
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionsTypes.AUTH_START:
