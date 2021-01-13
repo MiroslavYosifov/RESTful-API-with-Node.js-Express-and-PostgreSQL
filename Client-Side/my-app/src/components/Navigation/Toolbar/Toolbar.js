@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Toolbar.module.css';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import AuthLogoutForm from '../../Auth/Forms/AuthLogoutForm/AuthLogoutForm';
 

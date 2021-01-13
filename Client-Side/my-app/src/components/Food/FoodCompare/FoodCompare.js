@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import classes from './FoodCompare.module.css';
 
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-
 import FoodCardContent from '../FoodCard/FoodCardContent/FoodCardContent';
 
 class FoodCompare extends Component {

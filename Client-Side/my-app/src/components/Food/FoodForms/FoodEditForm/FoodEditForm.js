@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { editFoods } from '../../../../store/actions/index';
 
 import * as yup from 'yup';
-import { useFormik, withFormik, Form, Field } from 'formik';
+import { withFormik, Form, Field } from 'formik';
 
 const FoodEditForm  = (props) => {
     //console.log(props);

@@ -1,7 +1,7 @@
-import foodService from './food-service';
-import userServices from './user-service';
-import recipeService from './recipe-service';
-import workoutService from './workout-service';
+import { foodService } from './food-service';
+import { userServices } from './user-service';
+import { recipeService } from './recipe-service';
+import { workoutService } from './workout-service';
 
 const localhostUrl = "http://localhost:3333"
 const productionUrl = "https://workout-organizer.herokuapp.com";

@@ -1,4 +1,4 @@
-export default (url) => {
+export const recipeService = (url) => {
     return {
 
     }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import classes from './FoodCard.module.css';
 
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { addFoodToCompareList, deleteFood } from '../../../store/actions/index';
@@ -54,12 +53,12 @@ class FoodCard extends Component {
 
     render() {
         const { isHidden, isEditFormHidden } = this.state;
-        const { calories, carbohydrate, fat, protein, imgUrl, name, kind } = this.state.food;
+        const { imgUrl, name } = this.state.food;
 
         return (
             <div className={classes.FoodCard}>
                 <div className={classes.FoodCardMediaContainer}>
-                    <img src={imgUrl}/>
+                    <img src={imgUrl} alt=""/>
                     {isHidden ? 
                         <div className={classes.FoodCardContentContainer}>
                             <FoodCardContent {...this.state.food}/>

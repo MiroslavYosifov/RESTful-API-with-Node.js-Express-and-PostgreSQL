@@ -1,7 +1,4 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-
-
+import React from 'react';
 
 const foodCardContent = (props) => { 
     console.log(props);

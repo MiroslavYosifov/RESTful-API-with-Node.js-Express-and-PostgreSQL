@@ -1,4 +1,4 @@
-export default (url) => {
+export const userServices = (url) => {
     return {
         registration: async function (data) {
             const response = await fetch(`${url}/api/user/registration`, {

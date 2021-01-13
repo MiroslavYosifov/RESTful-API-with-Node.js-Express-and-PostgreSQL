@@ -1,4 +1,4 @@
-export default (url) => {
+export const foodService = (url) => {
     return {
         getFoods: async function () {
             const response = await fetch(`${url}/api/food`, {

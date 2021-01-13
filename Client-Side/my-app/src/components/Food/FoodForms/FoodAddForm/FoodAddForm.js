@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import  classes from './FoodAddForm.module.css';
 
 import { connect } from 'react-redux';
@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { addFood } from '../../../../store/actions/index';
 
 import * as yup from 'yup';
-import { useFormik, withFormik, Form, Field } from 'formik';
+import { withFormik, Form, Field } from 'formik';
 
 const FoodAddForm  = ({ values, errors, touched, isSubmitting }) => (
   <Form className={classes.FoodAddForm}>

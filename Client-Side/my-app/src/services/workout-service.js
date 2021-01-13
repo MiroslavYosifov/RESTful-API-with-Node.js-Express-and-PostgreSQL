@@ -1,4 +1,4 @@
-export default (url) => {
+export const workoutService = (url) => {
     return {
         getWorkouts: async function () {
             const response = await fetch(`${url}/api/workout`, {
