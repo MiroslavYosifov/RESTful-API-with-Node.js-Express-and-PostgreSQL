@@ -16,7 +16,6 @@ module.exports = {
       .catch((error) => { res.status(400).send(error); });
   },
   registration(req, res) {
-    console.log('TUUUUUUUUUUUUUUUUUUUUKA SYM', req.body);
     const { username, firstName, lastName, email, password } = req.body;
     return User
       .create({ username, firstName, lastName, email, password})
@@ -34,9 +33,7 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
   login(req, res) {
-    console.log(req.body);
     const { username, password } = req.body;
-  
     return User
       .findOne({
         where: {

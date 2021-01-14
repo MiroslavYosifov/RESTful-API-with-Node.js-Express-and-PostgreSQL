@@ -17,6 +17,7 @@ function App(props) {
   const [authData, setIsLogged] = useState({ isLogged: false, isAdmin: false });
   
   useEffect(() => {
+    
     const updatedAuthData = {  
       isLogged: !!localStorage.getItem('token'),
       isAdmin: !!localStorage.getItem('isAdmin'),

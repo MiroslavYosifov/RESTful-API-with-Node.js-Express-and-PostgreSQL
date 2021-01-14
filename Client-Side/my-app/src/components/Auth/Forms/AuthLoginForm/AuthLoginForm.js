@@ -48,7 +48,6 @@ const FormikAuthLoginForm = withFormik({
   handleSubmit(values, { props, setSubmitting }) {
     const { onAuth } = props;
     const authData = { username: values.username, password: values.password }
-    console.log(authData);
     onAuth(authData).then(() => setSubmitting(false));
   },
 })(AuthLoginForm);

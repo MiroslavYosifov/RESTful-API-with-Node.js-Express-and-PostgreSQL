@@ -53,8 +53,8 @@
             services.userServices.login(authData)
                 .then(res => {
 
-                    const isAdmin =  res.user.roles !== null ? res.user.roles.includes('admin') : false;
-                    
+                    const isAdmin =  res.user.roles !== null ? res.user.roles.includes('admin') : "";
+
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('userId', res.user.id);
                     localStorage.setItem('isAdmin', isAdmin);
