@@ -14,8 +14,8 @@ const AuthLoginForm = (props) => {
     <Form className={classes.AuthLoginForm}>
       {/* {!props.auth.loading && <p>IT IS TRUE</p>} */}
       <div>
-         { touched.firstName && errors.firstName && <p>{errors.firstName}</p>}
-         <Field type="text" name="firstName" placeholder="First Name"/>
+         { touched.username && errors.username && <p>{errors.username}</p>}
+         <Field type="text" name="username" placeholder="First Name"/>
        </div>
       <div>
          { touched.password && errors.password && <p>{errors.password}</p>}
@@ -28,7 +28,7 @@ const AuthLoginForm = (props) => {
          </label>
       </div> */}
       {/* <button disabled={isSubmitting}>Sign upa</button> */}
-      <button disabled={isSubmitting}>Sign in</button>
+      <button>Sign in</button>
     </Form>
   )
 };
@@ -36,19 +36,19 @@ const AuthLoginForm = (props) => {
 
 const FormikAuthLoginForm = withFormik({
   mapPropsToValues(props) {
-    console.log(props);
     return {
-      firstName: props.firstName || '',
+      username: props.username || '',
       password: props.password || '',
     }
   },
   validationSchema: yup.object().shape({
-    firstName: yup.string().min(1, 'must be 1 symbols').required(),
+    username: yup.string().min(1, 'must be 1 symbols').required(),
     password: yup.string().min(1, 'must be 1 symbols').required()
   }),
   handleSubmit(values, { props, setSubmitting }) {
     const { onAuth } = props;
-    const authData = { firstName: values.firstName, password: values.password }
+    const authData = { username: values.username, password: values.password }
+    console.log(authData);
     onAuth(authData).then(() => setSubmitting(false));
   },
 })(AuthLoginForm);
@@ -63,7 +63,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      onAuth: (firstName, password) => dispatch(authLogin(firstName, password)),
+      onAuth: (authData) => dispatch(authLogin(authData)),
     }
   )
 };

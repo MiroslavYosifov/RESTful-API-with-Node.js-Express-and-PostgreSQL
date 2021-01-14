@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -12,16 +12,34 @@ import FoodBuilder from './containers/FoodBuilder/FoodBuilder';
 import AuthBuilder from './containers/AuthBuilder/AuthBuilder';
 
 function App(props) {
+
+  //const isLogged = localStorage.getItem('isLogged');
+  const [authData, setIsLogged] = useState({ isLogged: false, isAdmin: false });
+  
+  useEffect(() => {
+    const updatedAuthData = {  
+      isLogged: !!localStorage.getItem('token'),
+      isAdmin: !!localStorage.getItem('isAdmin'),
+    };
+
+    if(authData.isLogged !== updatedAuthData.isLogged || authData.isAdmin !== updatedAuthData.isAdmin) {
+      setIsLogged({
+        ...authData,
+        ...updatedAuthData
+      });
+    };
+  });
+  
   let routes = (
     <Switch>
       <Route path="/workout" component={WorkoutBuilder}></Route>
       <Route path="/recipe" component={RecipeBuilder}></Route>
       <Route path="/food" component={FoodBuilder}></Route>
       <Route path="/auth" component={AuthBuilder}></Route>
-    </Switch>
+    </Switch> 
   )
 
-  if(props.isLogged) {
+  if(authData.isLogged) {
     routes = (
       <Switch>
         <Route path="/workout" component={WorkoutBuilder}></Route>
@@ -32,21 +50,32 @@ function App(props) {
   } 
   return (
     <div className="App">
+      
       {/* <WorkoutBuilder></WorkoutBuilder>
       <Layout>
         <RecipeBuilder></RecipeBuilder>
       </Layout> */}
-      <Layout {...props}>
+      <Layout isLogged={authData.isLogged} {...props}>
         {routes}
       </Layout>
+      <h1>IS LOGGED {authData.isLogged.toString()}</h1>
+      <h1>IS ADMIN {authData.isAdmin.toString()}</h1>
     </div>
   );
 }
 
 const mapStateToProps = state => {
   return {
-      isLogged: state.auth.token !== null,
+      auth: state.auth,
   };
 };
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = (dispatch) => {
+  // return bindActionCreators(
+  //   {
+  //     onAuth: (authData) => dispatch(authLogin(authData)),
+  //   }
+  // )
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

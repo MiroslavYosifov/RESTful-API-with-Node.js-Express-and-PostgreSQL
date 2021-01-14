@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import AuthLogoutForm from '../../Auth/Forms/AuthLogoutForm/AuthLogoutForm';
 
 const toolbar = (props) => {
-    const { isLogged } = props;
+    //const { isLogged } = props;
+    const isLogged = props.isLogged;
+    
     return (
         <header className={classes.Toolbar}>
             <div>MENU</div>

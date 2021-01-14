@@ -7,11 +7,12 @@
         }
     }
 
-    export const authSuccess = (userId, token) => {
+    export const authSuccess = (userId, token, isAdmin) => {
         return {
             type: actionTypes.AUTH_SUCCESS,
             userId: userId,
-            token: token
+            token: token,
+            isAdmin: isAdmin
         }
     }
 
@@ -34,6 +35,7 @@
                 .then(res => {
                     localStorage.removeItem('token');
                     localStorage.removeItem('userId');
+                    localStorage.removeItem('isAdmin');
                     dispatch(authLogout());
                 }).catch(err => {
                     console.log(err => {
@@ -45,18 +47,21 @@
     }
 
     export const authLogin = (authData) => {
+        console.log(authData);
         return dispatch => {
             dispatch(authStart());
             services.userServices.login(authData)
                 .then(res => {
+
+                    const isAdmin =  res.user.roles !== null ? res.user.roles.includes('admin') : false;
+                    
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('userId', res.user.id);
-                    dispatch(authSuccess(res.user.id, res.token));
+                    localStorage.setItem('isAdmin', isAdmin);
+                    dispatch(authSuccess(res.user.id, res.token, isAdmin));
                 }).catch(err => {
-                    console.log(err => {
-                        console.log(err);
-                        dispatch(authFail())
-                    })
+                    console.log(err);
+                    dispatch(authFail())
                 })
         }
     }

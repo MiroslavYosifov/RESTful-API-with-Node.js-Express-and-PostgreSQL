@@ -35,12 +35,12 @@ module.exports = {
   },
   login(req, res) {
     console.log(req.body);
-    const { firstName, password } = req.body;
+    const { username, password } = req.body;
   
     return User
       .findOne({
         where: {
-          firstName: firstName,
+          username: username,
         }
       }).then((user) => {
         user.validPassword(password).then((isValid) => {
@@ -49,9 +49,8 @@ module.exports = {
             res.status(401).send('Invalid username or password');
             return;
           }
-
           const token = jwt.createToken({ id: user._id });
-          res.cookie(config.development.authCookieName, token).send( { user: user, token: token});
+          res.cookie(config.development.authCookieName, token).send( { user: user, token: token });
         })
       }
     ).catch((error) => { res.status(400).send(error); });
