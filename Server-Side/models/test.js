@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   Tests.init({
     name: DataTypes.STRING,
     addObj: DataTypes.JSON,
-    addSecondObj: DataTypes.JSON,
     addArrayWithObj: DataTypes.ARRAY(DataTypes.JSON),
     kind: DataTypes.STRING,
     macros: DataTypes.ARRAY(DataTypes.JSON)
