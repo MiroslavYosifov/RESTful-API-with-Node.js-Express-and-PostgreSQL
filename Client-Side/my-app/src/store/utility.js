@@ -52,19 +52,14 @@ export const deleteOneElement = (oldObj, updatedValues) => {
 
 export const addOneElementToCompareState = (oldObj, updatedValues) => {
 
-    const isExist = false;
-
     const updatedState = JSON.parse(JSON.stringify(oldObj));
-    
-    // const updatedState = {...oldObj};
-    // if(updatedState) {
-    //     isExist = updatedState.foodCompareData.some(food => food.id === updatedValues.foodCompareData.id);
-    // }
-    
+
+    const isExist = updatedState.foodCompareData.some(food => food.id === updatedValues.foodCompareData.id);
 
     if(!isExist) {
         updatedState.foodCompareData.push(updatedValues.foodCompareData);
     }
+
     console.log('1',updatedState);
     console.log('2', oldObj);
 

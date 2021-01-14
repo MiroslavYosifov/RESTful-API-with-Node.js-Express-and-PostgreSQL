@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import classes from './App.css';
 
 import { BrowserRouter, Route, Switch, Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -36,6 +36,7 @@ function App(props) {
       <Route path="/recipe" component={RecipeBuilder}></Route>
       <Route path="/food" component={FoodBuilder}></Route>
       <Route path="/auth" component={AuthBuilder}></Route>
+      <Route render={() => <h1>Not found</h1>} ></Route>
     </Switch> 
   )
 
@@ -45,11 +46,13 @@ function App(props) {
         <Route path="/workout" component={WorkoutBuilder}></Route>
         <Route path="/recipe" component={RecipeBuilder}></Route>
         <Route path="/food" component={FoodBuilder}></Route>
+        <Route render={() => <h1>Not found</h1>} ></Route>
       </Switch>
     );
-  } 
+  }
+
   return (
-    <div className="App">
+    <div className={classes.App}>
       
       {/* <WorkoutBuilder></WorkoutBuilder>
       <Layout>
@@ -58,8 +61,8 @@ function App(props) {
       <Layout isLogged={authData.isLogged} {...props}>
         {routes}
       </Layout>
-      <h1>IS LOGGED {authData.isLogged.toString()}</h1>
-      <h1>IS ADMIN {authData.isAdmin.toString()}</h1>
+      <h4>IS LOGGED {authData.isLogged.toString()}</h4>
+      <h4>IS ADMIN {authData.isAdmin.toString()}</h4>
     </div>
   );
 }
