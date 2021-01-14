@@ -11,7 +11,6 @@ const deleteResult = ( state, action ) => {
 }
 
 const reducer = (state = initialState , action) => {
-
     switch(action.type) {
         case actionTypes.STORE_RESULT:
             return updatedObj(state, { results: state.results.concat( { id: new Date(), value: Number(action.result) }) })

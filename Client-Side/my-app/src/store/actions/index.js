@@ -13,11 +13,13 @@ export {
     authRegistration,
     authLogoutChecking,
     authCheckState
-} from './auth';
+} from './auth/auth';
 export {
     addFood,
     editFoods,
     getFoods,
-    addFoodToCompareList,
     deleteFood
-} from './food';
+} from './food/food';
+export {
+    addFoodToCompareList
+} from './food/foodCompare';

@@ -1,5 +1,5 @@
-import * as actionTypes from './actionsTypes';
-import { services } from '../../services/index';
+import * as actionTypes from '../actionsTypes';
+import { services } from '../../../services/index'
 
 export const foodStart = () => {
     return {
@@ -42,20 +42,6 @@ export const foodDataDeleteElement = (food) => {
     }
 }
 
-export const foodCompareDataUpdate = (food) => {
-    return {
-        type: actionTypes.FOOD_COMPARE_DATA_UPDATE,
-        food: food
-    }
-}
-
-export const addFoodToCompareList = (food) => {
-    console.log('ACTIONS',food);
-    return dispatch => {
-        dispatch(foodCompareDataUpdate(food))
-    }
-}
-
 export const getFoods = () => {
     return dispatch => {
         dispatch(foodStart())
@@ -73,7 +59,6 @@ export const addFood = (foodData) => {
         dispatch(foodStart())
         services.foodService.addFood(foodData)
             .then(res => {
-                console.log('TUKA LI SYM',res);
                 dispatch(foodDataAdd(res))
             }).catch(err => {
                 dispatch(foodFail(err))

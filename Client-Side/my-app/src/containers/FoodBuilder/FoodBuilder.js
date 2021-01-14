@@ -1,53 +1,31 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import  classes from './FoodBuilder.module.css';
+
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import FoodList from '../../components/Food/FoodList';
 import FoodAddForm from '../../components/Food/FoodForms/FoodAddForm/FoodAddForm'
 import FoodCompare from '../../components/Food/FoodCompare/FoodCompare';
-import { INCREMENT } from '../../store/actions/actionsTypes';
 
-class FoodBuilder extends Component {
-    constructor (props) {
-        super(props)
-    }
+function FoodBuilder(props) {
 
-    state = {
-        isUpdatedCompareCmp: true,
-        foodCompareData: []
-    }
-
-    componentDidUpdate () {
-
-    }
-
-    updateFoodCompareData = (data) => {
-
-        const updatedData = this.state.foodCompareData;
-        const isExist = updatedData.some(food => food.id === data.id);
-        
-        if(!isExist) {
-            updatedData.push(data);
-            this.setState(() => {
-                return { foodCompareData: updatedData, isUpdatedCompareCmp: !this.state.isUpdatedCompareCmp };
-            })
-        } else {
-            console.log('FOOD EXIST');
-        }
-    }
-
-    render() {
-        console.log(this.state.foodCompareData);
-        return (
-            <div className={classes.FoodBuilder}>
-                <header>
-                    <h1>FOODBUILDER COMPONENT</h1>
-                </header>
-                <FoodAddForm/>
-                <FoodCompare key={this.state.isUpdatedCompareCmp} {...this.state}/>
-                <FoodList updateFoodCompareData={this.updateFoodCompareData}/>
-            </div>
-        );
-    }
+    return (
+        <div className={classes.FoodBuilder}>
+            <header>
+                <h1>FOODBUILDER CONTAINER</h1>
+            </header>
+            <FoodAddForm/>
+            <FoodCompare foodCompareData={props.foodCompareData}/>
+            <FoodList/>
+        </div>
+    );
 }
 
-export default FoodBuilder;
+const mapStateToProps = state => {
+    return {
+        foodCompareData: state.foodCompare.foodCompareData,
+    };
+};
+
+export default withRouter(connect(mapStateToProps)(FoodBuilder));

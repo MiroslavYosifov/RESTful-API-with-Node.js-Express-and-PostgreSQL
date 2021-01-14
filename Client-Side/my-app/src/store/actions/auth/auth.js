@@ -1,5 +1,5 @@
-    import * as actionTypes from './actionsTypes';
-    import { services } from '../../services/index';
+    import * as actionTypes from '../actionsTypes';
+    import { services } from '../../../services/index';
 
     export const authStart = () => {
         return {

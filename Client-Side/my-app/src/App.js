@@ -17,7 +17,6 @@ function App(props) {
   const [authData, setIsLogged] = useState({ isLogged: false, isAdmin: false });
   
   useEffect(() => {
-    
     const updatedAuthData = {  
       isLogged: !!localStorage.getItem('token'),
       isAdmin: !!localStorage.getItem('isAdmin'),
@@ -71,12 +70,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  // return bindActionCreators(
-  //   {
-  //     onAuth: (authData) => dispatch(authLogin(authData)),
-  //   }
-  // )
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps)(App));

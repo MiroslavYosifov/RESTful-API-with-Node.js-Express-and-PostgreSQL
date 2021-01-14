@@ -9,8 +9,16 @@ import Toolbar from '../../../Navigation/Toolbar/Toolbar';
 configure({adapter: new Adapter()});
 
 describe('<FoodCard/>', () => {
+    let wrapper;
+    beforeEach(() => {
+        wrapper = shallow(<FoodCardContent />);
+    });
+
+    it('should no render <Toolbar/>', () => {
+
+        expect(wrapper.find(Toolbar)).toHaveLength(0);
+    });
     it('should render show content button', () => {
-        const wrapper = shallow(<FoodCardContent />);
         expect(wrapper.find(Toolbar)).toHaveLength(0);
     });
 });

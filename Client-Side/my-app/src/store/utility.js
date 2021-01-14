@@ -1,5 +1,4 @@
 export const updatedObj = (oldObj, updatedValues) => {
-    console.log(updatedValues);
     return {
         ...oldObj,
         ...updatedValues
@@ -9,11 +8,9 @@ export const updatedObj = (oldObj, updatedValues) => {
 export const addOneElement = (oldObj, updatedValues) => {
     console.log(updatedValues);
     const updatedFooData = {...oldObj};
-    console.log('111111',updatedFooData);
     updatedFooData.foodData.unshift(updatedValues.foodData);
-
     updatedValues.foodData = updatedFooData.foodData;
-    console.log('2222222',updatedFooData);
+
     return {
         ...oldObj,
         ...updatedValues
@@ -21,7 +18,7 @@ export const addOneElement = (oldObj, updatedValues) => {
 }
 
 export const updatedOneElement = (oldObj, updatedValues) => {
-    console.log(updatedValues);
+
     const updatedFooData = oldObj.foodData.map(foodEl => {
         if(foodEl.id === updatedValues.foodData.id) {
             foodEl = updatedValues.foodData;
@@ -55,13 +52,21 @@ export const deleteOneElement = (oldObj, updatedValues) => {
 
 export const addOneElementToCompareState = (oldObj, updatedValues) => {
 
-    const updatedState = oldObj;
-    // const updatedState = {...oldObj};
-    const isExist = updatedState.foodCompareData.some(food => food.id === updatedValues.foodCompareData.id);
+    const isExist = false;
+
+    const updatedState = JSON.parse(JSON.stringify(oldObj));
     
+    // const updatedState = {...oldObj};
+    // if(updatedState) {
+    //     isExist = updatedState.foodCompareData.some(food => food.id === updatedValues.foodCompareData.id);
+    // }
+    
+
     if(!isExist) {
         updatedState.foodCompareData.push(updatedValues.foodCompareData);
     }
+    console.log('1',updatedState);
+    console.log('2', oldObj);
 
     return {
         ...oldObj,

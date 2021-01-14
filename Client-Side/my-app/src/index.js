@@ -10,7 +10,8 @@ import thunk from 'redux-thunk';
 import counterReducer from './store/reducers/counter';
 import resultReducer from './store/reducers/result';
 import authReducer from './store/reducers/auth';
-import foodReducer from './store/reducers/food';
+import foodReducer from './store/reducers/food/food';
+import foodCompareReducer from './store/reducers/food/foodCompare';
 
 import { BrowserRouter } from 'react-router-dom';
 
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   ctr: counterReducer,
   res: resultReducer,
   auth: authReducer,
-  food: foodReducer
+  food: foodReducer,
+  foodCompare: foodCompareReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

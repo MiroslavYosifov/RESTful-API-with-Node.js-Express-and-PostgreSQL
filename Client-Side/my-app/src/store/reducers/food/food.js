@@ -1,10 +1,9 @@
 
-import * as actionsTypes from '../actions/actionsTypes';
-import { updatedObj, addOneElement, updatedOneElement, deleteOneElement, addOneElementToCompareState } from '../utility';
+import * as actionsTypes from '../../actions/actionsTypes';
+import { updatedObj, addOneElement, updatedOneElement, deleteOneElement } from '../../utility';
 
 const initialState = {
     foodData: null,
-    foodCompareData: [],
     error: null,
     loading: false,
 }
@@ -62,14 +61,6 @@ const foodDataDelete = (state, action) => {
     })
 }
 
-const foodCompareDataUpdate = (state, action) => {
-    return addOneElementToCompareState(state, {
-        foodCompareData: action.food,
-        error: null, 
-        loading: false 
-    })
-}
-
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionsTypes.FOOD_START:
@@ -84,8 +75,6 @@ const reducer = (state = initialState, action) => {
             return foodDataUpdate(state, action);
         case actionsTypes.FOOD_DATA_DELETE_ELEMENT:
             return foodDataDelete(state, action);
-        case actionsTypes.FOOD_COMPARE_DATA_UPDATE:
-            return foodCompareDataUpdate(state, action);
         default:
             return state;
     }

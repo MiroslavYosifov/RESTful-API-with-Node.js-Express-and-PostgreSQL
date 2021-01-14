@@ -8,7 +8,7 @@ import { addFoodToCompareList, deleteFood } from '../../../store/actions/index';
 import FoodEditForm from '../FoodForms/FoodEditForm/FoodEditForm';
 import FoodCardContent from './FoodCardContent/FoodCardContent';
 
-class FoodCard extends Component {
+export class FoodCard extends Component {
     state = {
         isHidden: false,
         isEditFormHidden: false,
@@ -72,9 +72,8 @@ class FoodCard extends Component {
                     <div className={classes.FoodCardNavigationContainer}>
                         {!isEditFormHidden ? <p onClick={this.changeIsHidden}>{!isHidden ? 'Show content' : 'Hide content'}</p> : ''}
                         {isHidden ? <p onClick={this.changeIsEditFormHidden}>{!isEditFormHidden ? 'Show Edit' : 'Hide Edit'}</p> : ''}
-                        {/* {isHidden ? <p onClick={() => this.props.onDelete(this.state.food)}>Delete</p> : ''} */}
                         {<p onClick={() => this.props.onDelete(this.state.food)}>Delete</p>}
-                        {<p onClick={() => this.props.updateFoodCompareData(this.state.food)} >Compare</p>}
+                        {<p onClick={() => this.props.addToCompareList(this.state.food)} >Compare</p>}
                         {isHidden || isEditFormHidden  ? <p onClick={this.showDefaultCard}>Close</p> : ''}
                     </div>
                 </div>
@@ -83,11 +82,11 @@ class FoodCard extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        foodCompareData: state.food.foodCompareData
-    };
-};
+// const mapStateToProps = state => {
+//     return {
+//         foodCompareData: state.foodCompare.foodCompareData
+//     };
+// };
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -96,4 +95,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FoodCard);
+export default connect(null, mapDispatchToProps)(FoodCard);
