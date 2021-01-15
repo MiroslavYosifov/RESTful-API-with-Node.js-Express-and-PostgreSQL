@@ -4,11 +4,12 @@
 
 .AuthLogoutForm button {
     border: none;
-    color: lightgray;
+    color: rgb(145, 145, 145);
     background: none;
+    font-size: 1.2em;
 }
 
 .AuthLogoutForm button:hover {
     cursor: pointer;
-    color: white;
+    color: rgb(94, 94, 94);
 }

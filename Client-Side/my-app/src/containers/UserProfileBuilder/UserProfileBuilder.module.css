@@ -1,8 +1,8 @@
-.FoodBuilder {
+.UserProfileBuilder {
     padding: 2em 4em 0 4em;
     text-align: center;
 }
 
-.FoodBuilder header {
+.UserProfileBuilder header {
     margin-bottom: 2em;
 }

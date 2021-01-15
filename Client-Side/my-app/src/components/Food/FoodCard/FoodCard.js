@@ -54,6 +54,7 @@ export class FoodCard extends Component {
     render() {
         const { isHidden, isEditFormHidden } = this.state;
         const { imgUrl, name } = this.state.food;
+        const { isLogged, isAdmin } = this.props;
 
         return (
             <div className={classes.FoodCard}>
@@ -70,10 +71,10 @@ export class FoodCard extends Component {
                         <h3>{name}</h3>
                     </header>
                     <div className={classes.FoodCardNavigationContainer}>
-                        {!isEditFormHidden ? <p onClick={this.changeIsHidden}>{!isHidden ? 'Show content' : 'Hide content'}</p> : ''}
-                        {isHidden ? <p onClick={this.changeIsEditFormHidden}>{!isEditFormHidden ? 'Show Edit' : 'Hide Edit'}</p> : ''}
-                        {<p onClick={() => this.props.onDelete(this.state.food)}>Delete</p>}
+                        <p onClick={this.changeIsHidden}>{!isHidden ? 'Show content' : 'Hide content'}</p>
                         {<p onClick={() => this.props.addToCompareList(this.state.food)} >Compare</p>}
+                        { isAdmin && isLogged ? <p onClick={this.changeIsEditFormHidden}>{!isEditFormHidden ? 'Show Edit' : 'Hide Edit'}</p> : ''}
+                        { isAdmin && isLogged && <p onClick={() => this.props.onDelete(this.state.food)}>Delete</p>}
                         {isHidden || isEditFormHidden  ? <p onClick={this.showDefaultCard}>Close</p> : ''}
                     </div>
                 </div>

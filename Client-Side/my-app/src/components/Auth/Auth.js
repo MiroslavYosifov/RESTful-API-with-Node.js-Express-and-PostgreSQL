@@ -17,14 +17,15 @@ class Auth extends Component {
     render() {
         const { isHidden } = this.state;
         return (
-            <div className={classes.Auth}>
-                <h3>AUTH COMPONENT</h3>
+        <div className={classes.Auth}>
+            <div className={classes.AuthContent}>
+                {isHidden ? <h3>Log in to your account</h3> : <h3>Create your account</h3>}
                 {  isHidden  ? <AuthLoginForm/> : <AuthRegistrationForm/> }
-            <div>
-                {  isHidden  ? <p>Don't have an account? <a onClick={this.showRegistrationForm}>Sign Up</a></p> 
-                             : <p>Have an account? <a onClick={this.showRegistrationForm}>Sign in</a></p> }
+                <div>
+                    {  isHidden  ? <p>Don't have an account? <a onClick={this.showRegistrationForm}>Sign Up</a></p> 
+                                 : <p>Have an account? <a onClick={this.showRegistrationForm}>Sign in</a></p> }
+                </div>
             </div>
-          
         </div>
       )
     }

@@ -28,10 +28,12 @@
 
         render() {
             const foodData  = this.state.foodData;
+            const { isLogged, isAdmin } = this.props;
+
             return (
                 <div className={classes.FoodList}>
                     {foodData ? foodData.map(resFood =>  (
-                        <FoodCard key={resFood.id} food={resFood} history={this.props.history} />
+                        <FoodCard key={resFood.id} isLogged={isLogged} isAdmin={isAdmin} food={resFood} history={this.props.history} />
                     )) : ''}
                 </div>
             );

@@ -13,12 +13,12 @@ function FoodBuilder(props) {
 
     return (
         <div className={classes.FoodBuilder}>
-            <header>
-                <h1>FOODBUILDER CONTAINER</h1>
-            </header>
             { isLogged && isAdmin ? <FoodAddForm/> : '' }
-            <FoodCompare foodCompareData={props.foodCompareData}/>
-            <FoodList/>
+            {props.foodCompareData.length > 0 ? <FoodCompare foodCompareData={props.foodCompareData}/> : ''}
+            <header>
+                <h1>FOOD PRODUCTS</h1>
+            </header>
+            <FoodList isLogged={isLogged} isAdmin={isAdmin}/>
         </div>
     );
 }

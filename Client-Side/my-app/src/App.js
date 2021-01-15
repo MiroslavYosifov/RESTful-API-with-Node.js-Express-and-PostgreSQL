@@ -62,8 +62,8 @@ function App(props) {
       <Layout isLogged={authData.isLogged} {...props}>
         {routes}
       </Layout>
-      <h4>IS LOGGED {authData.isLogged.toString()}</h4>
-      <h4>IS ADMIN {authData.isAdmin.toString()}</h4>
+      {/* <h4>IS LOGGED {authData.isLogged.toString()}</h4>
+      <h4>IS ADMIN {authData.isAdmin.toString()}</h4> */}
     </div>
   );
 }

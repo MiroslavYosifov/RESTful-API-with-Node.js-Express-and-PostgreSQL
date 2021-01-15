@@ -1,5 +1,4 @@
 .Auth {
-    border: 1px solid black;
     padding: 0.6em;
 }
 
@@ -7,3 +6,10 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+.AuthContent {
+    width: 26em;
+    margin: 0 auto;
+    text-align: center;
+}
+

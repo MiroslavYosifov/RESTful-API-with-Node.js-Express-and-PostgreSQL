@@ -13,9 +13,9 @@ class AuthBuilder extends Component {
   render() {
     return (
       <div className={classes.AuthBuilder}>
-        <div>
+        {/* <div>
           <h1>AuthBuilder Component</h1>
-        </div>
+        </div> */}
         <Auth/>
       </div>
     )

@@ -1,5 +1,36 @@
-.AuthLoginForm {
+/* .AuthLoginForm {
     border: 1px solid black;
     padding: 0.4em;
     margin: 2em 0;
+} */
+
+.AuthLoginForm {
+    border-radius: 0.2em;
+    padding: 1.4em;
+    background: rgb(199, 198, 198);
+    width: 100%;
+    margin: 1em 0;
+    /* margin-left: auto; */
+}
+
+.AuthLoginForm input {
+    border: none;
+    padding: 0.6em;
+    margin-bottom: 0.3em;
+    border-radius: 0.2em;
+    width: 100%;
+}
+
+.AuthLoginForm select {
+    border: none;
+    padding: 0.1em;
+    margin-bottom: 0.3em;
+    border-radius: 0.2em;
+    width: 100%;
+}
+
+.AuthLoginForm button {
+    width: 100%;
+    cursor: pointer;
+    padding: 0.2em;
 }

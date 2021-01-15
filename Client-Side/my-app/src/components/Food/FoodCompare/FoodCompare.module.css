@@ -1,7 +1,7 @@
 .FoodCompareTable {
     display: flex;
     flex-wrap: wrap;
-    background: rgb(224, 224, 224);
+    background: rgb(240, 240, 240);
     border-radius: 0.6em;
     margin: 2em 0;
     overflow: hidden;
@@ -22,15 +22,15 @@
 }
 
 .FoodCompareCardContent div p:nth-child(even){
-    background: rgb(179, 179, 179);
+    background: rgb(219, 219, 219);
 }
 
 .FoodCompareCardContent div p:nth-child(odd){
-    background: rgb(224, 224, 224);
+    background: rgb(255, 255, 255);
 }
 
 .FoodCompareCardContent div p:nth-child(1){
-    background: rgb(92, 92, 92);
+    background: rgb(167, 167, 167);
     color: white;
 }
 

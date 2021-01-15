@@ -7,9 +7,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 //import reducer from './store/reducer';
-import counterReducer from './store/reducers/counter';
-import resultReducer from './store/reducers/result';
-import authReducer from './store/reducers/auth';
+import authReducer from './store/reducers/auth/auth';
 import foodReducer from './store/reducers/food/food';
 import foodCompareReducer from './store/reducers/food/foodCompare';
 
@@ -20,8 +18,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const rootReducer = combineReducers({
-  ctr: counterReducer,
-  res: resultReducer,
   auth: authReducer,
   food: foodReducer,
   foodCompare: foodCompareReducer

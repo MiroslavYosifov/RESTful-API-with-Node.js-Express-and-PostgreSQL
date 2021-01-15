@@ -7,11 +7,12 @@
         }
     }
 
-    export const authSuccess = (userId, token, isAdmin) => {
+    export const authSuccess = (userId, token, username, isAdmin) => {
         return {
             type: actionTypes.AUTH_SUCCESS,
             userId: userId,
             token: token,
+            username: username,
             isAdmin: isAdmin
         }
     }
@@ -35,6 +36,7 @@
                 .then(res => {
                     localStorage.removeItem('token');
                     localStorage.removeItem('userId');
+                    localStorage.removeItem('username');
                     localStorage.removeItem('isAdmin');
                     dispatch(authLogout());
                 }).catch(err => {
@@ -52,13 +54,13 @@
             dispatch(authStart());
             services.userServices.login(authData)
                 .then(res => {
-
                     const isAdmin =  res.user.roles !== null ? res.user.roles.includes('admin') : "";
-
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('userId', res.user.id);
+                    localStorage.setItem('username', res.user.username);
                     localStorage.setItem('isAdmin', isAdmin);
-                    dispatch(authSuccess(res.user.id, res.token, isAdmin));
+                   
+                    dispatch(authSuccess(res.user.id, res.token, res.user.username, isAdmin));
                 }).catch(err => {
                     console.log(err);
                     dispatch(authFail())
@@ -74,7 +76,8 @@
                 .then(res => {
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('userId', res.user.id);
-                    dispatch(authSuccess(res.user.id, res.token));
+                    localStorage.setItem('username', res.username);
+                    dispatch(authSuccess(res.user.id, res.token, res.username));
                 }).catch(err => {
                     console.log(err => {
                         console.log(err);
@@ -84,14 +87,14 @@
         }
     }
 
-    export const authCheckState = () => {
-        return dispatch => {
-            const token = localStorage.getItem('token');
-            const userId = localStorage.getItem('userId');
-            if(!token) {
-                dispatch(authLogout());
-            } else {
-                dispatch(authSuccess(userId, token));
-            }
-        };
-    };
+    // export const authCheckState = () => {
+    //     return dispatch => {
+    //         const token = localStorage.getItem('token');
+    //         const userId = localStorage.getItem('userId');
+    //         if(!token) {
+    //             dispatch(authLogout());
+    //         } else {
+    //             dispatch(authSuccess(userId, token));
+    //         }
+    //     };
+    // };

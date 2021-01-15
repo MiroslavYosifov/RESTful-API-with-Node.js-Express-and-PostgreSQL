@@ -1,0 +1,9 @@
+.Logo {
+    width: 16em;
+}
+
+.Logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
