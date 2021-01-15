@@ -20,6 +20,8 @@ export class FoodCard extends Component {
             imgUrl: '', 
             name: '', 
             kind: '',
+            price: '',
+            availability: null
         }
     }
 
@@ -30,11 +32,13 @@ export class FoodCard extends Component {
     }
 
     componentDidUpdate (prevState) {
+        console.log(this.props.food)
         if (this.state.food !== this.props.food) {
             this.setState(() => {
                 return { isHidden: false, isEditFormHidden: false, food: this.props.food };
             })
         }
+        console.log(this.state.food)
     }
 
     changeIsHidden = () => {
@@ -53,9 +57,9 @@ export class FoodCard extends Component {
 
     render() {
         const { isHidden, isEditFormHidden } = this.state;
-        const { imgUrl, name } = this.state.food;
+        const { imgUrl, name, price, availability } = this.state.food;
         const { isLogged, isAdmin } = this.props;
-
+        console.log(availability);
         return (
             <div className={classes.FoodCard}>
                 <div className={classes.FoodCardMediaContainer}>
@@ -69,6 +73,10 @@ export class FoodCard extends Component {
                 <div className={classes.FoodCardHeaderContainer}>
                     <header>
                         <h3>{name}</h3>
+                        <div>
+                            {!availability ? '' : availability.count ? <p>Count: <b>{availability.count}</b></p> : <p>Quantity: <b>{availability.quantity}</b></p>}
+                            <p>Price: <b>{price}lv.</b></p>
+                        </div> 
                     </header>
                     <div className={classes.FoodCardNavigationContainer}>
                         <p onClick={this.changeIsHidden}>{!isHidden ? 'Show content' : 'Hide content'}</p>

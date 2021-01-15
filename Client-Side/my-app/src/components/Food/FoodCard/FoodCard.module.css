@@ -53,7 +53,9 @@
 
     .FoodCardHeaderContainer header {
         display: flex;
+        flex-wrap: wrap;
         width: 100%;
+        margin: 0;
     }
 
     .FoodCardHeaderContainer header h3 {
@@ -61,6 +63,19 @@
         text-align: center;
     }
 
+    .FoodCardHeaderContainer header div {
+        width: 100%;
+        display: flex;
+        padding: 0.2em;
+    }
+
+    .FoodCardHeaderContainer header div p {
+        font-style: italic;
+    }
+
+    .FoodCardHeaderContainer header div p:first-child {
+        margin-right: auto;
+    }
    
     .FoodCardNavigationContainer {
         display: flex;

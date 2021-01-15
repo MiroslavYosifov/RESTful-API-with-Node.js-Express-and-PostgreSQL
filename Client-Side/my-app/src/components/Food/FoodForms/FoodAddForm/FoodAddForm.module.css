@@ -26,4 +26,12 @@
     width: 100%;
     cursor: pointer;
     padding: 0.2em;
+    border: 1px solid white;
+    border-radius: 0.2em;
+    
+}
+
+.FoodAddForm button:hover {
+    background: rgb(169, 194, 79);
+    color: white;
 }

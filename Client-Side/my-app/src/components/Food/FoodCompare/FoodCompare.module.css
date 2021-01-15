@@ -1,4 +1,9 @@
+.FoodCompare {
+    width: 100%;
+}
+
 .FoodCompareTable {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     background: rgb(240, 240, 240);
@@ -7,9 +12,12 @@
     overflow: hidden;
 }
 
+/* FoodCompareCardContent */
+/* animation: cardContent 1s timing-function delay iteration-count direction fill-mode; */
 .FoodCompareCardContent {
     border-right: 1px solid rgb(255, 255, 255);
     width: 10%;
+    animation: cardContent ease-out 0.3s;
 }
 
 .FoodCompareCardContent:last-child {
@@ -40,4 +48,40 @@
 
 .FoodCompareCardContent:last-child {
     margin-right: 0;
+}
+
+@keyframes cardContent {
+    0%   {
+        transform: translate(400%);
+    }
+    10%  {
+        transform: translate(300%);
+    }
+    20%  {
+        transform: translate(200%);
+    }
+    30% {
+        transform: translate(150%);
+    }
+    40%   {
+        transform: translate(100%);
+    }
+    50%  {
+        transform: translate(50%);
+    }
+    60%  {
+        transform: translate(40%);
+    }
+    70% {
+        transform: translate(30%);
+    }
+    80% {
+        transform: translate(20%);
+    }
+    90% {
+        transform: translate(10%);
+    }
+    100% {
+        transform: translate(0);
+    }
 }
