@@ -17,6 +17,7 @@ function App(props) {
   const [authData, setIsLogged] = useState({ isLogged: false, isAdmin: false });
   
   useEffect(() => {
+
     const updatedAuthData = {  
       isLogged: !!localStorage.getItem('token'),
       isAdmin: !!localStorage.getItem('isAdmin'),
@@ -34,7 +35,7 @@ function App(props) {
     <Switch>
       <Route path="/workout" component={WorkoutBuilder}></Route>
       <Route path="/recipe" component={RecipeBuilder}></Route>
-      <Route path="/food" component={FoodBuilder}></Route>
+      <Route path="/food"  render={() => <FoodBuilder isLogged={authData.isLogged} isAdmin={authData.isAdmin}/>}></Route>
       <Route path="/auth" component={AuthBuilder}></Route>
       <Route render={() => <h1>Not found</h1>} ></Route>
     </Switch> 
@@ -45,7 +46,7 @@ function App(props) {
       <Switch>
         <Route path="/workout" component={WorkoutBuilder}></Route>
         <Route path="/recipe" component={RecipeBuilder}></Route>
-        <Route path="/food" component={FoodBuilder}></Route>
+        <Route path="/food"  render={() => <FoodBuilder isLogged={authData.isLogged} isAdmin={authData.isAdmin}/>}></Route>
         <Route render={() => <h1>Not found</h1>} ></Route>
       </Switch>
     );

@@ -22,8 +22,3 @@ db.sequelize.sync().then(() => {
 }).catch(err => {
     console.log('IMA GRESHKA', err);
 });
-
-// app.listen(port, () => {
-//   console.log(`App listening on PORT ${port}`);
-// });
-

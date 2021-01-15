@@ -5,13 +5,14 @@ import classes from './Layout.module.css';
 import Toolbar from '../Navigation/Toolbar/Toolbar'
 
 
-const layout = (props) => (
-    <Auxiliary>
-        <Toolbar key={props.isLogged} {...props}/>
+const layout = (props) => {
+    console.log(props);
+    return (<Auxiliary>
+        <Toolbar key={props.isLogged} isLogged={props.isLogged}/>
         <main  className={classes.Content}>
             {props.children}
         </main>
-    </Auxiliary>
-);
+    </Auxiliary>)
+}
   
 export default layout;
