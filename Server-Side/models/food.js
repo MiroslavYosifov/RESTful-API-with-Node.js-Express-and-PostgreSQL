@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     carbohydrate: DataTypes.INTEGER,
     calories: DataTypes.INTEGER,
     imgUrl: DataTypes.INTEGER,
-    //macros: DataTypes.JSON,
+    price: DataTypes.DECIMAL,
+    availability: DataTypes.JSON(DataTypes.DECIMAL),
   }, {
     sequelize,
     modelName: 'Food',

@@ -12,8 +12,9 @@ module.exports = {
       .catch((error) => { res.status(400).send(error); });
   },
   add(req, res) {
-    const { name, kind, protein, fat, carbohydrate, imgUrl} = req.body;
+    const { name, kind, protein, fat, carbohydrate, imgUrl, availability, price } = req.body;
     const calories = (Number(protein) * 4) + (Number(carbohydrate) * 4) + (Number(fat) * 4);
+    console.log(req.body);
     return Food
       .create({
         name: name,
@@ -22,7 +23,9 @@ module.exports = {
         fat: Number(fat),
         carbohydrate: Number(carbohydrate),
         imgUrl: imgUrl,
-        calories: calories
+        calories: calories,
+        availability: availability,
+        price: price
       })
       .then((test) => res.status(201).send(test))
       .catch((error) => res.status(400).send(error));

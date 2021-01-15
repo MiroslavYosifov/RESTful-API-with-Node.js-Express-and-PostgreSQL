@@ -10,7 +10,7 @@ export const addOneElement = (oldObj, updatedValues) => {
     const updatedFooData = {...oldObj};
     updatedFooData.foodData.unshift(updatedValues.foodData);
     updatedValues.foodData = updatedFooData.foodData;
-
+    
     return {
         ...oldObj,
         ...updatedValues
