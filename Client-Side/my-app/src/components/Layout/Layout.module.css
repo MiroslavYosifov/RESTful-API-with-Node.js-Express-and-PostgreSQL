@@ -1,6 +1,7 @@
 .Layout {
     padding: 5em 0 4em 0;
     display: flex;
+    background: rgb(248, 248, 248);
 }
 
 .Content {

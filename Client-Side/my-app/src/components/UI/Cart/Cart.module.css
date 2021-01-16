@@ -1,25 +1,3 @@
-.Cart {
-    display: block;
-    position: absolute;
-    overflow: scroll;
-    background: rgb(143, 143, 143);
-    width: 20em;
-    border-bottom-left-radius: 0.4em;
-    border-top-left-radius: 0.4em;
-    padding: 1em;
-    top: 0;
-    right: 100%;
-    animation: cartShow ease-in-out 0.3s;
-}
-
-.Cart > div::-webkit-scrollbar {
-    width: 5px;
-    height: 8px;
-    background-color: #aaa; /* or add it to the track */
-  }
-
-
-
 @keyframes cartShow {
     0%  {
         transform: translate(100%);
@@ -38,11 +16,74 @@
     }
 }
 
-.CartFoodElement {
+.Cart {
+    display: block;
+    position: absolute;
+    background: rgb(155, 155, 155);
+    width: 26em;
+    height: auto;
+    border-bottom-left-radius: 0.4em;
+    border-top-left-radius: 0.4em;
+    border: 1px solid white ;
+    padding: 1em;
+    top: 0;
+    right: 100%;
+    box-shadow: -0.2em 0.2em 0.6em 0.1em rgba(0, 0, 0, 0.767);
+    animation: cartShow ease-in-out 0.3s;
+}
+
+.Cart button {
+    border: none;
+    width: 100%;
     padding: 0.4em;
-    /* border: 1px solid white ; */
     border-radius: 0.4em;
-    background: rgb(170, 169, 169);
+}
+
+.Cart button:hover {
+    cursor: pointer;
+}
+
+.CartElementsList {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-radius: 0.4em;
+    padding: 0.6em 0 0.6em 0.6em;
+    background: rgb(94, 94, 94);
+}
+
+.CartFoodElement {
+    display: flex;
+    width: 100%;
+    padding: 0.4em;
+    border-radius: 0.4em;
+    background: rgb(121, 121, 121);
     margin-bottom: 1em;
-    color: rgb(32, 32, 32);
+    color: white;
+}
+
+.CartFoodElementMedia {
+    position: relative;
+    width: 50%;
+    border-radius: 0.4em;
+    overflow: hidden;
+}
+
+.CartFoodElementMedia:before {
+    display: block;
+    content: '';
+    padding: 50%;
+}
+
+.CartFoodElementMedia img {
+    position: absolute;
+    width: auto;
+    height: 100%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.CartFoodElementContent {
+    padding: 0.4em;
+    width: 50%;
 }
