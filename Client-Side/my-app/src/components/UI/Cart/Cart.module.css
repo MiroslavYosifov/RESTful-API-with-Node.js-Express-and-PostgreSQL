@@ -1,11 +1,48 @@
 .Cart {
-    background: red;
-    width: 10em;
+    display: block;
     position: absolute;
+    overflow: scroll;
+    background: rgb(143, 143, 143);
+    width: 20em;
+    border-bottom-left-radius: 0.4em;
+    border-top-left-radius: 0.4em;
+    padding: 1em;
     top: 0;
     right: 100%;
+    animation: cartShow ease-in-out 0.3s;
 }
 
-.Cart p {
-    border: none;
+.Cart > div::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: #aaa; /* or add it to the track */
+  }
+
+
+
+@keyframes cartShow {
+    0%  {
+        transform: translate(100%);
+    }
+    25% {
+        transform: translate(75%);
+    }
+    50% {
+        transform: translate(50%);
+    }
+    75% {
+        transform: translate(25%);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+.CartFoodElement {
+    padding: 0.4em;
+    /* border: 1px solid white ; */
+    border-radius: 0.4em;
+    background: rgb(170, 169, 169);
+    margin-bottom: 1em;
+    color: rgb(32, 32, 32);
 }

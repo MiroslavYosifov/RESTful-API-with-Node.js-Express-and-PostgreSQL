@@ -4,24 +4,26 @@ import classes from './Cart.module.css';
 import { BrowserRouter, Route, Switch, Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import FoodCardContent from '../../Food/FoodCard/FoodCardContent/FoodCardContent';
 
 function Cart(props) {
 
   //const isLogged = localStorage.getItem('isLogged');
-  const [authData, setIsLogged] = useState({ isLogged: false, isAdmin: false });
+//   const [foodCartData, setCartData] = useState({ data: null });
   
-  useEffect(() => {
-
-  });
+//   useEffect(() => {
+//     console.log('EFETKI raboti li', props);
+//   });
+//   console.log('raboti li', props);
 
   return (
     <div className={classes.Cart}>
         <div>
-            <p>First Element</p>
-            <p>Second Element</p>
-            <p>Third Element</p>
-            <p>Fourth Element</p>
-            <p>Fifth Element</p>
+            { props.foodCartData ? props.foodCartData.map(food => (
+                <div className={classes.CartFoodElement}>
+                    <FoodCardContent key={food.id + 'cart'} {...food}/>
+                </div>  
+            )) : ''}
         </div>
         <p>Total price: 10.00</p>
     </div>
@@ -30,7 +32,7 @@ function Cart(props) {
 
 const mapStateToProps = state => {
   return {
-      auth: state.auth,
+      foodCartData: state.foodCart.foodCartData,
   };
 };
 

@@ -9,10 +9,9 @@ const foodCardContent = (props) => {
             <p>Protein: {props.protein}</p>
             <p>Fat: {props.fat}</p>
             <p>Carbohydrate: {props.carbohydrate}</p>
+            <p>Price: {props.price}</p>
         </div>
     )
 }
-
-
 
 export default foodCardContent;

@@ -10,7 +10,7 @@ export const addOneElement = (oldObj, updatedValues) => {
     const updatedFooData = {...oldObj};
     updatedFooData.foodData.unshift(updatedValues.foodData);
     updatedValues.foodData = updatedFooData.foodData;
-    
+
     return {
         ...oldObj,
         ...updatedValues
@@ -61,6 +61,25 @@ export const addOneElementToCompareState = (oldObj, updatedValues) => {
     }
 
     console.log('1',updatedState);
+    console.log('2', oldObj);
+
+    return {
+        ...oldObj,
+        ...updatedState
+    }
+}
+
+export const addOneElementToCartState = (oldObj, updatedValues) => {
+
+    const updatedState = JSON.parse(JSON.stringify(oldObj));
+
+    const isExist = updatedState.foodCartData.some(food => food.id === updatedValues.foodCartData.id);
+
+    if(!isExist) {
+        updatedState.foodCartData.push(updatedValues.foodCartData);
+    }
+
+    console.log('1', updatedState);
     console.log('2', oldObj);
 
     return {

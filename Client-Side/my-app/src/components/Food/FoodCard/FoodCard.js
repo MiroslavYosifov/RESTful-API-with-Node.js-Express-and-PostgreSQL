@@ -3,7 +3,7 @@ import classes from './FoodCard.module.css';
 
 import { connect } from 'react-redux';
 
-import { addFoodToCompareList, deleteFood } from '../../../store/actions/index';
+import { addFoodToCompareList, addFoodToCartList, deleteFood } from '../../../store/actions/index';
 
 import FoodEditForm from '../FoodForms/FoodEditForm/FoodEditForm';
 import FoodCardContent from './FoodCardContent/FoodCardContent';
@@ -84,6 +84,7 @@ export class FoodCard extends Component {
                         { isAdmin && isLogged ? <p onClick={this.changeIsEditFormHidden}>{!isEditFormHidden ? 'Show Edit' : 'Hide Edit'}</p> : ''}
                         { isAdmin && isLogged && <p onClick={() => this.props.onDelete(this.state.food)}>Delete</p>}
                         {isHidden || isEditFormHidden  ? <p onClick={this.showDefaultCard}>Close</p> : ''}
+                        {<p onClick={() => this.props.addToCartList(this.state.food)} >Add to cart</p>}
                     </div>
                 </div>
             </div>
@@ -101,6 +102,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addToCompareList: (food) => dispatch(addFoodToCompareList(food)),
         onDelete: (food) => dispatch(deleteFood(food)),
+        addToCartList: (food) => dispatch(addFoodToCartList(food))
     }
 };
 

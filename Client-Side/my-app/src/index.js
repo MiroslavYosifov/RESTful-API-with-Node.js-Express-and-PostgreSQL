@@ -10,6 +10,7 @@ import thunk from 'redux-thunk';
 import authReducer from './store/reducers/auth/auth';
 import foodReducer from './store/reducers/food/food';
 import foodCompareReducer from './store/reducers/food/foodCompare';
+import foodCartReducer from './store/reducers/food/foodCart';
 
 import { BrowserRouter } from 'react-router-dom';
 
@@ -20,7 +21,8 @@ import * as serviceWorker from './serviceWorker';
 const rootReducer = combineReducers({
   auth: authReducer,
   food: foodReducer,
-  foodCompare: foodCompareReducer
+  foodCompare: foodCompareReducer,
+  foodCart: foodCartReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

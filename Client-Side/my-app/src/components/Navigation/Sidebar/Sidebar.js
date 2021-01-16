@@ -9,24 +9,26 @@ import Cart from '../../UI/Cart/Cart';
 function Sidebar(props) {
 
   //const isLogged = localStorage.getItem('isLogged');
-  const [authData, setIsLogged] = useState({ isLogged: false, isAdmin: false });
+  const [elementsStatus, setShowedElements] = useState({ showCart: false });
   
-  useEffect(() => {
-
-  });
+  function showCart () {
+    setShowedElements({
+        showCart: !elementsStatus.showCart
+    })
+  }
 
   return (
-    <sidebar className={classes.Sidebar}>
-        
+    <div className={classes.Sidebar}>
+        {elementsStatus.showCart ? <Cart/> : ''}
         <nav>
             <ul>
-                <li className={classes.CartButton}><Cart/><p>Cart</p></li>
+                <li><p onClick={() => {showCart()}}>Cart</p></li>
                 <li><p>TEST</p></li>
                 <li><p>TEST</p></li>
                 <li><p>TEST</p></li>
             </ul>
         </nav>
-    </sidebar>
+    </div>
     
   );
 }
