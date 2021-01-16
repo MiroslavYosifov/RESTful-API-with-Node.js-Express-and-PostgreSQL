@@ -17,9 +17,7 @@ class WorkoutBuilder extends Component {
     }
 
     componentDidMount () {
-        
         console.log(localStorage);
-        
         services.workoutService.getWorkouts().then(data => {
             this.setState({
                 exercises: data

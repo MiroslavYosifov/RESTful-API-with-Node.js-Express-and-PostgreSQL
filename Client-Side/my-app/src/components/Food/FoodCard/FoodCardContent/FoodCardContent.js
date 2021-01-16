@@ -1,7 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import classes from './FoodCardContent.module.css';
 
-const foodCardContent = (props) => { 
-    console.log('CONTENT FOOD',props);
+import { connect } from 'react-redux';
+
+import { updatedCartElementsList } from '../../../../store/actions/index';
+
+function FoodCardContent(props) { 
+
+    const isLogged = localStorage.getItem('isLogged');
+    const [foodCartElement, setCartElement] = useState({ cartElement: null, value: '' });
+    
+    useEffect(() => {
+        if(JSON.stringify(foodCartElement.cartElement) !== JSON.stringify(props)) {
+            setCartElement({
+                cartElement: {...props}
+            });
+        }
+    });
+
+    function handleChange(event) {
+        const updatedTotalPrice = Number(event.target.value) * foodCartElement.cartElement.price;
+        setCartElement({
+            totalPrice: updatedTotalPrice,
+            value: event.target.value
+        });
+        props.updatedCartElements(foodCartElement.cartElement, event.target.value);
+    };
 
     switch(props.parent) {
         case "foodCard":
@@ -30,8 +54,13 @@ const foodCardContent = (props) => {
             return(
                 <div>
                     <p>Name: {props.name}</p>
-                    <p>Price: {props.price}</p>
-                    {!props.availability ? '' : props.availability.count ? <p>Count: <b>{props.availability.count}</b></p> : <p>Quantity: <b>{props.availability.quantity}</b></p>}
+                    {!props.availability ? '' : props.availability.count ?  <p>Price per count: {props.price}lv</p> :  <p>Price per kg: {props.price}lv</p>}
+                    {!props.availability ? '' : props.availability.count ? <p>Availability: {props.availability.count} counts</p> : <p>Availability: {props.availability.quantity}kg</p>}
+                    <div className={ classes.CartFoodElementContentForm} >
+                        <label>Quantity:</label>
+                        <input onChange={handleChange} name="quantity" value={foodCartElement.value}/>
+                      </div>
+                    <p>Product price: {props.totalPrice}</p>
                 </div>)
         default: 
             return(<div>NOT EXIST PARENT</div>)
@@ -42,4 +71,17 @@ const foodCardContent = (props) => {
 
 }
 
-export default foodCardContent;
+const mapStateToProps = state => {
+    return {
+        foodCartData: state.cart.foodCartData,
+    };
+  };
+  
+  
+const mapDispatchToProps = (dispatch) => {
+  return {
+      updatedCartElements: (food, quantity) => dispatch(updatedCartElementsList(food, quantity))
+  }
+};
+  
+export default connect(mapStateToProps, mapDispatchToProps)(FoodCardContent);

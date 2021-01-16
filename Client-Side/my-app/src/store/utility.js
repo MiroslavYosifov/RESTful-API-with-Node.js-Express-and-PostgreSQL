@@ -75,10 +75,12 @@ export const addOneElementToCartState = (oldObj, updatedValues) => {
     const isExist = updatedState.foodCartData.some(food => food.id === updatedValues.foodCartData.id);
 
     if(!isExist) {
+        updatedValues.foodCartData.totalPrice = 0;
         updatedState.foodCartData.push(updatedValues.foodCartData);
     }
 
     updatedState.productCount = updatedState.foodCartData.length;
+    updatedState.totalPrice -= 0;
 
     return {
         ...oldObj,
@@ -88,17 +90,47 @@ export const addOneElementToCartState = (oldObj, updatedValues) => {
 
 export const removeOneElementToCartState = (oldObj, updatedValues) => {
     
+    let priceToDecrease = 0;
+    const updatedState = JSON.parse(JSON.stringify(oldObj));
+
     const updatedFooData = oldObj.foodCartData.filter(foodEl => {
         if(foodEl.id !== updatedValues.foodCartData.id) {
+            return foodEl;
+        } else {
+            priceToDecrease = foodEl.totalPrice;
+        }
+    });
+    console.log('PRCIE TO DECRESE',priceToDecrease);
+
+    updatedState.foodCartData = updatedFooData;
+    updatedState.productCount = updatedFooData.length;
+    updatedState.totalPrice -= priceToDecrease;
+    
+    return {
+        ...oldObj,
+        ...updatedState
+    };
+}
+
+export const updateOneElementToCartState = (oldObj, updatedValues) => {
+
+    console.log(oldObj);
+    const updatedState = JSON.parse(JSON.stringify(oldObj));
+    console.log('UPDATED VALUES', updatedValues);
+
+    updatedState.foodCartData = oldObj.foodCartData.filter(foodEl => {
+        if(foodEl.id === updatedValues.foodCartData.id) {
+            foodEl.totalPrice = Number(updatedValues.quantity) * Number(foodEl.price);
+            updatedState.totalPrice += foodEl.totalPrice;
+            return foodEl;
+        } else {
             return foodEl;
         }
     });
 
-    updatedValues.foodCartData = updatedFooData;
-    updatedValues.productCount = updatedValues.foodCartData.length;
-    
+    console.log('LAST VALUES', updatedValues);
     return {
         ...oldObj,
-        ...updatedValues
+        ...updatedState
     };
 }

@@ -9,19 +9,40 @@ import { connect } from 'react-redux';
 import { removeFoodFromCartList } from '../../../store/actions/index';
 
 import FoodCardContent from '../../Food/FoodCard/FoodCardContent/FoodCardContent';
+import Modal from '../Modal/Modal';
+import AuthLoginForm from '../../Auth/Forms/AuthLoginForm/AuthLoginForm'
 
 function Cart(props) {
+  // const isLogged = localStorage.getItem('isLogged');
+  // const [foodCartData, setCartData] = useState({ data: null });
+  console.log(props);
+  const [checkOrder, setOrder] = useState({ showModal: false });
 
-  const isLogged = localStorage.getItem('isLogged');
-  const [foodCartData, setCartData] = useState({ data: null });
+  function handleOrder () {
+      if(!props.isLogged) {
+        setOrder({
+          showModal: true
+        });
+      } else {
+        setOrder({
+          showModal: false
+        })
+        console.log(props.foodCartData);
+      }
+  }
+
+  function closeModal () {
+    setOrder({
+      showModal: false
+    });
+  }
   
-  useEffect(() => {
-    console.log('EFETKI raboti li', props);
-  });
-  console.log('raboti li', props);
-
   return (
     <div className={classes.Cart}>
+        { !props.isLogged && checkOrder.showModal ? <Modal messagge="You must be login if you want to make a order!">
+          <AuthLoginForm />
+          <button onClick={() => closeModal()}>Close</button>
+        </Modal> : '' }
         <Scrollbar  
           style={{ width: "100%", height: 560 }}>
           <div className={classes.CartElementsList}>
@@ -39,8 +60,8 @@ function Cart(props) {
           </div>
         </Scrollbar>
         <div className={classes.CartContent}>
-          <p>Total price: 10.00</p>
-          <button>Order</button>
+          <p>Total price: {props.foodTotalPrice}</p>
+          <button onClick={() => handleOrder()}>Order</button>
         </div>
     </div>
   );
@@ -49,13 +70,15 @@ function Cart(props) {
 const mapStateToProps = state => {
   return {
       foodCartData: state.cart.foodCartData,
+      foodTotalPrice: state.cart.totalPrice
   };
 };
 
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      removeFromCartList: (food) => dispatch(removeFoodFromCartList(food))
+      removeFromCartList: (food) => dispatch(removeFoodFromCartList(food)),
+      // updatedCartElements: (food, quantity) => dispatch(updatedCartElementsList(food, quantity))
   }
 };
 

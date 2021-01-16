@@ -15,16 +15,30 @@ export const removeFoodFromCart = (food) => {
     }
 }
 
+export const updateFoodFromCart = (food, quantity) => {
+    console.log(quantity);
+    return {
+        type: actionTypes.UPDATE_FOOD_IN_CART_DATA,
+        food: food,
+        quantity: quantity,
+    }
+}
+
 export const addFoodToCartList = (food) => {
-    console.log('ACTIONS',food);
     return dispatch => {
         dispatch(addFoodToCart(food))
     }
 }
 
 export const removeFoodFromCartList = (food) => {
-    console.log('ACTIONS',food);
     return dispatch => {
         dispatch(removeFoodFromCart(food))
+    }
+}
+
+export const updatedCartElementsList = (food, quantity) => {
+    console.log('ACTIONS',food, quantity);
+    return dispatch => {
+        dispatch(updateFoodFromCart(food, quantity))
     }
 }

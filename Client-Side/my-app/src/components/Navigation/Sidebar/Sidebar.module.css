@@ -19,16 +19,23 @@
 }
 
 .Sidebar nav ul li {
+
 }
+
 
 .Sidebar nav ul li > p {
     border-bottom: 1px solid white;
-    background: gray;
+    background: rgb(179, 179, 179);
     padding: 1em;
 }
 
+.Sidebar nav ul li > p:hover {
+    background: rgb(168, 168, 168);
+}
+
 .Sidebar nav ul li > .SelectedListElement {
-    background: rgb(54, 54, 54);
+    /* background: rgb(54, 54, 54); */
+    background: rgb(140, 140, 140);
     color: white;
 }
 

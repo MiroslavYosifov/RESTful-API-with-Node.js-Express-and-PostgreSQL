@@ -23,9 +23,10 @@ function Sidebar(props) {
 
   return (
     <div className={classes.Sidebar}>
-        {elementsStatus.showCart ? <Cart/> : ''}
+        {elementsStatus.showCart ? <Cart isLogged={props.isLogged}/> : ''}
         <nav>
             <ul>
+            {/* da opravq tagovete tuka ot p na drugo */}
                 {elementsStatus.isSelected 
                   ? <li><p className={classes.SelectedListElement} onClick={() => {showCart()}}>Cart {props.cartProductsCount > 0 ? <div className={classes.CartNotification}><CartNotification /></div> : '' }</p></li> 
                   : <li><p onClick={() => {showCart()}}>Cart {props.cartProductsCount > 0 ?  <div className={classes.CartNotification}><CartNotification /></div> : '' }</p></li>}

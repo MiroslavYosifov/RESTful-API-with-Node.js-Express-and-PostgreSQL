@@ -44,7 +44,6 @@
     margin-top: 0.2em;
     text-align: center;
     font-size: 1.4em;
-    /* font-weight: bold; */
     color: white;
 }
 
@@ -115,4 +114,19 @@
 .CartFoodElementContent {
     padding: 0.4em;
     width: 50%;
+}
+
+.CartFoodElementContent div > p {
+    color: rgb(197, 197, 197);
+}
+
+.CartFoodElementContent > button {
+    width: 100%;
+    padding: 0.3em;
+    border: none;
+    border-radius: 0.2em;
+    background: rgb(175, 175, 175);
+    color: rgb(53, 53, 53);
+    font-weight: bold;
+    margin-top: 0.2em;
 }
