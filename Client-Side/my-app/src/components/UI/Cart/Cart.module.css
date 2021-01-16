@@ -1,0 +1,11 @@
+.Cart {
+    background: red;
+    width: 10em;
+    position: absolute;
+    top: 0;
+    right: 100%;
+}
+
+.Cart p {
+    border: none;
+}

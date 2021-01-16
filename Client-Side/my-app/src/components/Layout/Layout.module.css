@@ -1,3 +1,10 @@
-.Content {
-    margin-top: 2em;
+.Layout {
+    padding: 5em 0 4em 0;
+    display: flex;
 }
+
+.Content {
+    width: 95%;
+    /* background: red; */
+}
+

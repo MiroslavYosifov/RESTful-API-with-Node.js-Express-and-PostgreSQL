@@ -1,0 +1,34 @@
+.Sidebar {
+    display: block;
+    width: 5%;
+    background: rgb(199, 199, 199);
+    box-sizing: border-box;
+    z-index: 80;
+}
+
+.Sidebar nav {
+    display: flex;
+    width: 100%;
+}
+
+.Sidebar nav ul {
+    width: 100%;
+}
+
+.Sidebar nav ul li {
+
+}
+
+.Sidebar nav ul li > p {
+    border-bottom: 1px solid white;
+    background: gray;
+    padding: 1em;
+}
+
+.Sidebar nav ul li > p:hover {
+    cursor: pointer;
+}
+
+.CartButton {
+    position: relative;
+}
