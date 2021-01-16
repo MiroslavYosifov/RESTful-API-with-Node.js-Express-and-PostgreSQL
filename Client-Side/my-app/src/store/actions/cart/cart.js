@@ -8,9 +8,23 @@ export const addFoodToCart = (food) => {
     }
 }
 
+export const removeFoodFromCart = (food) => {
+    return {
+        type: actionTypes.REMOVE_FOOD_FROM_CART_DATA,
+        food: food
+    }
+}
+
 export const addFoodToCartList = (food) => {
     console.log('ACTIONS',food);
     return dispatch => {
         dispatch(addFoodToCart(food))
+    }
+}
+
+export const removeFoodFromCartList = (food) => {
+    console.log('ACTIONS',food);
+    return dispatch => {
+        dispatch(removeFoodFromCart(food))
     }
 }

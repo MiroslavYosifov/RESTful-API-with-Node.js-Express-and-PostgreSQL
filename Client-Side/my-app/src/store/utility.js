@@ -6,7 +6,6 @@ export const updatedObj = (oldObj, updatedValues) => {
 }
 
 export const addOneElement = (oldObj, updatedValues) => {
-    console.log(updatedValues);
     const updatedFooData = {...oldObj};
     updatedFooData.foodData.unshift(updatedValues.foodData);
     updatedValues.foodData = updatedFooData.foodData;
@@ -35,13 +34,12 @@ export const updatedOneElement = (oldObj, updatedValues) => {
 }
 
 export const deleteOneElement = (oldObj, updatedValues) => {
-    console.log(updatedValues);
     const updatedFooData = oldObj.foodData.filter(foodEl => {
         if(foodEl.id !== updatedValues.foodData.id) {
             return foodEl;
         }
     });
-    console.log('UPDATED FOOD', updatedFooData);
+
     updatedValues.foodData = updatedFooData;
     
     return {
@@ -49,6 +47,8 @@ export const deleteOneElement = (oldObj, updatedValues) => {
         ...updatedValues
     };
 }
+
+
 
 export const addOneElementToCompareState = (oldObj, updatedValues) => {
 
@@ -60,14 +60,13 @@ export const addOneElementToCompareState = (oldObj, updatedValues) => {
         updatedState.foodCompareData.push(updatedValues.foodCompareData);
     }
 
-    console.log('1',updatedState);
-    console.log('2', oldObj);
-
     return {
         ...oldObj,
         ...updatedState
     }
 }
+
+// CART UTILITITES
 
 export const addOneElementToCartState = (oldObj, updatedValues) => {
 
@@ -79,11 +78,27 @@ export const addOneElementToCartState = (oldObj, updatedValues) => {
         updatedState.foodCartData.push(updatedValues.foodCartData);
     }
 
-    console.log('1', updatedState);
-    console.log('2', oldObj);
+    updatedState.productCount = updatedState.foodCartData.length;
 
     return {
         ...oldObj,
         ...updatedState
     }
+}
+
+export const removeOneElementToCartState = (oldObj, updatedValues) => {
+    
+    const updatedFooData = oldObj.foodCartData.filter(foodEl => {
+        if(foodEl.id !== updatedValues.foodCartData.id) {
+            return foodEl;
+        }
+    });
+
+    updatedValues.foodCartData = updatedFooData;
+    updatedValues.productCount = updatedValues.foodCartData.length;
+    
+    return {
+        ...oldObj,
+        ...updatedValues
+    };
 }

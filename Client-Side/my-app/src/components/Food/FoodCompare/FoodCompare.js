@@ -17,7 +17,7 @@ class FoodCompare extends Component {
                 <div className={classes.FoodCompareTable}>
                     {foodCompareData ? this.props.foodCompareData.map(food => (
                         <div key={food.id + 'b'} className={classes.FoodCompareCardContent}>
-                            <FoodCardContent {...food}/>
+                            <FoodCardContent parent="foodCompare" {...food}/>
                         </div>
                     )) : ''}
                 </div>

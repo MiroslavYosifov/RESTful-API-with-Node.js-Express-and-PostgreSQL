@@ -5,24 +5,30 @@ import { BrowserRouter, Route, Switch, Link, withRouter } from 'react-router-dom
 import { connect } from 'react-redux';
 
 import Cart from '../../UI/Cart/Cart';
+import CartNotification from '../../UI/Cart/CartNotification/CartNotification';
 
 function Sidebar(props) {
 
   //const isLogged = localStorage.getItem('isLogged');
-  const [elementsStatus, setShowedElements] = useState({ showCart: false });
+  const [elementsStatus, setShowedElements] = useState({ showCart: false, isSelected: false });
   
   function showCart () {
     setShowedElements({
-        showCart: !elementsStatus.showCart
+        showCart: !elementsStatus.showCart,
+        isSelected:  !elementsStatus.isSelected
     })
   }
+
+  console.log(elementsStatus.isSelected);
 
   return (
     <div className={classes.Sidebar}>
         {elementsStatus.showCart ? <Cart/> : ''}
         <nav>
             <ul>
-                <li><p onClick={() => {showCart()}}>Cart</p></li>
+                {elementsStatus.isSelected 
+                  ? <li><p className={classes.SelectedListElement} onClick={() => {showCart()}}>Cart {props.cartProductsCount > 0 ? <div className={classes.CartNotification}><CartNotification /></div> : '' }</p></li> 
+                  : <li><p onClick={() => {showCart()}}>Cart {props.cartProductsCount > 0 ?  <div className={classes.CartNotification}><CartNotification /></div> : '' }</p></li>}
                 <li><p>TEST</p></li>
                 <li><p>TEST</p></li>
                 <li><p>TEST</p></li>
@@ -35,7 +41,7 @@ function Sidebar(props) {
 
 const mapStateToProps = state => {
   return {
-      auth: state.auth,
+      cartProductsCount: state.cart.productCount,
   };
 };
 

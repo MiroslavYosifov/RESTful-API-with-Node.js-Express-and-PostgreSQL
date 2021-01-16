@@ -32,13 +32,11 @@ export class FoodCard extends Component {
     }
 
     componentDidUpdate (prevState) {
-        console.log(this.props.food)
         if (this.state.food !== this.props.food) {
             this.setState(() => {
                 return { isHidden: false, isEditFormHidden: false, food: this.props.food };
             })
         }
-        console.log(this.state.food)
     }
 
     changeIsHidden = () => {
@@ -59,14 +57,14 @@ export class FoodCard extends Component {
         const { isHidden, isEditFormHidden } = this.state;
         const { imgUrl, name, price, availability } = this.state.food;
         const { isLogged, isAdmin } = this.props;
-        console.log(availability);
+        
         return (
             <div className={classes.FoodCard}>
                 <div className={classes.FoodCardMediaContainer}>
                     <img src={imgUrl} alt=""/>
                     {isHidden ? 
                         <div className={classes.FoodCardContentContainer}>
-                            <FoodCardContent {...this.state.food}/>
+                            <FoodCardContent parent="foodCard" {...this.state.food}/>
                         </div> : ''}
                     {isEditFormHidden ? <FoodEditForm key={this.props.food.id+'a'} {...this.props}/> : ''}
                 </div>
@@ -74,8 +72,8 @@ export class FoodCard extends Component {
                     <header>
                         <h3>{name}</h3>
                         <div>
-                            {!availability ? '' : availability.count ? <p>Count: <b>{availability.count}</b></p> : <p>Quantity: <b>{availability.quantity}</b></p>}
-                            <p>Price: <b>{price}lv.</b></p>
+                            {/* {!availability ? '' : availability.count ? <p>Count: <b>{availability.count}</b></p> : <p>Quantity: <b>{availability.quantity}</b></p>} */}
+                            {!availability ? '' : availability.count ? <p>Price per count: <b>{price}lv.</b></p> : <p>Price per kg: <b>{price}lv.</b></p>}
                         </div> 
                     </header>
                     <div className={classes.FoodCardNavigationContainer}>

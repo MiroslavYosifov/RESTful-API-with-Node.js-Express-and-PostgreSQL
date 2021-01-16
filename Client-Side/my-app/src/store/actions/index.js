@@ -13,5 +13,6 @@ export {
     addFoodToCompareList
 } from './food/foodCompare';
 export {
-    addFoodToCartList
-} from './food/foodCart';
+    addFoodToCartList,
+    removeFoodFromCartList
+} from './cart/cart';

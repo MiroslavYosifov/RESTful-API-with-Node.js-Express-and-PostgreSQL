@@ -19,13 +19,17 @@
 }
 
 .Sidebar nav ul li {
-
 }
 
 .Sidebar nav ul li > p {
     border-bottom: 1px solid white;
     background: gray;
     padding: 1em;
+}
+
+.Sidebar nav ul li > .SelectedListElement {
+    background: rgb(54, 54, 54);
+    color: white;
 }
 
 .Sidebar nav ul li > p:hover {
@@ -35,3 +39,29 @@
 /* .CartButton {
     position: relative;
 } */
+
+/* NOTIFICATION CSS */
+.CartNotification {
+    position: absolute;
+    background: red;
+    border-radius: 50%;
+    width: 2.4em;
+    height: 2.4em;
+    text-align: center;
+    top: -5%;
+    left: -25%;
+    overflow: hidden;
+}
+
+.CartNotification div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.CartNotification div p {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}

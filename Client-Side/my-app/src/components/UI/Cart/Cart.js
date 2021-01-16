@@ -6,38 +6,41 @@ import Scrollbar from 'react-scrollbars-custom';
 import { BrowserRouter, Route, Switch, Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { removeFoodFromCartList } from '../../../store/actions/index';
+
 import FoodCardContent from '../../Food/FoodCard/FoodCardContent/FoodCardContent';
 
 function Cart(props) {
 
-  //const isLogged = localStorage.getItem('isLogged');
-//   const [foodCartData, setCartData] = useState({ data: null });
+  const isLogged = localStorage.getItem('isLogged');
+  const [foodCartData, setCartData] = useState({ data: null });
   
-//   useEffect(() => {
-//     console.log('EFETKI raboti li', props);
-//   });
-//   console.log('raboti li', props);
+  useEffect(() => {
+    console.log('EFETKI raboti li', props);
+  });
+  console.log('raboti li', props);
 
   return (
     <div className={classes.Cart}>
-        <div className={classes.CartElementsList}>
         <Scrollbar  
-          style={{ width: 400, height: 540 }}>
-          { props.foodCartData ? props.foodCartData.map(food => (
+          style={{ width: "100%", height: 560 }}>
+          <div className={classes.CartElementsList}>
+            { props.foodCartData ? props.foodCartData.map(food => (
                 <div key={food.id + "cart"} className={classes.CartFoodElement}>
                     <div className={ classes.CartFoodElementMedia }>
                       <img src={food.imgUrl}/>
                     </div>
                     <div className={ classes.CartFoodElementContent }>
-                      <FoodCardContent {...food}/>
+                      <FoodCardContent parent="cart" {...food}/>
+                      <button onClick={() => props.removeFromCartList(food)}>Remove product</button>
                     </div>
                 </div>  
-            )) : ''}
-         </Scrollbar>
-        </div>
-        <div>
+            )) : ''} 
+          </div>
+        </Scrollbar>
+        <div className={classes.CartContent}>
           <p>Total price: 10.00</p>
-          <button>Bye food products</button>
+          <button>Order</button>
         </div>
     </div>
   );
@@ -45,8 +48,15 @@ function Cart(props) {
 
 const mapStateToProps = state => {
   return {
-      foodCartData: state.foodCart.foodCartData,
+      foodCartData: state.cart.foodCartData,
   };
 };
 
-export default withRouter(connect(mapStateToProps)(Cart));
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      removeFromCartList: (food) => dispatch(removeFoodFromCartList(food))
+  }
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart));
