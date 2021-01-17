@@ -54,6 +54,19 @@ export const getFoods = () => {
     }
 };
 
+export const getLimitedFoods = (page) => {
+    let data = { page: page };
+    return dispatch => {
+        dispatch(foodStart())
+        services.foodService.getLimitedFoods(data)
+            .then(res => {
+                dispatch(foodSuccess(res))
+            }).catch(err => {
+                dispatch(foodFail(err))
+            })
+    }
+};
+
 export const addFood = (foodData) => {
     return dispatch => {
         dispatch(foodStart())

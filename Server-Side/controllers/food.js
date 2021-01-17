@@ -74,4 +74,16 @@ module.exports = {
       })
       .catch((error) => res.status(400).send(error));
   },
+  pagination(req, res) {
+
+    const { page } = req.body;
+    const skip = Number(page) > 0 ? (Number(page) - 1) * 7 : 1;
+
+    return Food
+      .findAll({
+        offset: skip, limit: 7
+      })
+      .then((food) => res.status(200).send(food))
+      .catch((error) => { res.status(400).send(error); });
+  }
 };

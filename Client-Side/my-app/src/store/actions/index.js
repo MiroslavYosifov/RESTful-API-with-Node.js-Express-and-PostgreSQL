@@ -7,7 +7,8 @@ export {
     addFood,
     editFoods,
     getFoods,
-    deleteFood
+    deleteFood,
+    getLimitedFoods
 } from './food/food';
 export {
     addFoodToCompareList
