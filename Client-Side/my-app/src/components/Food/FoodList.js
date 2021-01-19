@@ -16,7 +16,9 @@
         }
 
         componentDidMount () {
-            this.props.onGetLimitedFood(0);
+            if(!this.props.food.isLimitedFood) {
+                this.props.onGetLimitedFood(0);
+            }
         }
 
         componentDidUpdate(prevProps, prevState, snapshot) {
@@ -37,12 +39,15 @@
         }
 
         handleNextPage = () => {
-            this.setState(() => {
-                return {
-                    page: this.state.page + 1
-                }
-            }, () => { this.props.onGetLimitedFood(this.state.page) });
-            
+            if(!this.props.food.isLimitedFood) {
+                this.setState(() => {
+                    return {
+                        page: this.state.page + 1
+                    }
+                }, () => { 
+                    this.props.onGetLimitedFood(this.state.page) 
+                });
+            } 
         }
 
         render() {

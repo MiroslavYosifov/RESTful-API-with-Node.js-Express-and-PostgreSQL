@@ -1,13 +1,13 @@
 
 import * as actionsTypes from '../../actions/actionsTypes';
-import { updatedObj, addOneElement, updatedOneElement, deleteOneElement } from '../../utility';
+import { updatedObj, updatedLimitedFood, addOneElement, updatedOneElement, deleteOneElement } from '../../utility';
 
 const initialState = {
     foodData: null,
     error: null,
     loading: false,
+    isLimitedFood: false
 }
-
 
 const  foodStart = ( state, action) => {
     return updatedObj(state, {
@@ -28,6 +28,15 @@ const foodFail = (state, action) => {
     return updatedObj(state, {
         error: action.error, 
         loading: false 
+    });
+}
+
+const limitedFoodSuccess = (state, action) => {
+    return updatedLimitedFood( state, {
+        foodData: action.foodData,
+        error: null, 
+        loading: false, 
+        isLimitedFood: false
     });
 }
 
@@ -69,6 +78,8 @@ const reducer = (state = initialState, action) => {
             return foodSuccess(state, action);
         case actionsTypes.FOOD_FAIL:
             return foodFail(state, action);
+        case actionsTypes.FOOD_LIMITED_SUCCESS:
+            return limitedFoodSuccess(state, action);
         case actionsTypes.FOOD_DATA_ADD:
             return foodDataAdd(state, action);
         case actionsTypes.FOOD_DATA_UPDATE:

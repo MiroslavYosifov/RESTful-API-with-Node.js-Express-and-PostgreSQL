@@ -5,6 +5,22 @@ export const updatedObj = (oldObj, updatedValues) => {
     }
 }
 
+export const updatedLimitedFood = (oldObj, updatedValues) => {
+    console.log('Tuka sym', updatedValues.foodData.length);
+
+    if(updatedValues.foodData.length < 7) {
+        updatedValues.isLimitedFood = true;
+    } else {
+        updatedValues.isLimitedFood = false;
+    }
+
+    console.log(updatedValues.isLimitedFood);
+    return {
+        ...oldObj,
+        ...updatedValues
+    }
+}
+
 export const addOneElement = (oldObj, updatedValues) => {
     const updatedFooData = {...oldObj};
     updatedFooData.foodData.unshift(updatedValues.foodData);

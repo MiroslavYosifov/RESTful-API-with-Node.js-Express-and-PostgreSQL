@@ -14,6 +14,13 @@ export const foodSuccess = (foodData) => {
     }
 }
 
+export const getLimitedFoodSuccess = (foodData) => {
+    return {
+        type: actionTypes.FOOD_LIMITED_SUCCESS,
+        foodData: foodData
+    }
+}
+
 export const foodFail = (error) => {
     return {
         type: actionTypes.FOOD_FAIL,
@@ -60,7 +67,7 @@ export const getLimitedFoods = (page) => {
         dispatch(foodStart())
         services.foodService.getLimitedFoods(data)
             .then(res => {
-                dispatch(foodSuccess(res))
+                dispatch(getLimitedFoodSuccess(res))
             }).catch(err => {
                 dispatch(foodFail(err))
             })
