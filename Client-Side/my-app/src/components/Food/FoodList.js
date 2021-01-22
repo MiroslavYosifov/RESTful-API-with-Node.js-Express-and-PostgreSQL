@@ -8,6 +8,7 @@
 
     import FoodCard from './FoodCard/FoodCard';
     import Spinner from '../UI/Spinner/Spinner';
+    import Pagination from '../../components/Navigation/Pagination/Pagination';
 
     class FoodList extends Component {
         state = {
@@ -21,28 +22,19 @@
             }
         }
 
-        componentDidUpdate(prevProps, prevState, snapshot) {
-            if (this.state.foodData !== this.props.food.foodData) {
+        componentDidUpdate() {
+            if(this.state.foodData !== this.props.food.foodData) {
                 this.setState(() => {
                     return { foodData: this.props.food.foodData };
                 });
             }
         }
 
-        handlePreviusPage = () => {
-            if(this.state.page > 0) {
-                this.setState({
-                    page: this.state.page - 1
-                }, () => { this.props.onGetLimitedFood(this.state.page) })
-                
-            }
-        }
-
-        handleNextPage = () => {
-            if(!this.props.food.isLimitedFood) {
+        handleChangePage = (page) => {
+            if(!this.props.food.isLimitedFood && page > 0 || this.state.page > 0 && page < 0) {
                 this.setState(() => {
                     return {
-                        page: this.state.page + 1
+                        page: this.state.page + page
                     }
                 }, () => { 
                     this.props.onGetLimitedFood(this.state.page) 
@@ -53,15 +45,21 @@
         render() {
             const { foodData, page }  = this.state;
             const { isLogged, isAdmin } = this.props;
+
             return (
                 <div className={classes.FoodList}>
                     {foodData ? foodData.map(resFood =>  (
-                        <FoodCard key={resFood.id} isLogged={isLogged} isAdmin={isAdmin} food={resFood} history={this.props.history} />
+                        <FoodCard 
+                            key={resFood.id} 
+                            isLogged={isLogged} 
+                            isAdmin={isAdmin} 
+                            food={resFood} 
+                            history={this.props.history} />
                     )) : ''}
                     <div className={classes.PageButton}>
-                        <span onClick={() => this.handlePreviusPage()}>previus</span>
+                        <span onClick={() => this.handleChangePage(-1)}>previus</span>
                         <p>{page}</p>   
-                        <span onClick={() => this.handleNextPage()}>next</span>
+                        <span onClick={() => this.handleChangePage(1)}>next</span>
                     </div>
                 </div>
             );

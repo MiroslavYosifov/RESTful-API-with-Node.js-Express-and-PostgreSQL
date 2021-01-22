@@ -19,6 +19,7 @@ const creds = {
       host: 'ec2-54-78-127-245.eu-west-1.compute.amazonaws.com',
       dialect: 'postgresql',
       authCookieName: 'x-auth-token'
+      
     },
     test: {
       username: DB_USERNAME,

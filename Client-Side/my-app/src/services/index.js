@@ -3,9 +3,10 @@ import { userServices } from './user-service';
 import { recipeService } from './recipe-service';
 import { workoutService } from './workout-service';
 
-const localhostUrl = "http://localhost:3333"
-const productionUrl = "https://workout-organizer.herokuapp.com";
-const url = localhostUrl;
+// const localhostUrl = "http://localhost:3333"
+// const productionUrl = "https://workout-organizer.herokuapp.com";
+
+const url = process.env.URL || 'http://localhost:3333';
 
 export const services = {
     foodService: foodService(url),
