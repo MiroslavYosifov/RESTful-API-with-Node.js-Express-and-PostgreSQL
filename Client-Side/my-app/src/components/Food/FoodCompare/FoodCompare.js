@@ -3,7 +3,7 @@ import classes from './FoodCompare.module.css';
 
 // import { connect } from 'react-redux';
 
-import FoodCardContent from '../FoodCard/FoodCardContent/FoodCardContent';
+import FoodContent from '../FoodContent/FoodContent';
 
 class FoodCompare extends Component {
     
@@ -17,7 +17,7 @@ class FoodCompare extends Component {
                 <div className={classes.FoodCompareTable}>
                     {foodCompareData ? this.props.foodCompareData.map(food => (
                         <div key={food.id + 'b'} className={classes.FoodCompareCardContent}>
-                            <FoodCardContent parent="foodCompare" {...food}/>
+                            <FoodContent parent="foodCompare" {...food}/>
                         </div>
                     )) : ''}
                 </div>

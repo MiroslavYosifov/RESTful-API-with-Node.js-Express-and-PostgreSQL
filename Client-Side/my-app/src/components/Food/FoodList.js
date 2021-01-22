@@ -8,7 +8,6 @@
 
     import FoodCard from './FoodCard/FoodCard';
     import Spinner from '../UI/Spinner/Spinner';
-    import Pagination from '../../components/Navigation/Pagination/Pagination';
 
     class FoodList extends Component {
         state = {
@@ -43,25 +42,34 @@
         }
 
         render() {
+
             const { foodData, page }  = this.state;
             const { isLogged, isAdmin } = this.props;
 
+            const foodCards = foodData ? foodData.map(resFood =>  (
+                <FoodCard 
+                    key={resFood.id} 
+                    isLogged={isLogged} 
+                    isAdmin={isAdmin} 
+                    food={resFood} 
+                    history={this.props.history} />
+            )) : '';
+
             return (
                 <div className={classes.FoodList}>
-                    {foodData ? foodData.map(resFood =>  (
-                        <FoodCard 
-                            key={resFood.id} 
-                            isLogged={isLogged} 
-                            isAdmin={isAdmin} 
-                            food={resFood} 
-                            history={this.props.history} />
-                    )) : ''}
+                    <header>
+                        <h1>FOOD PRODUCTS</h1>
+                    </header>
+                    <main className={classes.FoodListBody}>
+                        {foodCards}
+                    </main>
                     <div className={classes.PageButton}>
                         <span onClick={() => this.handleChangePage(-1)}>previus</span>
                         <p>{page}</p>   
                         <span onClick={() => this.handleChangePage(1)}>next</span>
                     </div>
                 </div>
+                
             );
         }
     }

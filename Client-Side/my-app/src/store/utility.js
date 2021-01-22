@@ -6,7 +6,6 @@ export const updatedObj = (oldObj, updatedValues) => {
 }
 
 export const updatedLimitedFood = (oldObj, updatedValues) => {
-    console.log('Tuka sym', updatedValues.foodData.length);
 
     if(updatedValues.foodData.length < 7) {
         updatedValues.isLimitedFood = true;
@@ -14,7 +13,6 @@ export const updatedLimitedFood = (oldObj, updatedValues) => {
         updatedValues.isLimitedFood = false;
     }
 
-    console.log(updatedValues.isLimitedFood);
     return {
         ...oldObj,
         ...updatedValues
@@ -88,14 +86,15 @@ export const addOneElementToCartState = (oldObj, updatedValues) => {
 
     const updatedState = JSON.parse(JSON.stringify(oldObj));
 
-    const isExist = updatedState.foodCartData.some(food => food.id === updatedValues.foodCartData.id);
+    const isExist = updatedState.productsCartData.some(food => food.id === updatedValues.productsCartData.id);
 
     if(!isExist) {
-        updatedValues.foodCartData.totalPrice = 0;
-        updatedState.foodCartData.push(updatedValues.foodCartData);
+        updatedValues.productsCartData.totalPrice = 0;
+        updatedValues.productsCartData.quantity = 0;
+        updatedState.productsCartData.push(updatedValues.productsCartData);
     }
 
-    updatedState.productCount = updatedState.foodCartData.length;
+    updatedState.productCount = updatedState.productsCartData.length;
     updatedState.totalPrice -= 0;
 
     return {
@@ -109,16 +108,15 @@ export const removeOneElementToCartState = (oldObj, updatedValues) => {
     let priceToDecrease = 0;
     const updatedState = JSON.parse(JSON.stringify(oldObj));
 
-    const updatedFooData = oldObj.foodCartData.filter(foodEl => {
-        if(foodEl.id !== updatedValues.foodCartData.id) {
+    const updatedFooData = oldObj.productsCartData.filter(foodEl => {
+        if(foodEl.id !== updatedValues.productsCartData.id) {
             return foodEl;
         } else {
             priceToDecrease = foodEl.totalPrice;
         }
     });
-    console.log('PRCIE TO DECRESE',priceToDecrease);
 
-    updatedState.foodCartData = updatedFooData;
+    updatedState.productsCartData = updatedFooData;
     updatedState.productCount = updatedFooData.length;
     updatedState.totalPrice -= priceToDecrease;
     
@@ -130,21 +128,20 @@ export const removeOneElementToCartState = (oldObj, updatedValues) => {
 
 export const updateOneElementToCartState = (oldObj, updatedValues) => {
 
-    console.log(oldObj);
     const updatedState = JSON.parse(JSON.stringify(oldObj));
-    console.log('UPDATED VALUES', updatedValues);
-
-    updatedState.foodCartData = oldObj.foodCartData.filter(foodEl => {
-        if(foodEl.id === updatedValues.foodCartData.id) {
-            foodEl.totalPrice = Number(updatedValues.quantity) * Number(foodEl.price);
-            updatedState.totalPrice += foodEl.totalPrice;
-            return foodEl;
+    
+    updatedState.productsCartData = oldObj.productsCartData.filter(product => {
+        if(product.id === updatedValues.productsCartData.id) {
+            updatedState.totalPrice -= product.totalPrice;
+            product.quantity = updatedValues.quantity;
+            product.totalPrice = Number(updatedValues.quantity) * Number(product.price);
+            updatedState.totalPrice += product.totalPrice;
+            return product;
         } else {
-            return foodEl;
+            return product;
         }
     });
 
-    console.log('LAST VALUES', updatedValues);
     return {
         ...oldObj,
         ...updatedState

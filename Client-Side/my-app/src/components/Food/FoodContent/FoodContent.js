@@ -1,19 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import classes from './FoodCardContent.module.css';
+import classes from './FoodContent.module.css';
 
 import { connect } from 'react-redux';
 
-import { updatedCartElementsList } from '../../../../store/actions/index';
+import { updateProductInCartList } from '../../../store/actions/index';
 
-function FoodCardContent(props) { 
+function FoodContent(props) { 
 
     const isLogged = localStorage.getItem('isLogged');
     const [foodCartElement, setCartElement] = useState({ cartElement: null, value: '' });
     
     useEffect(() => {
+        console.log(props);
         if(JSON.stringify(foodCartElement.cartElement) !== JSON.stringify(props)) {
             setCartElement({
-                cartElement: {...props}
+                cartElement: {...props},
+                value: props.quantity
             });
         }
     });
@@ -71,17 +73,10 @@ function FoodCardContent(props) {
 
 }
 
-const mapStateToProps = state => {
-    return {
-        foodCartData: state.cart.foodCartData,
-    };
-  };
-  
-  
 const mapDispatchToProps = (dispatch) => {
   return {
-      updatedCartElements: (food, quantity) => dispatch(updatedCartElementsList(food, quantity))
+      updatedCartElements: (food, quantity) => dispatch(updateProductInCartList(food, quantity))
   }
 };
   
-export default connect(mapStateToProps, mapDispatchToProps)(FoodCardContent);
+export default connect(null, mapDispatchToProps)(FoodContent);

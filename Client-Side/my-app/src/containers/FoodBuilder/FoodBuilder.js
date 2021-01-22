@@ -15,9 +15,6 @@ function FoodBuilder(props) {
         <div className={classes.FoodBuilder}>
             { isLogged && isAdmin ? <FoodAddForm/> : '' }
             {props.foodCompareData.length > 0 ? <FoodCompare foodCompareData={props.foodCompareData}/> : ''}
-            <header>
-                <h1>FOOD PRODUCTS</h1>
-            </header>
             <FoodList isLogged={isLogged} isAdmin={isAdmin}/>
         </div>
     );

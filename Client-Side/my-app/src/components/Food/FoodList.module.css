@@ -1,4 +1,12 @@
 .FoodList {
+
+}
+
+.FoodList header {
+    margin-bottom: 2em;
+}
+
+.FoodListBody {
     display: flex;
     flex-wrap: wrap;
 }

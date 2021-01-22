@@ -14,7 +14,7 @@ export {
     addFoodToCompareList
 } from './food/foodCompare';
 export {
-    addFoodToCartList,
-    removeFoodFromCartList,
-    updatedCartElementsList
+    addProductToCartList,
+    removeProductFromCartList,
+    updateProductInCartList
 } from './cart/cart';

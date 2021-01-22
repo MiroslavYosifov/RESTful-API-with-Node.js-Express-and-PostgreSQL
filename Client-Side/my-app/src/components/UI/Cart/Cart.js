@@ -3,62 +3,56 @@ import classes from './Cart.module.css';
 
 import Scrollbar from 'react-scrollbars-custom';
 
-import { BrowserRouter, Route, Switch, Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { removeFoodFromCartList } from '../../../store/actions/index';
+import { removeProductFromCartList } from '../../../store/actions/index';
 
-import FoodCardContent from '../../Food/FoodCard/FoodCardContent/FoodCardContent';
+import FoodContent from '../../Food/FoodContent/FoodContent';
 import Modal from '../Modal/Modal';
 import AuthLoginForm from '../../Auth/Forms/AuthLoginForm/AuthLoginForm'
 
 function Cart(props) {
-  // const isLogged = localStorage.getItem('isLogged');
-  // const [foodCartData, setCartData] = useState({ data: null });
-  console.log(props);
+
   const [checkOrder, setOrder] = useState({ showModal: false });
 
   function handleOrder () {
-      if(!props.isLogged) {
-        setOrder({
-          showModal: true
-        });
-      } else {
-        setOrder({
-          showModal: false
-        })
-        console.log(props.foodCartData);
-      }
+    props.isLogged 
+      ? setOrder({ showModal: true })                
+      : setOrder({ showModal: false });
   }
 
   function closeModal () {
-    setOrder({
-      showModal: false
-    });
+    setOrder({ showModal: false });
   }
+  console.log('TUKA SUM', props.productsData);
+  const productsList = props.productsData ? props.productsData.map(food => (
+      <div key={food.id + "cart"} className={classes.CartFoodElement}>
+          <div className={ classes.CartFoodElementMedia }>
+            <img src={food.imgUrl}/>
+          </div>
+          <div className={ classes.CartFoodElementContent }>
+            <FoodContent parent="cart" {...food}/>
+            <button onClick={() => props.removeFromCartList(food)}>Remove product</button>
+          </div>
+      </div>  
+    )) : '';
   
   return (
     <div className={classes.Cart}>
-        { !props.isLogged && checkOrder.showModal ? <Modal messagge="You must be login if you want to make a order!">
-          <AuthLoginForm />
-          <button onClick={() => closeModal()}>Close</button>
-        </Modal> : '' }
-        <Scrollbar  
-          style={{ width: "100%", height: 560 }}>
+        { !props.isLogged && checkOrder.showModal 
+          ? <Modal messagge="You must be login if you want to make a order!">
+              <AuthLoginForm />
+              <button onClick={() => closeModal()}>Close</button>
+            </Modal> 
+          : '' }
+
+        <Scrollbar  style={{ width: "100%", height: 560 }}>
           <div className={classes.CartElementsList}>
-            { props.foodCartData ? props.foodCartData.map(food => (
-                <div key={food.id + "cart"} className={classes.CartFoodElement}>
-                    <div className={ classes.CartFoodElementMedia }>
-                      <img src={food.imgUrl}/>
-                    </div>
-                    <div className={ classes.CartFoodElementContent }>
-                      <FoodCardContent parent="cart" {...food}/>
-                      <button onClick={() => props.removeFromCartList(food)}>Remove product</button>
-                    </div>
-                </div>  
-            )) : ''} 
+            {productsList} 
           </div>
         </Scrollbar>
+        
         <div className={classes.CartContent}>
           <p>Total price: {props.foodTotalPrice}</p>
           <button onClick={() => handleOrder()}>Order</button>
@@ -69,7 +63,7 @@ function Cart(props) {
 
 const mapStateToProps = state => {
   return {
-      foodCartData: state.cart.foodCartData,
+      productsData: state.cart.productsCartData,
       foodTotalPrice: state.cart.totalPrice
   };
 };
@@ -77,7 +71,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      removeFromCartList: (food) => dispatch(removeFoodFromCartList(food)),
+      removeFromCartList: (food) => dispatch(removeProductFromCartList(food)),
       // updatedCartElements: (food, quantity) => dispatch(updatedCartElementsList(food, quantity))
   }
 };

@@ -3,10 +3,10 @@ import classes from './FoodCard.module.css';
 
 import { connect } from 'react-redux';
 
-import { addFoodToCompareList, addFoodToCartList, deleteFood } from '../../../store/actions/index';
+import { addFoodToCompareList, addProductToCartList, deleteFood } from '../../../store/actions/index';
 
 import FoodEditForm from '../FoodForms/FoodEditForm/FoodEditForm';
-import FoodCardContent from './FoodCardContent/FoodCardContent';
+import FoodContent from '../FoodContent/FoodContent';
 
 export class FoodCard extends Component {
     state = {
@@ -64,7 +64,7 @@ export class FoodCard extends Component {
                     <img src={imgUrl} alt=""/>
                     {isHidden ? 
                         <div className={classes.FoodCardContentContainer}>
-                            <FoodCardContent parent="foodCard" {...this.state.food}/>
+                            <FoodContent parent="foodCard" {...this.state.food}/>
                         </div> : ''}
                     {isEditFormHidden ? <FoodEditForm key={this.props.food.id+'a'} {...this.props}/> : ''}
                 </div>
@@ -100,7 +100,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addToCompareList: (food) => dispatch(addFoodToCompareList(food)),
         onDelete: (food) => dispatch(deleteFood(food)),
-        addToCartList: (food) => dispatch(addFoodToCartList(food))
+        addToCartList: (food) => dispatch(addProductToCartList(food))
     }
 };
 

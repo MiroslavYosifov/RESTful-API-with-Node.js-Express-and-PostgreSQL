@@ -3,43 +3,38 @@ import * as actionsTypes from '../../actions/actionsTypes';
 import { addOneElementToCartState, removeOneElementToCartState, updateOneElementToCartState } from '../../utility';
 
 const initialState = {
-    foodCartData: [],
+    productsCartData: [],
     productCount: 0,
     totalPrice: 0
 }
 
-const foodAddToCartData = (state, action) => {
-    console.log(state);
-    console.log(action);
+const productAddToCartData = (state, action) => {
     return addOneElementToCartState(state, {
-        foodCartData: action.food,
+        productsCartData: action.product,
     })
 }
 
-const foodRemoveFromCartData = (state, action) => {
-    console.log(state);
-    console.log(action);
+const productRemoveFromCartData = (state, action) => {
     return removeOneElementToCartState(state, {
-        foodCartData: action.food,
+        productsCartData: action.product,
     })
 }
 
-const updateFoodFromCart = (state, action) => {
-    console.log('test', action);
+const productUpdateInCart = (state, action) => {
     return updateOneElementToCartState(state, {
-        foodCartData: action.food,
+        productsCartData: action.product,
         quantity: action.quantity
     })
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionsTypes.FOOD_ADD_TO_CART_DATA:
-            return foodAddToCartData(state, action);
-        case actionsTypes.REMOVE_FOOD_FROM_CART_DATA:
-            return foodRemoveFromCartData(state, action);
-        case actionsTypes.UPDATE_FOOD_IN_CART_DATA:
-            return updateFoodFromCart(state, action);
+        case actionsTypes.PRODUCT_ADD_TO_CART_DATA:
+            return productAddToCartData(state, action);
+        case actionsTypes.PRODUCT_REMOVE_FROM_CART_DATA:
+            return productRemoveFromCartData(state, action);
+        case actionsTypes.PRODUCT_UPDATE_IN_CART_DATA:
+            return productUpdateInCart(state, action);
         default:
             return state;
     }

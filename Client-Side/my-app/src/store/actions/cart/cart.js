@@ -1,44 +1,42 @@
 import * as actionTypes from '../actionsTypes';
 import { services } from '../../../services/index';
 
-export const addFoodToCart = (food) => {
+export const addProductToCart = (product) => {
     return {
-        type: actionTypes.FOOD_ADD_TO_CART_DATA,
-        food: food
+        type: actionTypes.PRODUCT_ADD_TO_CART_DATA,
+        product: product
     }
 }
 
-export const removeFoodFromCart = (food) => {
+export const removeProductFromCart = (product) => {
     return {
-        type: actionTypes.REMOVE_FOOD_FROM_CART_DATA,
-        food: food
+        type: actionTypes.PRODUCT_REMOVE_FROM_CART_DATA,
+        product: product
     }
 }
 
-export const updateFoodFromCart = (food, quantity) => {
-    console.log(quantity);
+export const updateProductInCart = (product, quantity) => {
     return {
-        type: actionTypes.UPDATE_FOOD_IN_CART_DATA,
-        food: food,
+        type: actionTypes.PRODUCT_UPDATE_IN_CART_DATA,
+        product: product,
         quantity: quantity,
     }
 }
 
-export const addFoodToCartList = (food) => {
+export const addProductToCartList = (product) => {
     return dispatch => {
-        dispatch(addFoodToCart(food))
+        dispatch(addProductToCart(product))
     }
 }
 
-export const removeFoodFromCartList = (food) => {
+export const removeProductFromCartList = (product) => {
     return dispatch => {
-        dispatch(removeFoodFromCart(food))
+        dispatch(removeProductFromCart(product))
     }
 }
 
-export const updatedCartElementsList = (food, quantity) => {
-    console.log('ACTIONS',food, quantity);
+export const updateProductInCartList = (product, quantity) => {
     return dispatch => {
-        dispatch(updateFoodFromCart(food, quantity))
+        dispatch(updateProductInCart(product, quantity))
     }
 }

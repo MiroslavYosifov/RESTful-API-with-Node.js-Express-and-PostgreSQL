@@ -28,11 +28,11 @@ function Sidebar(props) {
             <ul>
             {/* da opravq tagovete tuka ot p na drugo */}
                 {elementsStatus.isSelected 
-                  ? <li><p className={classes.SelectedListElement} onClick={() => {showCart()}}>Cart {props.cartProductsCount > 0 ? <div className={classes.CartNotification}><CartNotification /></div> : '' }</p></li> 
-                  : <li><p onClick={() => {showCart()}}>Cart {props.cartProductsCount > 0 ?  <div className={classes.CartNotification}><CartNotification /></div> : '' }</p></li>}
-                <li><p>TEST</p></li>
-                <li><p>TEST</p></li>
-                <li><p>TEST</p></li>
+                  ? <li><span className={classes.SelectedListElement} onClick={() => {showCart()}}>Cart {props.cartProductsCount > 0 ? <span className={classes.CartNotification}><CartNotification /></span> : '' }</span></li> 
+                  : <li><span onClick={() => {showCart()}}>Cart {props.cartProductsCount > 0 ?  <span className={classes.CartNotification}><CartNotification /></span> : '' }</span></li>}
+                <li><span>TEST</span></li>
+                <li><span>TEST</span></li>
+                <li><span>TEST</span></li>
             </ul>
         </nav>
     </div>
