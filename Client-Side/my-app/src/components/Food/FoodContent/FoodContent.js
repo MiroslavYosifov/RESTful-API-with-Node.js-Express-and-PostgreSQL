@@ -11,7 +11,6 @@ function FoodContent(props) {
     const [foodCartElement, setCartElement] = useState({ cartElement: null, value: '' });
     
     useEffect(() => {
-        console.log(props);
         if(JSON.stringify(foodCartElement.cartElement) !== JSON.stringify(props)) {
             setCartElement({
                 cartElement: {...props},
@@ -20,7 +19,7 @@ function FoodContent(props) {
         }
     });
 
-    function handleChange(event) {
+    const handleChange = (event) => {
         const updatedTotalPrice = Number(event.target.value) * foodCartElement.cartElement.price;
         setCartElement({
             totalPrice: updatedTotalPrice,

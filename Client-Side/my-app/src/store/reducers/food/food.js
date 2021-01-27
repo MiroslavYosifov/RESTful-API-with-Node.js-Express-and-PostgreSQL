@@ -5,7 +5,7 @@ import { updatedObj, updatedLimitedFood, addOneElement, updatedOneElement, delet
 const initialState = {
     foodData: null,
     error: null,
-    loading: false,
+    loading: true,
     isLimitedFood: false
 }
 

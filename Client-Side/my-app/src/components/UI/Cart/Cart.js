@@ -16,31 +16,32 @@ function Cart(props) {
 
   const [checkOrder, setOrder] = useState({ showModal: false });
 
-  function handleOrder () {
+  const handleOrder = () => {
     props.isLogged 
-      ? setOrder({ showModal: true })                
-      : setOrder({ showModal: false });
+      ? setOrder({ showModal: false })                
+      : setOrder({ showModal: true });
   }
 
-  function closeModal () {
-    setOrder({ showModal: false });
+  const closeModal = () => {      
+      setOrder({ showModal: false });
   }
-  console.log('TUKA SUM', props.productsData);
+
+
   const productsList = props.productsData ? props.productsData.map(food => (
-      <div key={food.id + "cart"} className={classes.CartFoodElement}>
-          <div className={ classes.CartFoodElementMedia }>
-            <img src={food.imgUrl}/>
-          </div>
-          <div className={ classes.CartFoodElementContent }>
-            <FoodContent parent="cart" {...food}/>
-            <button onClick={() => props.removeFromCartList(food)}>Remove product</button>
-          </div>
-      </div>  
-    )) : '';
-  
+    <div key={food.id + "cart"} className={classes.CartFoodElement}>
+        <div className={ classes.CartFoodElementMedia }>
+          <img src={food.imgUrl}/>
+        </div>
+        <div className={ classes.CartFoodElementContent }>
+          <FoodContent parent="cart" {...food}/>
+          <button onClick={() => props.removeFromCartList(food)}>Remove product</button>
+        </div>
+    </div>  
+  )) : '';
+
   return (
     <div className={classes.Cart}>
-        { !props.isLogged && checkOrder.showModal 
+        { !props.isLogged && checkOrder.showModal
           ? <Modal messagge="You must be login if you want to make a order!">
               <AuthLoginForm />
               <button onClick={() => closeModal()}>Close</button>

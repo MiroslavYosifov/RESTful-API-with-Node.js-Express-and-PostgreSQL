@@ -20,5 +20,7 @@ const mapStateToProps = state => {
         cartProductsCount: state.cart.productCount,
     };
   };
+
+  
   
 export default withRouter(connect(mapStateToProps)(CartNotification));

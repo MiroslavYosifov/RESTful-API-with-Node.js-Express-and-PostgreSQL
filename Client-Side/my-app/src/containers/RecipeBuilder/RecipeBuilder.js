@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Auxiliary from '../../hoc/Auxiliary';
-import styles from './RecipeBuilder.module.css'
+import classes from './RecipeBuilder.module.css'
 
 import Recipe from '../../components/Recipe/Recipe';
 
@@ -19,9 +19,10 @@ class RecipeBuilder extends Component {
 
     render() {
         return (
-            <Auxiliary>
+            <div className={classes.RecipeBuilder}>
                 <Recipe/>
-            </Auxiliary>
+            </div>
+               
         );
     }
 }

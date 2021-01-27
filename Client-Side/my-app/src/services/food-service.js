@@ -42,7 +42,7 @@ export const foodService = (url) => {
             return await response.json();
         },
         getLimitedFoods: async function (data) {
-            console.log(data);
+        
             const response = await fetch(`${url}/api/food`, {
                 method: 'POST',
                 headers: {

@@ -9,7 +9,6 @@ const toolbar = (props) => {
     //const { isLogged } = props;
     const { isLogged } = props;
     const username = localStorage.getItem('username');
-    console.log(props);
     return (
         <header className={classes.Toolbar}>
             {/* <div>MENU</div> */}

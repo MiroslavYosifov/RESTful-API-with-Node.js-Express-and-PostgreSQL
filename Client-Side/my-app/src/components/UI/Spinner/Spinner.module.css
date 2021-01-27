@@ -1,10 +1,11 @@
 .Spinner {
-    position: absolute;
+    position: fixed;
     background: white;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    width: 20em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0.8em 0.4em rgba(0, 0, 0, 0.61);
 }
 
 .Loader {

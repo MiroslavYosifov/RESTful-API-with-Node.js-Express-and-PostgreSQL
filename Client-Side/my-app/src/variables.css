@@ -1,3 +1,7 @@
 :root {
-    --background-main-layout: gray;
+    --main-layout-width: 100vw;
+    --main-layout-background-color: gray;
+
+    --containers-component-width: 100%;
+    --containers-component-background-color: rgb(226, 226, 226);
 }

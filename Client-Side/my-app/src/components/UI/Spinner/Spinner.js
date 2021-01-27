@@ -8,5 +8,4 @@ const spinner = (props) => (
    
 );
 
-
 export default spinner

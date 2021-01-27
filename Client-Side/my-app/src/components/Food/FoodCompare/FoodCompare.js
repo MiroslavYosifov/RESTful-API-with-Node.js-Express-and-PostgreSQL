@@ -6,7 +6,6 @@ import classes from './FoodCompare.module.css';
 import FoodContent from '../FoodContent/FoodContent';
 
 class FoodCompare extends Component {
-    
     render() {
         const { foodCompareData } = this.props;
         return (

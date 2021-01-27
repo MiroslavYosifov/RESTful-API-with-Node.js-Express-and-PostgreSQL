@@ -10,6 +10,7 @@ import WorkoutBuilder from './containers/WorkoutBuilder/WorkoutBuilder';
 import RecipeBuilder from './containers/RecipeBuilder/RecipeBuilder';
 import FoodBuilder from './containers/FoodBuilder/FoodBuilder';
 import AuthBuilder from './containers/AuthBuilder/AuthBuilder';
+import UserProfileBuilder from './containers/UserProfileBuilder/UserProfileBuilder';
 
 function App(props) {
 
@@ -43,10 +44,11 @@ function App(props) {
 
   if(authData.isLogged) {
     routes = (
-      <Switch>
+      <Switch>myprofile
         <Route path="/workout" component={WorkoutBuilder}></Route>
         <Route path="/recipe" component={RecipeBuilder}></Route>
         <Route path="/food"  render={() => <FoodBuilder isLogged={authData.isLogged} isAdmin={authData.isAdmin}/>}></Route>
+        <Route path="/myprofile"  render={() => <UserProfileBuilder isLogged={authData.isLogged} isAdmin={authData.isAdmin}/>}></Route>
         <Route render={() => <h1>Not found</h1>} ></Route>
       </Switch>
     );

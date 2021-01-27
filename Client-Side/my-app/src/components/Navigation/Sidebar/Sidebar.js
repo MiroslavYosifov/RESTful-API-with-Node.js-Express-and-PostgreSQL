@@ -9,7 +9,6 @@ import CartNotification from '../../UI/Cart/CartNotification/CartNotification';
 
 function Sidebar(props) {
 
-  //const isLogged = localStorage.getItem('isLogged');
   const [elementsStatus, setShowedElements] = useState({ showCart: false, isSelected: false });
   
   function showCart () {
@@ -26,7 +25,6 @@ function Sidebar(props) {
         {elementsStatus.showCart ? <Cart isLogged={props.isLogged}/> : ''}
         <nav>
             <ul>
-            {/* da opravq tagovete tuka ot p na drugo */}
                 {elementsStatus.isSelected 
                   ? <li><span className={classes.SelectedListElement} onClick={() => {showCart()}}>Cart {props.cartProductsCount > 0 ? <span className={classes.CartNotification}><CartNotification /></span> : '' }</span></li> 
                   : <li><span onClick={() => {showCart()}}>Cart {props.cartProductsCount > 0 ?  <span className={classes.CartNotification}><CartNotification /></span> : '' }</span></li>}

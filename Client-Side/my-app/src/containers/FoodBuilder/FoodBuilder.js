@@ -7,10 +7,10 @@ import { withRouter } from 'react-router-dom';
 import FoodList from '../../components/Food/FoodList';
 import FoodAddForm from '../../components/Food/FoodForms/FoodAddForm/FoodAddForm'
 import FoodCompare from '../../components/Food/FoodCompare/FoodCompare';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 function FoodBuilder(props) {
     const { isLogged, isAdmin } = props;
-
     return (
         <div className={classes.FoodBuilder}>
             { isLogged && isAdmin ? <FoodAddForm/> : '' }
