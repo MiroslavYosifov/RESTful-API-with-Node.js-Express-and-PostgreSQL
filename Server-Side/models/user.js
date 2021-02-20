@@ -1,48 +1,38 @@
-'use strict';
-const { Model } = require('sequelize');
-let bcrypt = require('bcrypt');
+import mongoose from 'mongoose';
+import bcrypt  from 'bcrypt';
+const saltRounds = 10;
 
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-  };
-  
-  User.init({
-    username: DataTypes.STRING,
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      // Storing passwords in plaintext in the database is terrible.
-      // Hashing the value with an appropriate cryptographic hash function is better.
-    },
-    roles: DataTypes.ARRAY(DataTypes.STRING),
-    comments: DataTypes.ARRAY(DataTypes.STRING)
-  },{
-    sequelize,
-    modelName: 'User',
-  });
+const Schema = mongoose.Schema;
+const Model = mongoose.model;
+const { String, Number, Boolean, ObjectId } = Schema.Types;
 
-  User.beforeCreate((user, options) => {
-    return bcrypt.hash(user.password, bcrypt.genSaltSync(8))
-        .then(hash => {
-            user.password = hash;
-        })
-        .catch(err => { 
-            throw new Error(); 
-        });
-  });
+const User = new Schema({
+    username: { type: String, required: true },
+    password: { type: String, required: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, require: true },
+    email: { type: String, unique: true, required: true },
+    roles: []
+});
 
-  User.prototype.validPassword = async function(password) {
-    //console.log('Is it working', bcrypt.compare(password, this.password));
-    return await bcrypt.compare(password, this.password);
-  }
-
-  return User;
+User.methods = {
+    matchPassword: function (password) {
+        return bcrypt.compare(password, this.password);
+    }
 };
+
+User.pre('save', function (next) {
+    if (this.isModified('password')) {
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+            bcrypt.hash(this.password, salt, (err, hash) => {
+                if (err) { next(err); return }
+                this.password = hash;
+                next();
+            });
+        });
+        return;
+    }
+    next();
+});
+
+export default new Model('User', User);

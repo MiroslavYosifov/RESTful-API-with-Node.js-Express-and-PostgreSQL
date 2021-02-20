@@ -1,10 +1,12 @@
-const router = require('express').Router();
-const foodController = require('../controllers').food;
+import { Router } from 'express';
+import { foodControllers } from '../controllers/index.js';
 
-router.get('/', foodController.list);
-router.post('/', foodController.pagination); //should be get method
-router.post('/', foodController.add);
-router.put('/', foodController.updateOne);
-router.delete('/', foodController.deleteOne);
+const router = Router();
 
-module.exports = router;
+router.get('/', foodControllers.get.list);
+router.post('/', foodControllers.get.pagination); //should be get method
+router.post('/', foodControllers.post.add);
+router.put('/', foodControllers.put.updateOne);
+router.delete('/', foodControllers.delete.deleteOne);
+
+export default router;

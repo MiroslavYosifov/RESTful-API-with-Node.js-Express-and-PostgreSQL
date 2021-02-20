@@ -1,23 +1,11 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class TokenBlackList extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  };
-  TokenBlackList.init({
-    token: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'TokenBlackList',
-  });
-  return TokenBlackList;
-};
+import mongoose from 'mongoose';
+
+const Schema = mongoose.Schema;
+const Model = mongoose.model;
+const { String, Number, Boolean, ObjectId } = Schema.Types;
+
+const TokenBlacklist = new Schema({
+    token: String
+});
+
+export default new Model('TokenBlacklist', TokenBlacklist);

@@ -1,29 +1,20 @@
-const jwt = require('./jwt');
-const config = require('../config/config');
-const TokenBlackList = require('../models').TokenBlackList;
-const User = require('../models').User;
+import jwt from './jwt.js';
+import config from '../config/config.js';
+import {User, TokenBlacklist} from '../models/index.js';
 
-module.exports = (redirectAuthenticated = true) => {
+export default (redirectAuthenticated = true) => {
 
     return function (req, res, next) {
-        const token = req.cookies[config.development.authCookieName] || '';
-
+        const token = req.cookies[config.authCookieName] || '';
+        console.log('i am here');
         Promise.all([
             jwt.verifyToken(token),
-            TokenBlackList.findOne({
-                where: {
-                  token: token,
-                }
-            })
+            TokenBlacklist.findOne({ token })
         ])
             .then(([data, blacklistToken]) => {
                 if (blacklistToken) { return Promise.reject(new Error('blacklisted token')) }
 
-                User.find({
-                        where: {
-                            id: data.id
-                        }
-                    })
+                User.findById(data.id)
                     .then((user) => {
                         req.user = user;
                         next();

@@ -1,7 +1,9 @@
-const router = require('express').Router();
-const workoutController = require('../controllers').workout;
+import { Router } from 'express';
+import { workoutControllers } from '../controllers/index.js';
 
-router.get('/', workoutController.list);
-router.post('/', workoutController.add);
+const router = Router();
 
-module.exports = router;
+// router.get('/', workoutController.list);
+// router.post('/', workoutController.add);
+
+export default router;

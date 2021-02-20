@@ -1,13 +1,9 @@
-const userController = require('./user');
-const workoutController = require('./workout');
-const foodController = require('./food');
-const recipeController = require('./recipe');
-const testController = require('./test');
+import userController from './user.js';
+import workoutController from'./workout.js';
+import foodController from'./food.js';
 
-module.exports = {
+export default {
     userController,
     workoutController,
     foodController,
-    recipeController,
-    testController
 }

@@ -1,9 +1,7 @@
-const routes = require('../routes/index');
+import routes from '../routes/index.js';
 
-module.exports = (app) => {
+export default (app) => {
     app.use('/api/user', routes.userController);
     app.use('/api/workout', routes.workoutController);
     app.use('/api/food', routes.foodController);
-    app.use('/api/food', routes.recipeController);
-    app.use('/', routes.testController);
 }

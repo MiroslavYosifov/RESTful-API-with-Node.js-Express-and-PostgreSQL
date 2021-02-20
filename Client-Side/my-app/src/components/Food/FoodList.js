@@ -10,7 +10,7 @@ import FoodCard from './FoodCard/FoodCard';
 import Spinner from '../UI/Spinner/Spinner';
 import PageHeader from '../UI/PageHeader/PageHeader';
 
-function FoodList (props) {
+const FoodList = React.memo(props => {
 
     const [foods, setFoodData] = useState({ data: [] });
     const [page, setPage] = useState({ count: 0 });
@@ -31,31 +31,30 @@ function FoodList (props) {
             setPage({ count: pageCount + page });
         }
     }
-        console.log(foods.data);
-        const foodCards = foods.data ? foods.data.map(resFood =>  (
-            <FoodCard 
-                key={resFood.id} 
-                isLogged={isLogged} 
-                isAdmin={isAdmin} 
-                food={resFood} 
-                history={props.history} />
-        )) : '';
 
-        return ( 
-            <div className={classes.FoodList}>
-                <PageHeader pageName="Food Products"/>
-                <main className={classes.FoodListBody}>
-                    {isLoading ? <Spinner/> : foodCards}
-                </main>
-                <div className={classes.PageButton}>
-                    <span onClick={() => handleChangePage(-1, page.count)}>previus</span>
-                    <p>{page.count}</p>   
-                    <span onClick={() => handleChangePage(1, page.count)}>next</span>
-                </div>
+    const foodCards = foods.data ? foods.data.map(resFood =>  (
+        <FoodCard 
+            key={resFood.id} 
+            isLogged={isLogged} 
+            isAdmin={isAdmin} 
+            food={resFood} 
+            history={props.history} />
+    )) : '';
+
+    return ( 
+        <div className={classes.FoodList}>
+            <PageHeader pageName="Food Products"/>
+            <main className={classes.FoodListBody}>
+                {isLoading ? <Spinner/> : foodCards}
+            </main>
+            <div className={classes.PageButton}>
+                <span onClick={() => handleChangePage(-1, page.count)}>previus</span>
+                <p>{page.count}</p>   
+                <span onClick={() => handleChangePage(1, page.count)}>next</span>
             </div>
-            
-        );
-}
+        </div>
+    );
+});
 
 const mapStateToProps = state => {
     return {

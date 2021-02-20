@@ -1,24 +1,25 @@
-const dotenv = require('dotenv');
-dotenv.config();
-const express = require('express');
-const router = require('./config/router');
-const settings = require('./config/settings')
-const db = require('./models/index');
+// const dotenv = require('dotenv');
+// dotenv.config();
 
-const port = process.env.PORT || 3333;
+import config from './config/config.js';
+import dbConnection from './config/database.js';
+import express from  'express';
+import setting from './config/settings.js';
+import routes from './config/router.js';
 
 const app = express();
-settings(app);
-router(app);
 
-db.sequelize.sync().then(() => {
-    console.log('DATABASE IS READY!!!');
-    // inside our db sync callback, we start the server
-    // this is our way of making sure the server is not listening 
-    // to requests if we have not made a db connection
-    app.listen(port, () => {
-      console.log(`App listening on PORT ${port}`);
+dbConnection().then(() => {
+
+    setting(app);
+    routes(app);
+
+    app.use(function (err, req, res, next) {
+        console.error(err);
+        res.status(500).send(err.message);
+        console.log('*'.repeat(90))
     });
-}).catch(err => {
-    console.log('IMA GRESHKA', err);
-});
+
+    app.listen(config.port, console.log(`Listening on port ${config.port}!`))
+
+}).catch(console.error);
