@@ -1,19 +1,29 @@
-import mongoose from 'mongoose';
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Food extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  };
 
-const Schema = mongoose.Schema;
-const Model = mongoose.model;
-const { String, Number } = Schema.Types;
-
-const Food = new Schema({
-    name: { type: String },
-    kind: { type: String },
-    protein: { type: Number },
-    fat:  { type: Number },
-    carbohydrate:  { type: Number },
-    calories:  { type: Number },
-    imgUrl: { type: String },
-    price: { type: Number },
-    availability: { type: Number }
-});
-
-export default new Model('Food', Food);
+  Food.init({
+    name: DataTypes.STRING,
+    kind: DataTypes.STRING,
+    protein: DataTypes.INTEGER,
+    fat: DataTypes.INTEGER,
+    carbohydrate: DataTypes.INTEGER,
+    imgUrl: DataTypes.STRING,
+  }, {
+    sequelize,
+    modelName: 'Food',
+  });
+  return Food;
+};

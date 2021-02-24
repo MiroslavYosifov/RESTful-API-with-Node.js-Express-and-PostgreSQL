@@ -66,7 +66,7 @@ const FormikAuthRegistrationForm = withFormik({
       const { onRegistration } = props;
       const userData = { ...values };
       // console.log(userData);
-      onRegistration(userData).then(() => setSubmitting(false));
+      onRegistration(userData, props).then(() => setSubmitting(false));
     },
 })(AuthRegistrationForm);
 
@@ -79,7 +79,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      onRegistration: (userData) => dispatch(authRegistration(userData)),
+      onRegistration: (userData, props) => dispatch(authRegistration(userData, props)),
     }
   )
 };

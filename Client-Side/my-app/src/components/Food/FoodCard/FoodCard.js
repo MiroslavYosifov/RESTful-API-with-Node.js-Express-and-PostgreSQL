@@ -57,7 +57,7 @@ export class FoodCard extends Component {
         const { isHidden, isEditFormHidden } = this.state;
         const { imgUrl, name, price, availability } = this.state.food;
         const { isLogged, isAdmin } = this.props;
-        
+        console.log(this.state.food);
         return (
             <div className={classes.FoodCard}>
                 <div className={classes.FoodCardMediaContainer}>

@@ -4,9 +4,6 @@ import { updatedObj } from '../../utility';
 
 const initialState = {
     token: null,
-    userId: null,
-    username: null,
-    isAdmin: false,
     error: null,
     loading: false,
 }
@@ -22,9 +19,6 @@ const  authStart = ( state, action) => {
 const authSuccess = (state, action) => {
     return updatedObj(state, { 
         token: action.token,
-        userId: action.userId,
-        username: action.username,
-        isAdmin: action.isAdmin,
         error: null, 
         loading: false 
     });

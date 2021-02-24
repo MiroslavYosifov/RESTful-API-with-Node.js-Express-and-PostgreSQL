@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-const secret = 'shhhhh';
+const jwt = require('jsonwebtoken');
+const secret = 'secret';
 
 function createToken(data) {
     return jwt.sign(data, secret, { expiresIn: '5h' });
@@ -14,7 +14,7 @@ function verifyToken(token) {
     });
 }
 
-export default {
+module.exports = {
     createToken,
     verifyToken
 }

@@ -43,7 +43,7 @@ export const foodService = (url) => {
         },
         getLimitedFoods: async function (data) {
         
-            const response = await fetch(`${url}/api/food`, {
+            const response = await fetch(`${url}/api/food/page`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'

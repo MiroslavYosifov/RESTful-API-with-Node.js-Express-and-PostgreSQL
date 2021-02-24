@@ -6,7 +6,7 @@ import { workoutService } from './workout-service';
 // const localhostUrl = "http://localhost:3333"
 //const productionUrl = "https://workout-organizer.herokuapp.com";
 
-const url = "http://localhost:3333"
+const url = "https://workout-organizer.herokuapp.com";
 
 export const services = {
     foodService: foodService(url),

@@ -1,20 +1,34 @@
-const env = process.env.NODE_ENV || 'development';
+require('dotenv').config();
+const { DB_HOSTNAME, DB_USERNAME, DB_PASSWORD } = process.env;
 
-// const url = "mongodb+srv://miro:0EYtbLvbictfbVek@myfirstcluster.7bryi.mongodb.net/myFirstData?retryWrites=true&w=majority"
+let env = process.env.NODE_ENV || 'production';
 
-const config = {
+const creds = {
     development: {
-        port: process.env.PORT || 3333,
-        dbURL: 'mongodb+srv://miroslav:09090909@cluster0.6yh8u.mongodb.net/organizer-workouts?retryWrites=true&w=majority',
-        authCookieName: 'x-auth-token',
-        domain: 'http://localhost:3000'
+      username: DB_USERNAME,
+      password: DB_PASSWORD,
+      database: 'sequelize_database_dev',
+      host: DB_HOSTNAME,
+      dialect: 'postgresql',
+      authCookieName: 'x-auth-token'
     },
     production: {
-        port: process.env.PORT || 3333,
-        dbURL: 'mongodb+srv://miroslav:09090909@cluster0.6yh8u.mongodb.net/organizer-workouts?retryWrites=true&w=majority',
-        authCookieName: 'x-auth-token',
-        domain: 'https://murmuring-tor-82797.herokuapp.com'
+      username: 'zttmuqycteihes',
+      password: '68e599a3a1440aad184995b848ff62be7e3e458857df9a608cff2bc4347b1686',
+      database: 'd6fvjbeae3ai77',
+      host: 'ec2-34-254-69-72.eu-west-1.compute.amazonaws.com',
+      dialect: 'postgresql',
+      authCookieName: 'x-auth-token'
+    },
+    test: {
+      username: DB_USERNAME,
+      password: DB_PASSWORD,
+      database: 'sequelize_database_test',
+      host: DB_HOSTNAME,
+      dialect: 'postgresql',
+      authCookieName: 'x-auth-token'
     },
 };
 
-export default config[env];
+module.exports = creds;
+  

@@ -1,13 +1,13 @@
-import express from "express";
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const secret = 'secret';
 
-export default (app) => {
-    app.use(cors({
-        origin: 'http://localhost:3000',
-        credentials: true
-    }));
+module.exports = (app) => {
+    // app.use(cors({
+    //     origin: 'http://localhost:3000',
+    //     credentials: true
+    // }));
     app.all('*', function(req, res,next) {
       /**
        * Response settings

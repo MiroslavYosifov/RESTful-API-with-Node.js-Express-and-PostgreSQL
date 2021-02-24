@@ -1,5 +1,6 @@
-    import * as actionTypes from '../actionsTypes';
-    import { services } from '../../../services/index';
+import * as actionTypes from '../actionsTypes';
+import { services } from '../../../services/index';
+import { Redirect } from 'react-router';
 
     export const authStart = () => {
         return {
@@ -32,7 +33,8 @@
 
     export const authLogoutChecking = () => {
         return dispatch => {
-            services.userServices.logout()
+            const token = localStorage.getItem('token').split('=')[1];
+            services.userServices.logout({ token: token })
                 .then(res => {
                     localStorage.removeItem('token');
                     localStorage.removeItem('userId');
@@ -49,17 +51,17 @@
     }
 
     export const authLogin = (authData) => {
-        console.log(authData);
         return dispatch => {
             dispatch(authStart());
             services.userServices.login(authData)
                 .then(res => {
-                    const isAdmin =  res.user.roles !== null ? res.user.roles.includes('admin') : "";
+                    console.log(res);
+                    const isAdmin =  res.roles !== null ? res.roles.includes('admin') : "";
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('userId', res.user.id);
                     localStorage.setItem('username', res.user.username);
                     localStorage.setItem('isAdmin', isAdmin);
-                   
+                    console.log(res.user.id);
                     dispatch(authSuccess(res.user.id, res.token, res.user.username, isAdmin));
                 }).catch(err => {
                     console.log(err);
@@ -68,22 +70,16 @@
         }
     }
 
-    export const authRegistration = (data) => {
-        console.log('TIKA IMA LI DATA', data);
+    export const authRegistration = (data, props) => {
         return dispatch => {
             dispatch(authStart());
             services.userServices.registration(data)
                 .then(res => {
-                    localStorage.setItem('token', res.token);
-                    localStorage.setItem('userId', res.user.id);
-                    localStorage.setItem('username', res.username);
-                    dispatch(authSuccess(res.user.id, res.token, res.username));
+                    window.location.hash = "food";
                 }).catch(err => {
-                    console.log(err => {
-                        console.log(err);
-                        dispatch(authFail())
-                    })
-                })
+                    console.log(err);
+                    dispatch(authFail());
+                });
         }
     }
 

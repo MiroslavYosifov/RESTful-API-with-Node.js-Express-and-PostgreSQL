@@ -1,7 +1,7 @@
-import jsonwebtoken from './jwt.js';
-import auth from './auth.js';
+const jwt = require('./jwt');
+const auth = require('./auth');
 
-export default {
-    jsonwebtoken,
+module.exports = {
+    jwt,
     auth,
 };

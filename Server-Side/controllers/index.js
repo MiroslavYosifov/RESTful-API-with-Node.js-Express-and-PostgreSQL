@@ -1,9 +1,13 @@
-import userControllers from './user.js';
-import workoutControllers from './workout.js';
-import foodControllers from './food.js';
+const user = require('./user');
+const workout = require('./workout');
+const food = require('./food');
+const recipe = require('./recipe');
+const test = require('./test');
 
-export {
-    userControllers,
-    workoutControllers,
-    foodControllers
+module.exports = {
+    user,
+    workout,
+    food,
+    recipe,
+    test
 };

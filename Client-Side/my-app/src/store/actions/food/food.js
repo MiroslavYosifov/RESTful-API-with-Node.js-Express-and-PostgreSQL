@@ -75,6 +75,7 @@ export const getLimitedFoods = (page) => {
 };
 
 export const addFood = (foodData) => {
+    console.log(foodData);
     return dispatch => {
         dispatch(foodStart())
         services.foodService.addFood(foodData)
@@ -91,24 +92,19 @@ export const editFoods = (foodData, props) => {
     return dispatch => {
         services.foodService.editFoods(foodData)
             .then(res => {
-                console.log('TUKA LI SYM',res);
                 dispatch(foodDataUpdate(res))
             }).catch(err => {
-                console.log('FOD TUKA ERORRA',err);
                 dispatch(foodFail(err))
             })
     }
 };
 
 export const deleteFood = (foodData) => {
-    console.log('DELETVAM LI ',foodData)
     return dispatch => {
         services.foodService.deleteFood(foodData)
             .then(res => {
-                console.log('TUKA LI SYM',res);
                 dispatch(foodDataDeleteElement(res))
             }).catch(err => {
-                console.log('FOD TUKA ERORRA',err);
                 dispatch(foodFail(err))
             })
     }

@@ -33,7 +33,7 @@ export const addOneElement = (oldObj, updatedValues) => {
 export const updatedOneElement = (oldObj, updatedValues) => {
 
     const updatedFooData = oldObj.foodData.map(foodEl => {
-        if(foodEl.id === updatedValues.foodData.id) {
+        if(foodEl._id === updatedValues.foodData._id) {
             foodEl = updatedValues.foodData;
         }
         return foodEl;
@@ -49,7 +49,7 @@ export const updatedOneElement = (oldObj, updatedValues) => {
 
 export const deleteOneElement = (oldObj, updatedValues) => {
     const updatedFooData = oldObj.foodData.filter(foodEl => {
-        if(foodEl.id !== updatedValues.foodData.id) {
+        if(foodEl._id !== updatedValues.foodData._id) {
             return foodEl;
         }
     });
@@ -68,7 +68,7 @@ export const addOneElementToCompareState = (oldObj, updatedValues) => {
 
     const updatedState = JSON.parse(JSON.stringify(oldObj));
 
-    const isExist = updatedState.foodCompareData.some(food => food.id === updatedValues.foodCompareData.id);
+    const isExist = updatedState.foodCompareData.some(food => food._id === updatedValues.foodCompareData._id);
 
     if(!isExist) {
         updatedState.foodCompareData.push(updatedValues.foodCompareData);
@@ -83,10 +83,10 @@ export const addOneElementToCompareState = (oldObj, updatedValues) => {
 // CART UTILITITES
 
 export const addOneElementToCartState = (oldObj, updatedValues) => {
-
+    debugger;
     const updatedState = JSON.parse(JSON.stringify(oldObj));
 
-    const isExist = updatedState.productsCartData.some(food => food.id === updatedValues.productsCartData.id);
+    const isExist = updatedState.productsCartData.some(food => food._id === updatedValues.productsCartData._id);
 
     if(!isExist) {
         updatedValues.productsCartData.totalPrice = 0;
@@ -96,7 +96,7 @@ export const addOneElementToCartState = (oldObj, updatedValues) => {
 
     updatedState.productCount = updatedState.productsCartData.length;
     updatedState.totalPrice -= 0;
-
+    debugger;
     return {
         ...oldObj,
         ...updatedState
@@ -109,7 +109,7 @@ export const removeOneElementToCartState = (oldObj, updatedValues) => {
     const updatedState = JSON.parse(JSON.stringify(oldObj));
 
     const updatedFooData = oldObj.productsCartData.filter(foodEl => {
-        if(foodEl.id !== updatedValues.productsCartData.id) {
+        if(foodEl._id !== updatedValues.productsCartData._id) {
             return foodEl;
         } else {
             priceToDecrease = foodEl.totalPrice;
@@ -131,7 +131,7 @@ export const updateOneElementToCartState = (oldObj, updatedValues) => {
     const updatedState = JSON.parse(JSON.stringify(oldObj));
     
     updatedState.productsCartData = oldObj.productsCartData.filter(product => {
-        if(product.id === updatedValues.productsCartData.id) {
+        if(product._id === updatedValues.productsCartData._id) {
             updatedState.totalPrice -= product.totalPrice;
             product.quantity = updatedValues.quantity;
             product.totalPrice = Number(updatedValues.quantity) * Number(product.price);

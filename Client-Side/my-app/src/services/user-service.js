@@ -9,8 +9,7 @@ export const userServices = (url) => {
                 credentials: 'include',
                 body: JSON.stringify(data),
             });
-            
-            return await response.json();
+            return await response.text();
         },
         login: async function (data) {
             const response = await fetch(`${url}/api/user/login`, {
@@ -21,16 +20,17 @@ export const userServices = (url) => {
                 credentials: 'include',
                 body: JSON.stringify(data),
             });
-            
+    
             return await response.json();
         },
-        logout: async function () {
+        logout: async function (token) {
             const response = await fetch(`${url}/api/user/logout`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
                 },
-                credentials: 'include'
+                credentials: 'include',
+                body: JSON.stringify(token),
             });
             return await response.json();
         }
