@@ -1,5 +1,6 @@
 .FoodBuilder {
     max-width: var(--containers-component-width);
+    min-height: 100vh;
     background: var(--containers-component-background-color);
     padding: 2em 4em 0 4em;
     text-align: center;

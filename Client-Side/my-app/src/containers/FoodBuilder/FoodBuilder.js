@@ -13,7 +13,7 @@ function FoodBuilder(props) {
     const { isLogged, isAdmin } = props;
     return (
         <div className={classes.FoodBuilder}>
-            { isLogged && <FoodAddForm/> }
+            { isLogged && <FoodAddForm /> }
             {props.foodCompareData.length > 0 ? <FoodCompare foodCompareData={props.foodCompareData}/> : ''}
             <FoodList isLogged={isLogged} isAdmin={isAdmin}/>
         </div>

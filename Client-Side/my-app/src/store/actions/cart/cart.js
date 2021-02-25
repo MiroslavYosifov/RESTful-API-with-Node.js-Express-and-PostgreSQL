@@ -23,6 +23,11 @@ export const updateProductInCart = (product, quantity) => {
     }
 }
 
+// ********************************************* //
+// ********************************************* //
+// ********************************************* //
+// ********************************************* //
+
 export const addProductToCartList = (product) => {
     return dispatch => {
         dispatch(addProductToCart(product))

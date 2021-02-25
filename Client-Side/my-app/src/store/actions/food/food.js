@@ -14,17 +14,29 @@ export const foodSuccess = (foodData) => {
     }
 }
 
-export const getLimitedFoodSuccess = (foodData) => {
-    return {
-        type: actionTypes.FOOD_LIMITED_SUCCESS,
-        foodData: foodData
-    }
-}
-
 export const foodFail = (error) => {
     return {
         type: actionTypes.FOOD_FAIL,
         error: error
+    }
+}
+
+export const getFoods = () => {
+    return dispatch => {
+        dispatch(foodStart())
+        services.foodService.getFoods()
+            .then(res => {
+                dispatch(foodSuccess(res))
+            }).catch(err => {
+                dispatch(foodFail(err))
+            })
+    }
+};
+
+export const getLimitedFoodSuccess = (foodData) => {
+    return {
+        type: actionTypes.FOOD_LIMITED_SUCCESS,
+        foodData: foodData
     }
 }
 
@@ -49,17 +61,6 @@ export const foodDataDeleteElement = (food) => {
     }
 }
 
-export const getFoods = () => {
-    return dispatch => {
-        dispatch(foodStart())
-        services.foodService.getFoods()
-            .then(res => {
-                dispatch(foodSuccess(res))
-            }).catch(err => {
-                dispatch(foodFail(err))
-            })
-    }
-};
 
 export const getLimitedFoods = (page) => {
     let data = { page: page };

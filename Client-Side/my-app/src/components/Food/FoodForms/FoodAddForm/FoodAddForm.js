@@ -8,7 +8,7 @@ import { addFood } from '../../../../store/actions/index';
 import * as yup from 'yup';
 import { withFormik, Form, Field } from 'formik';
 
-const FoodAddForm  = ({ values, errors, touched, isSubmitting, initialValues }) => {
+const FoodAddForm  = ({ errors, touched }) => {
 
   return (
     <Form className={classes.FoodAddForm}>
@@ -94,6 +94,7 @@ const FormikFoodAddForm = withFormik({
     imgUrl: yup.string().min(1, 'must be 1 symbols').required(),
   }),
   handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
+    console.log(props);
     const { onAddFood } = props;
     const foodData = { ...values }
     foodData.availability = {[foodData.pickedTypeOfAvailability]: foodData.availability};

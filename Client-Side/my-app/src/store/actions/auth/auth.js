@@ -1,6 +1,6 @@
 import * as actionTypes from '../actionsTypes';
 import { services } from '../../../services/index';
-import { Redirect } from 'react-router';
+import { setLocacalStorage } from '../../helpers/setLocalStorage';
 
     export const authStart = () => {
         return {
@@ -8,13 +8,12 @@ import { Redirect } from 'react-router';
         }
     }
 
-    export const authSuccess = (userId, token, username, isAdmin) => {
+    export const authSuccess = (userId, token, username) => {
         return {
             type: actionTypes.AUTH_SUCCESS,
             userId: userId,
             token: token,
             username: username,
-            isAdmin: isAdmin
         }
     }
 
@@ -31,16 +30,14 @@ import { Redirect } from 'react-router';
         }
     }
 
-    export const authLogoutChecking = () => {
+    export const authLogoutChecking = (history) => {
         return dispatch => {
             const token = localStorage.getItem('token').split('=')[1];
             services.userServices.logout({ token: token })
-                .then(res => {
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('userId');
-                    localStorage.removeItem('username');
-                    localStorage.removeItem('isAdmin');
+                .then(res => {        
+                    setLocacalStorage.removeAuthData(res);
                     dispatch(authLogout());
+                    history.replace('/food');
                 }).catch(err => {
                     console.log(err => {
                         console.log(err);
@@ -50,19 +47,14 @@ import { Redirect } from 'react-router';
         }
     }
 
-    export const authLogin = (authData) => {
+    export const authLogin = (authData, history) => {
         return dispatch => {
             dispatch(authStart());
             services.userServices.login(authData)
                 .then(res => {
-                    console.log(res);
-                    const isAdmin =  res.roles !== null ? res.roles.includes('admin') : "";
-                    localStorage.setItem('token', res.token);
-                    localStorage.setItem('userId', res.user.id);
-                    localStorage.setItem('username', res.user.username);
-                    localStorage.setItem('isAdmin', isAdmin);
-                    console.log(res.user.id);
-                    dispatch(authSuccess(res.user.id, res.token, res.user.username, isAdmin));
+                    setLocacalStorage.addAuthData(res);
+                    dispatch(authSuccess(res.user.id, res.token, res.user.username));
+                    history.replace('/food');
                 }).catch(err => {
                     console.log(err);
                     dispatch(authFail())
@@ -70,12 +62,14 @@ import { Redirect } from 'react-router';
         }
     }
 
-    export const authRegistration = (data, props) => {
+    export const authRegistration = (data, history) => {
         return dispatch => {
             dispatch(authStart());
             services.userServices.registration(data)
                 .then(res => {
-                    window.location.hash = "food";
+                    setLocacalStorage.addAuthData(res);
+                    dispatch(authSuccess(res.user.id, res.token, res.user.username));
+                    history.replace('/food');
                 }).catch(err => {
                     console.log(err);
                     dispatch(authFail());

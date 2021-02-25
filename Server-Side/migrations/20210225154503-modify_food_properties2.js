@@ -1,3 +1,4 @@
+'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     /**
@@ -7,22 +8,20 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     Promise.all([
-      await queryInterface.addColumn(
-        "Tests",
-        "kind",
-        {
-          type: Sequelize.STRING
-        }
-      ),
-      await queryInterface.addColumn(
-        "Tests",
-        "macros",
-        {
-          type: Sequelize.ARRAY(Sequelize.JSON)
-        }
-      ),
-    ]);
-    
+    await queryInterface.addColumn(
+      "Food",
+      "price",
+      {
+        type: Sequelize.DECIMAL
+      }
+    ),
+    await queryInterface.addColumn(
+      "Food",
+      "availability",
+      {
+        type: Sequelize.JSON(Sequelize.DECIMAL)
+      }
+    )]);
   },
 
   down: async (queryInterface, Sequelize) => {

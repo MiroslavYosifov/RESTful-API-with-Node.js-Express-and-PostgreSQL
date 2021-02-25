@@ -9,7 +9,7 @@ export const userServices = (url) => {
                 credentials: 'include',
                 body: JSON.stringify(data),
             });
-            return await response.text();
+            return await response.json();
         },
         login: async function (data) {
             const response = await fetch(`${url}/api/user/login`, {

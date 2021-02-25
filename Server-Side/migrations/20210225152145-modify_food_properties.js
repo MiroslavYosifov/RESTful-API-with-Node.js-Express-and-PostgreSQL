@@ -9,61 +9,55 @@ module.exports = {
      */
     Promise.all([
     await queryInterface.addColumn(
-      "FoodTwo",
+      "Food",
       "kind",
       {
         type: Sequelize.STRING
       }
     ),
     await queryInterface.addColumn(
-      "FoodTwo",
+      "Food",
       "protein",
       {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       }
     ),
     await queryInterface.addColumn(
-      "FoodTwo",
+      "Food",
       "fat",
       {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       }
     ),
     await queryInterface.addColumn(
-      "FoodTwo",
+      "Food",
       "carbohydrate",
       {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       }
     ),
     await queryInterface.addColumn(
-      "FoodTwo",
-      "calories",
-      {
-        type: Sequelize.INTEGER
-      }
-    ),
-    await queryInterface.addColumn(
-      "FoodTwo",
+      "Food",
       "imgUrl",
       {
         type: Sequelize.STRING
       }
     ),
-      await queryInterface.addColumn(
-        "FoodTwo",
-        "price",
-        {
-          type: Sequelize.INTEGER
-        }
-      ),
-     
-     
-    ]);
+    await queryInterface.addColumn(
+      "Food",
+      "calories",
+      {
+        type: Sequelize.DECIMAL
+      }
+    )]);
   },
 
   down: async (queryInterface, Sequelize) => {
- 
-     await queryInterface.dropTable('FoodTwo');
+    /**
+     * Add reverting commands here.
+     *
+     * Example:
+     * await queryInterface.dropTable('users');
+     */
   }
 };

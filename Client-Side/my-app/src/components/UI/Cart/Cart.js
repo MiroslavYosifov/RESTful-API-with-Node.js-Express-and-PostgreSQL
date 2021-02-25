@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { removeProductFromCartList } from '../../../store/actions/index';
 
 import FoodContent from '../../Food/FoodContent/FoodContent';
+import CartProductElement from './CartProductElement/CartProductElement';
 import Modal from '../Modal/Modal';
 import AuthLoginForm from '../../Auth/Forms/AuthLoginForm/AuthLoginForm'
 
@@ -33,7 +34,7 @@ function Cart(props) {
           <img src={food.imgUrl}/>
         </div>
         <div className={ classes.CartFoodElementContent }>
-          <FoodContent parent="cart" {...food}/>
+          <CartProductElement {...food}/>
           <button onClick={() => props.removeFromCartList(food)}>Remove product</button>
         </div>
     </div>  

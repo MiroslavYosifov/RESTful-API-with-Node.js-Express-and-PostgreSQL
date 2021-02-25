@@ -20,7 +20,7 @@ class Auth extends Component {
         <div className={classes.Auth}>
             <div className={classes.AuthContent}>
                 {isHidden ? <h3>Log in to your account</h3> : <h3>Create your account</h3>}
-                {  isHidden  ? <AuthLoginForm/> : <AuthRegistrationForm/> }
+                {  isHidden  ? <AuthLoginForm history={this.props.history}/> : <AuthRegistrationForm history={this.props.history}/> }
                 <div>
                     {  isHidden  ? <p>Don't have an account? <a onClick={this.showRegistrationForm}>Sign Up</a></p> 
                                  : <p>Have an account? <a onClick={this.showRegistrationForm}>Sign in</a></p> }

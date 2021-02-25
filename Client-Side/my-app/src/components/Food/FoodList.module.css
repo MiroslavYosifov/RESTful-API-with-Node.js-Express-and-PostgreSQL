@@ -1,10 +1,11 @@
 .FoodList {
-
+    padding: 0 0 2em 0;
 }
 
 .FoodListBody {
     display: flex;
     flex-wrap: wrap;
+    min-height: 75vh;
 }
 
 .PageButton {

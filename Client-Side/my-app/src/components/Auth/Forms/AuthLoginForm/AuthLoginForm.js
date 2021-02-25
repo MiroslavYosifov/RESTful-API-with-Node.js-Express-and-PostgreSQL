@@ -46,9 +46,10 @@ const FormikAuthLoginForm = withFormik({
     password: yup.string().min(1, 'must be 1 symbols').required()
   }),
   handleSubmit(values, { props, setSubmitting }) {
+    const history = props.history;
     const { onAuth } = props;
     const authData = { username: values.username, password: values.password }
-    onAuth(authData).then(() => setSubmitting(false));
+    onAuth(authData, history).then(() => setSubmitting(false));
   },
 })(AuthLoginForm);
 
@@ -62,7 +63,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      onAuth: (authData) => dispatch(authLogin(authData)),
+      onAuth: (authData, history) => dispatch(authLogin(authData, history)),
     }
   )
 };

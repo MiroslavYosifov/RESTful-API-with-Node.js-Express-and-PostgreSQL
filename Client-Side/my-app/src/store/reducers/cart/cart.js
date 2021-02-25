@@ -1,6 +1,6 @@
 
 import * as actionsTypes from '../../actions/actionsTypes';
-import { addOneElementToCartState, removeOneElementToCartState, updateOneElementToCartState } from '../../utility';
+import { addOneElementToCartState, removeOneElementToCartState, updateOneElementToCartState } from '../../helpers/cartHelpers';
 
 const initialState = {
     productsCartData: [],

@@ -16,15 +16,16 @@ const AuthLogoutForm = () => (
 
 const FormikAuthLogoutForm = withFormik({
   handleSubmit(values, { props, setSubmitting }) {
+    const history = props.history;
     const { onLogout } = props;
-    onLogout().then(() => setSubmitting(false))
+    onLogout(history).then(() => setSubmitting(false))
   }
 })(AuthLogoutForm);
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
       {
-        onLogout: () => dispatch(authLogoutChecking()),
+        onLogout: (history) => dispatch(authLogoutChecking(history)),
       }
     )
   };

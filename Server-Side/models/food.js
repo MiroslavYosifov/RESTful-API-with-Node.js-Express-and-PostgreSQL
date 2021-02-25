@@ -13,14 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-
   Food.init({
     name: DataTypes.STRING,
     kind: DataTypes.STRING,
-    protein: DataTypes.INTEGER,
-    fat: DataTypes.INTEGER,
-    carbohydrate: DataTypes.INTEGER,
+    protein: DataTypes.DECIMAL,
+    fat: DataTypes.DECIMAL,
+    carbohydrate: DataTypes.DECIMAL,
     imgUrl: DataTypes.STRING,
+    calories: DataTypes.DECIMAL,
+    price: DataTypes.DECIMAL,
+    availability: DataTypes.JSON(DataTypes.DECIMAL)
   }, {
     sequelize,
     modelName: 'Food',

@@ -63,10 +63,11 @@ const FormikAuthRegistrationForm = withFormik({
         comfirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').min(1, 'must be 1 symbols').required()
     }),
     handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
+      const history = props.history;
       const { onRegistration } = props;
       const userData = { ...values };
       // console.log(userData);
-      onRegistration(userData, props).then(() => setSubmitting(false));
+      onRegistration(userData, history).then(() => setSubmitting(false));
     },
 })(AuthRegistrationForm);
 
@@ -79,9 +80,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      onRegistration: (userData, props) => dispatch(authRegistration(userData, props)),
+      onRegistration: (userData, history) => dispatch(authRegistration(userData, history)),
     }
   )
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )(FormikAuthRegistrationForm);
+export default connect( mapStateToProps, mapDispatchToProps)(FormikAuthRegistrationForm);

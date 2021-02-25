@@ -57,7 +57,7 @@ export class FoodCard extends Component {
         const { isHidden, isEditFormHidden } = this.state;
         const { imgUrl, name, price, availability } = this.state.food;
         const { isLogged, isAdmin } = this.props;
-        console.log(this.state.food);
+        console.log(isLogged);
         return (
             <div className={classes.FoodCard}>
                 <div className={classes.FoodCardMediaContainer}>
@@ -79,9 +79,9 @@ export class FoodCard extends Component {
                     <div className={classes.FoodCardNavigationContainer}>
                         <p onClick={this.changeIsHidden}>{!isHidden ? 'Show content' : 'Hide content'}</p>
                         {<p onClick={() => this.props.addToCompareList(this.state.food)} >Compare</p>}
-                        { isAdmin && isLogged ? <p onClick={this.changeIsEditFormHidden}>{!isEditFormHidden ? 'Show Edit' : 'Hide Edit'}</p> : ''}
-                        { isAdmin && isLogged && <p onClick={() => this.props.onDelete(this.state.food)}>Delete</p>}
-                        {isHidden || isEditFormHidden  ? <p onClick={this.showDefaultCard}>Close</p> : ''}
+                        { isLogged ? <p onClick={this.changeIsEditFormHidden}>{!isEditFormHidden ? 'Show Edit' : 'Hide Edit'}</p> : ''}
+                        { isLogged && <p onClick={() => this.props.onDelete(this.state.food)}>Delete</p>}
+                        { isHidden || isEditFormHidden  ? <p onClick={this.showDefaultCard}>Close</p> : ''}
                         {<p onClick={() => this.props.addToCartList(this.state.food)} >Add to cart</p>}
                     </div>
                 </div>

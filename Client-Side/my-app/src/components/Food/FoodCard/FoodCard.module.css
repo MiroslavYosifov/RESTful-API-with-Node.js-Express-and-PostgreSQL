@@ -1,4 +1,6 @@
     .FoodCard {
+        display: block;
+        align-self: start;
         margin: 1em 0.6em;
         border: 2px solid white;
         border-radius: 0.6em;

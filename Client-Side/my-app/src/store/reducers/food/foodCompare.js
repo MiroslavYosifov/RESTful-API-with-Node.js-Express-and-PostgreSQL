@@ -1,6 +1,6 @@
 
 import * as actionsTypes from '../../actions/actionsTypes';
-import { addOneElementToCompareState } from '../../utility';
+import { addOneElementToCompareState } from '../../helpers/foodHelpers';
 
 const initialState = {
     foodCompareData: [],

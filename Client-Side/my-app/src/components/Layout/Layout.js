@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import Auxiliary from '../../hoc/Auxiliary';
 import classes from './Layout.module.css';
@@ -8,11 +9,10 @@ import Modal from '../UI/Modal/Modal';
 import AuthLoginForm from '../Auth/Forms/AuthLoginForm/AuthLoginForm';
 
 const layout = (props) => {
-    console.log(props);
     return (
         <Auxiliary>
             <div className={classes.Layout}>
-                <Toolbar isLogged={props.isLogged}/>
+                <Toolbar history={props.history} isLogged={props.isLogged}/>
                 <main  className={classes.Content}>
                     {props.children}
                 </main>

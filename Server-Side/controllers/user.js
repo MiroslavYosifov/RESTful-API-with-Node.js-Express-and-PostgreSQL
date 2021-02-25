@@ -22,12 +22,14 @@ module.exports = {
       .then((user) => {
         user.validPassword(password).then((isValid) => {
           if(!isValid) {
-            console.log('Inavlid username or password');
+            console.log('Invalid username or password');
             res.status(401).send('Invalid username or password');
             return;
           }
           const token = jwt.createToken({ id: user._id });
-          res.cookie(config.development.authCookieName, token).send( { user: user, token: token});
+          console.log(user.dataValues);
+          res.cookie(config.development.authCookieName, token, { sameSite: 'None', secure: true,  httpOnly: true })
+          .send({ user: user.dataValues, token: `x-auth-token=${token}` });
         }).catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
@@ -39,7 +41,8 @@ module.exports = {
         where: {
           username: username,
         }
-      }).then((user) => {
+      })
+      .then((user) => {
         user.validPassword(password).then((isValid) => {
           if(!isValid) {
             console.log('Inavlid username or password');
@@ -51,9 +54,8 @@ module.exports = {
           //res.cookie(config.authCookieName, token).send({ username: user.username, token: token });
 
           // for production
-          user.roles.push('Admin');
           res.cookie(config.development.authCookieName, token, { sameSite: 'None', secure: true,  httpOnly: true })
-          .send( { username: user.username, roles: user.roles,  token: `x-auth-token=${token}` });
+          .send( { user: user.dataValues, token: `x-auth-token=${token}` });
         })
       }
     ).catch((error) => { res.status(400).send(error); });

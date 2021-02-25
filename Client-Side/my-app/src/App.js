@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import classes from './App.css';
 
-import { Route, Switch, Link, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Layout from './components/Layout/Layout';
 import WorkoutBuilder from './containers/WorkoutBuilder/WorkoutBuilder';
-import RecipeBuilder from './containers/RecipeBuilder/RecipeBuilder';
 import FoodBuilder from './containers/FoodBuilder/FoodBuilder';
 import AuthBuilder from './containers/AuthBuilder/AuthBuilder';
 import UserProfileBuilder from './containers/UserProfileBuilder/UserProfileBuilder';
@@ -35,7 +34,6 @@ function App(props) {
   let routes = (
     <Switch>
       <Route path="/workout" component={WorkoutBuilder}></Route>
-      <Route path="/recipe" component={RecipeBuilder}></Route>
       <Route path="/food"  render={() => <FoodBuilder isLogged={authData.isLogged} isAdmin={authData.isAdmin}/>}></Route>
       <Route path="/auth" component={AuthBuilder}></Route>
       <Route render={() => <h1>Not found</h1>} ></Route>
@@ -46,7 +44,6 @@ function App(props) {
     routes = (
       <Switch>myprofile
         <Route path="/workout" component={WorkoutBuilder}></Route>
-        <Route path="/recipe" component={RecipeBuilder}></Route>
         <Route path="/food"  render={() => <FoodBuilder isLogged={authData.isLogged} isAdmin={authData.isAdmin}/>}></Route>
         <Route path="/myprofile"  render={() => <UserProfileBuilder isLogged={authData.isLogged} isAdmin={authData.isAdmin}/>}></Route>
         <Route render={() => <h1>Not found</h1>} ></Route>
@@ -56,11 +53,6 @@ function App(props) {
 
   return (
     <div className={classes.App}>
-      
-      {/* <WorkoutBuilder></WorkoutBuilder>
-      <Layout>
-        <RecipeBuilder></RecipeBuilder>
-      </Layout> */}
       <Layout isLogged={authData.isLogged} {...props}>
         {routes}
       </Layout>

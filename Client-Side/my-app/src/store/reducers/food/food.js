@@ -1,6 +1,7 @@
 
 import * as actionsTypes from '../../actions/actionsTypes';
-import { updatedObj, updatedLimitedFood, addOneElement, updatedOneElement, deleteOneElement } from '../../utility';
+import { updatedLimitedFood, addOneElement, updatedOneElement, deleteOneElement } from '../../helpers/foodHelpers';
+import { updatedObj } from '../../helpers/common';
 
 const initialState = {
     foodData: null,

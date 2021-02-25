@@ -1,5 +1,17 @@
 const Food = require('../models').Food;
 
+const validations = (function () {
+
+  function isExist(props) {
+    return props.every(input => input === "" || input === null || input === undefined ? false : true);
+  }
+
+  return {
+    isExist
+  }
+})();
+
+
 module.exports = {
   list(req, res) {
     return Food
@@ -13,15 +25,15 @@ module.exports = {
   },
   add(req, res) {
     const { name, kind, protein, fat, carbohydrate, imgUrl, availability, price } = req.body;
-    //const calories = (Number(protein) * 4) + (Number(carbohydrate) * 4) + (Number(fat) * 4);
-    console.log(`{
-                  "name": "${name}",
-                  "kind": "${kind}",
-                  "protein": "${protein}",
-                  "fat": "${fat}",
-                  "carbohydrate": "${carbohydrate}",
-                  "imgUrl": "${imgUrl}",
-              }`);
+    const calories = (Number(protein) * 4) + (Number(carbohydrate) * 4) + (Number(fat) * 4);
+
+    if(!validations.isExist([name, kind, protein, fat, carbohydrate, imgUrl, price])) {
+      console.log('DATA IS NOT VALLID');
+      return res.status(400).send({
+        message: 'DATA IS NOT VALLID',
+      });
+    };
+
     return Food
       .create({
         name: name,
@@ -29,7 +41,10 @@ module.exports = {
         protein: Number(protein),
         fat: Number(fat),
         carbohydrate: Number(carbohydrate),
-        imgUrl: imgUrl
+        imgUrl: imgUrl,
+        calories: Number(calories),
+        price: Number(price),
+        availability: availability
       })
       .then((test) => res.status(201).send(test))
       .catch((error) => {
@@ -40,6 +55,14 @@ module.exports = {
     //console.log('I AM HERE', req.body);
     const { name, kind, protein, fat, carbohydrate, imgUrl, id } = req.body;
     const calories = (Number(protein) * 4) + (Number(carbohydrate) * 4) + (Number(fat) * 4);
+
+    if(!validations.isExist([name, kind, protein, fat, carbohydrate, imgUrl, price])) {
+      console.log('DATA IS NOT VALLID');
+      return res.status(400).send({
+        message: 'DATA IS NOT VALLID',
+      });
+    };
+
     return Food
       .update({
         name: name,
@@ -83,13 +106,15 @@ module.exports = {
   pagination(req, res) {
 
     const { page } = req.body;
-    const skip = Number(page) > 0 ? (Number(page) - 1) * 7 : 1;
-
+    const skip = Number(page) > 0 ? (Number(page) - 1) * 14 : 1;
+    console.log(skip);
     return Food
       .findAll({
-        offset: skip, limit: 7
+        offset: skip, limit: 14
       })
-      .then((food) => res.status(200).send(food))
+      .then((food) => {
+        res.status(200).send(food)
+      })
       .catch((error) => { res.status(400).send(error); });
   }
 };
